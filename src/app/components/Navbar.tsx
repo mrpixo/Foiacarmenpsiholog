@@ -1,21 +1,32 @@
 import { useState, useEffect } from "react";
+import { Link, useNavigate, useLocation } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X } from "lucide-react";
 import svgPaths from "../../imports/Header/svg-txdvk9yxpl";
 import { useLanguage } from "../i18n";
+import { Flag } from "./Flags";
 
-const navLinks = {
+/** Section links scroll within the homepage; `to` links navigate to a route. */
+type NavLink = { label: string; target?: string; to?: string };
+
+const navLinks: Record<"ro" | "en", NavLink[]> = {
   ro: [
-    { label: "Despre mine", href: "#despre" },
-    { label: "Servicii", href: "#servicii" },
-    { label: "Terapie în engleză", href: "#engleza" },
-    { label: "Pentru companii", href: "#companii" },
+    { label: "Acasă", target: "top" },
+    { label: "Despre mine", target: "despre" },
+    { label: "Domenii activitate", target: "servicii" },
+    { label: "Noutăți", to: "/noutati" },
+    { label: "Blog", to: "/blog" },
+    { label: "Întrebări frecvente", to: "/intrebari-frecvente" },
+    { label: "Contact", to: "/contact" },
   ],
   en: [
-    { label: "About me", href: "#despre" },
-    { label: "Services", href: "#servicii" },
-    { label: "Therapy in English", href: "#engleza" },
-    { label: "For companies", href: "#companii" },
+    { label: "Home", target: "top" },
+    { label: "About me", target: "despre" },
+    { label: "Areas of practice", target: "servicii" },
+    { label: "News", to: "/noutati" },
+    { label: "Blog", to: "/blog" },
+    { label: "FAQ", to: "/intrebari-frecvente" },
+    { label: "Contact", to: "/contact" },
   ],
 };
 
@@ -56,6 +67,26 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { language, setLanguage } = useLanguage();
   const [languageOpen, setLanguageOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const scrollToTarget = (target: string) => {
+    if (target === "top") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    document.getElementById(target)?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const goToSection = (target: string) => {
+    if (location.pathname !== "/") {
+      navigate("/");
+      // Wait for the homepage to mount before scrolling to the section.
+      window.setTimeout(() => scrollToTarget(target), 120);
+    } else {
+      scrollToTarget(target);
+    }
+  };
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 40);
@@ -75,7 +106,7 @@ export function Navbar() {
       ].join(" ")}
     >
       {/* Logo — matched to imported Figma header */}
-      <a href="#" className="flex shrink-0 items-center gap-4" aria-label={language === "ro" ? "Carmen Foia Psiholog homepage" : "Carmen Foia Psychologist homepage"}>
+      <Link to="/" className="flex shrink-0 items-center gap-4" aria-label={language === "ro" ? "Carmen Foia Psiholog homepage" : "Carmen Foia Psychologist homepage"}>
         <HeaderLogoMark />
         <div className="hidden h-[45px] flex-col items-start leading-[1.5] whitespace-nowrap sm:flex">
           <span className="text-[18px] font-semibold leading-[27px] text-[#1d293d]" style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}>
@@ -85,43 +116,56 @@ export function Navbar() {
             {language === "ro" ? "Psiholog Clinician" : "Clinical Psychologist"}
           </span>
         </div>
-      </a>
+      </Link>
 
       {/* Desktop nav — exact labels/order and imported spacing */}
-      <nav className="hidden h-5 w-[454px] items-center justify-between lg:flex" aria-label={language === "ro" ? "Navigare principală" : "Primary navigation"}>
-        {navLinks[language].map((link) => (
-          <a
-            key={link.label}
-            href={link.href}
-            className="group relative whitespace-nowrap text-[14px] font-medium leading-5 tracking-[-0.1504px] text-[#333] transition-colors duration-200 hover:text-[#006960]"
-            style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}
-          >
-            {link.label}
+      <nav className="hidden h-5 items-center gap-5 xl:flex" aria-label={language === "ro" ? "Navigare principală" : "Primary navigation"}>
+        {navLinks[language].map((link) => {
+          const linkClass =
+            "group relative cursor-pointer whitespace-nowrap text-[14px] font-medium leading-5 tracking-[-0.1504px] text-[#333] transition-colors duration-200 hover:text-[#006960]";
+          const underline = (
             <span className="absolute -bottom-1 left-0 h-px w-0 bg-[#006960] transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:w-full" />
-          </a>
-        ))}
+          );
+          return link.to ? (
+            <Link key={link.label} to={link.to} className={linkClass} style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}>
+              {link.label}
+              {underline}
+            </Link>
+          ) : (
+            <button
+              key={link.label}
+              type="button"
+              onClick={() => goToSection(link.target!)}
+              className={linkClass}
+              style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}
+            >
+              {link.label}
+              {underline}
+            </button>
+          );
+        })}
       </nav>
 
       <div className="hidden items-center gap-3 md:flex">
         {/* CTA — imported 24px x 12px sizing */}
-        <a
-          href="#contact"
+        <Link
+          to="/contact"
           className="inline-flex items-center justify-center rounded-full bg-[#ffba68] px-6 py-3 text-[16px] font-semibold leading-6 tracking-[-0.3125px] text-[#1f1d1b] transition-all duration-300 hover:bg-[#ffc985] hover:scale-105"
           style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}
         >
           {language === "ro" ? "Programează-te acum" : "Book a session"}
-        </a>
+        </Link>
 
         {/* Language selector */}
         <div className="relative">
           <button
             type="button"
             onClick={() => setLanguageOpen((open) => !open)}
-            className="flex size-12 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-white text-[46px] leading-none shadow-[0_4px_18px_rgba(0,0,0,0.06)] ring-1 ring-[#0d121a]/10 transition-all duration-300 hover:scale-105"
+            className="flex size-12 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-white leading-none shadow-[0_4px_18px_rgba(0,0,0,0.06)] ring-1 ring-[#0d121a]/10 transition-all duration-300 hover:scale-105"
             aria-label="Select language"
             aria-expanded={languageOpen}
           >
-            {language === "ro" ? "🇷🇴" : "🇬🇧"}
+            <Flag lang={language} className="size-9" />
           </button>
           <AnimatePresence>
             {languageOpen && (
@@ -133,17 +177,17 @@ export function Navbar() {
                 className="absolute right-0 top-[56px] z-50 flex flex-col gap-1 rounded-2xl bg-white/95 p-2 shadow-xl ring-1 ring-[#0d121a]/10 backdrop-blur-xl"
               >
                 {[
-                  { code: "ro" as const, flag: "🇷🇴", label: "Română" },
-                  { code: "en" as const, flag: "🇬🇧", label: "English" },
+                  { code: "ro" as const, label: "Română" },
+                  { code: "en" as const, label: "English" },
                 ].map((option) => (
                   <button
                     key={option.code}
                     type="button"
                     onClick={() => { setLanguage(option.code); setLanguageOpen(false); }}
-                    className="flex items-center gap-2 rounded-xl px-3 py-2 text-left text-sm font-medium text-[#333] transition-colors hover:bg-[#f5eee9]"
+                    className="flex cursor-pointer items-center gap-2 rounded-xl px-3 py-2 text-left text-sm font-medium text-[#333] transition-colors hover:bg-[#f5eee9]"
                     style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}
                   >
-                    <span className="text-lg">{option.flag}</span>
+                    <Flag lang={option.code} className="size-6" />
                     <span>{option.label}</span>
                   </button>
                 ))}
@@ -155,7 +199,7 @@ export function Navbar() {
 
       {/* Mobile toggle */}
       <button
-        className="rounded-full p-2 text-[#39342e] transition-colors hover:bg-[#006960]/8 lg:hidden"
+        className="rounded-full p-2 text-[#39342e] transition-colors hover:bg-[#006960]/8 xl:hidden"
         onClick={() => setMobileOpen(!mobileOpen)}
         aria-label="Toggle menu"
         aria-expanded={mobileOpen}
@@ -171,35 +215,47 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.97 }}
             transition={{ duration: 0.2 }}
-            className="absolute left-0 right-0 top-[84px] flex flex-col gap-4 rounded-[28px] bg-white/95 p-6 shadow-xl backdrop-blur-xl lg:hidden"
+            className="absolute left-0 right-0 top-[84px] flex flex-col gap-4 rounded-[28px] bg-white/95 p-6 shadow-xl backdrop-blur-xl xl:hidden"
           >
-            {navLinks[language].map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className="border-b border-[#f5eee9] py-2 text-base font-medium text-[#333] transition-colors hover:text-[#006960]"
-                style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}
-              >
-                {link.label}
-              </a>
-            ))}
+            {navLinks[language].map((link) =>
+              link.to ? (
+                <Link
+                  key={link.label}
+                  to={link.to}
+                  onClick={() => setMobileOpen(false)}
+                  className="border-b border-[#f5eee9] py-2 text-left text-base font-medium text-[#333] transition-colors hover:text-[#006960]"
+                  style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <button
+                  key={link.label}
+                  type="button"
+                  onClick={() => { setMobileOpen(false); goToSection(link.target!); }}
+                  className="border-b border-[#f5eee9] py-2 text-left text-base font-medium text-[#333] transition-colors hover:text-[#006960]"
+                  style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}
+                >
+                  {link.label}
+                </button>
+              )
+            )}
             <div className="flex items-center gap-3">
-              <a
-                href="#contact"
+              <Link
+                to="/contact"
                 onClick={() => setMobileOpen(false)}
                 className="inline-flex flex-1 items-center justify-center rounded-full bg-[#ffba68] px-6 py-3 text-center text-[16px] font-semibold leading-6 tracking-[-0.3125px] text-[#1f1d1b] transition-all duration-300 hover:bg-[#ffc985] hover:scale-105"
                 style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}
               >
                 {language === "ro" ? "Programează-te acum" : "Book a session"}
-              </a>
+              </Link>
               <button
                 type="button"
-                onClick={() => setLanguage((current) => (current === "ro" ? "en" : "ro"))}
-                className="flex size-12 shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-white text-[46px] leading-none ring-1 ring-[#0d121a]/10"
+                onClick={() => setLanguage(language === "ro" ? "en" : "ro")}
+                className="flex size-12 shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-white leading-none ring-1 ring-[#0d121a]/10"
                 aria-label={language === "ro" ? "Schimbă limba" : "Change language"}
               >
-                {language === "ro" ? "🇷🇴" : "🇬🇧"}
+                <Flag lang={language} className="size-9" />
               </button>
             </div>
           </motion.div>

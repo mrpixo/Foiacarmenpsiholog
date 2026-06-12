@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
+import { Link } from "react-router";
 import imgPortrait from "../../imports/Body/0246f3802382d4dbbdc1a474bf81eaf76c14991a.png";
 import imgHeroBg from "../../imports/Body/019dd9eeb6b49b7cdb6f1dd68088dd908e2ec026.png";
 import { useLanguage } from "../i18n";
@@ -55,7 +56,7 @@ export function HeroTop() {
           style={{
             fontFamily: "'Oakes Grotesk', 'Inter', sans-serif",
             fontWeight: 700,
-            fontSize: "clamp(65px,13vw,230px)",
+            fontSize: "clamp(80px,16vw,283px)",
             lineHeight: 1,
             color: "#f9f5f2",
             whiteSpace: "nowrap",
@@ -100,13 +101,13 @@ export function HeroTop() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
-            <a
-              href="#contact"
+            <Link
+              to="/contact"
               className="inline-flex items-center justify-center bg-[#ffba68] text-[#1f1d1b] font-semibold text-base px-7 py-3.5 rounded-full transition-all duration-300 hover:bg-[#ffc985] hover:scale-105"
               style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}
             >
               {language === "ro" ? "Programează-te acum" : "Book a session"}
-            </a>
+            </Link>
           </motion.div>
         </motion.div>
 

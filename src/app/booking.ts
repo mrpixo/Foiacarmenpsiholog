@@ -1,0 +1,102 @@
+/**
+ * Booking configuration.
+ *
+ * The booking flow is powered by Cal.com Cloud, which handles availability
+ * (synced from Google Calendar), card payment (Stripe), confirmation + receipt
+ * emails, calendar invites with both participants, and the 2-hour reminders.
+ *
+ * SETUP (done once in the Cal.com dashboard — see BOOKING_SETUP.md):
+ *  1. Create the account and set CAL_USERNAME below.
+ *  2. Connect Google Calendar (App Store → Google Calendar) for 2-way sync.
+ *  3. Connect Stripe (App Store → Stripe) so cards can be charged.
+ *  4. Create one Event Type per reason below, set its price + duration,
+ *     enable the Stripe payment requirement, and add a reminder workflow
+ *     "2 hours before" for attendee + host.
+ *  5. Replace each `slug` here with the event type's slug.
+ */
+
+export const CAL_USERNAME = "psiholog-carmen-foia";
+
+/**
+ * Single Cal.com event type used for every session (same length + price).
+ * The chosen reason below is passed into the booking notes so the therapist
+ * knows what kind of session is coming. Set this to your event's URL slug.
+ */
+export const EVENT_SLUG = "terapie";
+
+/** Standard price per session, charged by card via Stripe. Display-only here;
+ *  the authoritative amount is set on each Cal.com event type. */
+export const SESSION_PRICE = { amount: 150, currency: "RON" } as const;
+
+/** Legal entity invoiced on the Stripe receipt / invoice. */
+export const ENTITY = {
+  name: "Cabinet Individual Psihologie Carmen Foia",
+  cui: "54513889",
+  address: "Vasile Alecsandri nr. 7, Oradea",
+} as const;
+
+export type BookingReason = {
+  /** Stable id; sent in the booking notes so the therapist knows the reason. */
+  id: string;
+  label: { ro: string; en: string };
+  description: { ro: string; en: string };
+};
+
+export const bookingReasons: BookingReason[] = [
+  {
+    id: "psihologie-sportiva",
+    label: { ro: "Psihologie sportivă", en: "Sports psychology" },
+    description: {
+      ro: "Sesiuni 1-la-1 pentru a gestiona presiunea și anxietatea în sport.",
+      en: "One-to-one sessions to manage pressure and anxiety in sport.",
+    },
+  },
+  {
+    id: "orientare-vocationala",
+    label: { ro: "Orientare vocațională", en: "Vocational guidance" },
+    description: {
+      ro: "Consiliere pentru claritate profesională și decizii asumate.",
+      en: "Counselling for career clarity and confident decisions.",
+    },
+  },
+  {
+    id: "anxietate-performanta",
+    label: { ro: "Anxietate de performanță", en: "Performance anxiety" },
+    description: {
+      ro: "Strategii pentru reglare emoțională, focus și încredere.",
+      en: "Tools for emotional regulation, focus, and self-trust.",
+    },
+  },
+  {
+    id: "terapie-individuala",
+    label: { ro: "Terapie individuală", en: "Individual therapy" },
+    description: {
+      ro: "Sesiuni personalizate pentru autocunoaștere și echilibru.",
+      en: "Tailored sessions for self-awareness and balance.",
+    },
+  },
+  {
+    id: "terapie-cuplu",
+    label: { ro: "Terapie de cuplu", en: "Couples therapy" },
+    description: {
+      ro: "Sprijin pentru comunicare, reconectare și înțelegere reciprocă.",
+      en: "Support for communication, reconnection, and understanding.",
+    },
+  },
+  {
+    id: "dezvoltare-personala",
+    label: { ro: "Dezvoltare personală", en: "Personal development" },
+    description: {
+      ro: "Programe de autocunoaștere pentru a-ți atinge potențialul.",
+      en: "Self-discovery programs to help you reach your potential.",
+    },
+  },
+  {
+    id: "altul",
+    label: { ro: "Altul", en: "Other" },
+    description: {
+      ro: "Ai un alt motiv? Programează o ședință și discutăm.",
+      en: "Have a different reason? Book a session and we'll talk.",
+    },
+  },
+];

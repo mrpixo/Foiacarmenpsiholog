@@ -8,6 +8,7 @@
     "dev": "vite"
   },
   "dependencies": {
+    "@calcom/embed-react": "^1.5.3",
     "@emotion/react": "11.14.0",
     "@emotion/styled": "11.14.1",
     "@mui/icons-material": "7.3.5",
@@ -36,9 +37,16 @@
     "@radix-ui/react-slot": "1.1.2",
     "@radix-ui/react-switch": "1.1.3",
     "@radix-ui/react-tabs": "1.1.3",
-    "@radix-ui/react-toggle-group": "1.1.2",
     "@radix-ui/react-toggle": "1.1.2",
+    "@radix-ui/react-toggle-group": "1.1.2",
     "@radix-ui/react-tooltip": "1.1.8",
+    "@supabase/supabase-js": "^2.108.1",
+    "@tiptap/extension-image": "^3.26.1",
+    "@tiptap/extension-link": "^3.26.1",
+    "@tiptap/extension-placeholder": "^3.26.1",
+    "@tiptap/pm": "^3.26.1",
+    "@tiptap/react": "^3.26.1",
+    "@tiptap/starter-kit": "^3.26.1",
     "canvas-confetti": "1.9.4",
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
@@ -67,6 +75,7 @@
   "devDependencies": {
     "@tailwindcss/vite": "4.1.12",
     "@vitejs/plugin-react": "4.7.0",
+    "supabase": "^2.106.0",
     "tailwindcss": "4.1.12",
     "vite": "6.3.5"
   },

@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
-import { motion, useInView, AnimatePresence } from "motion/react";
+import { motion, useInView } from "motion/react";
+import { Link } from "react-router";
 import imgRect16 from "../../imports/Body/73056bd19e50c0720161c9b18d983fc7721ddf7a.png";
 import imgRect17 from "../../imports/Body/49859db54fbf9aeb6aea41ad98bcc853a0a36328.png";
 import imgRect18 from "../../imports/Body/c5ec97bda42d210a1e3d698f4949c7b911ec514d.png";
@@ -9,20 +10,20 @@ import { useLanguage } from "../i18n";
 
 const services = {
   ro: [
-    { id: 0, title: "Psihologie sportivă", description: "Sesiuni 1-la-1 personalizate pentru a te ajuta să depășești anxietatea.", image: imgRect16 },
-    { id: 1, title: "Orientare vocațională", description: "Consiliere pentru claritate profesională și decizii asumate.", image: imgRect17 },
-    { id: 2, title: "Anxietate de performanță", description: "Strategii pentru reglare emoțională, focus și încredere.", image: imgRect18 },
-    { id: 3, title: "Terapie individuală", description: "Sesiuni personalizate pentru autocunoaștere și echilibru.", image: imgRect19 },
-    { id: 4, title: "Terapie de cuplu", description: "Sprijin pentru comunicare, reconectare și înțelegere reciprocă.", image: imgRect20 },
-    { id: 5, title: "Dezvoltare personală", description: "Programe de autocunoaștere pentru a-ți atinge potențialul maxim.", image: imgRect16 },
+    { id: 0, reason: "psihologie-sportiva", title: "Psihologie sportivă", description: "Sesiuni 1-la-1 personalizate pentru a te ajuta să depășești anxietatea.", image: imgRect16 },
+    { id: 1, reason: "orientare-vocationala", title: "Orientare vocațională", description: "Consiliere pentru claritate profesională și decizii asumate.", image: imgRect17 },
+    { id: 2, reason: "anxietate-performanta", title: "Anxietate de performanță", description: "Strategii pentru reglare emoțională, focus și încredere.", image: imgRect18 },
+    { id: 3, reason: "terapie-individuala", title: "Terapie individuală", description: "Sesiuni personalizate pentru autocunoaștere și echilibru.", image: imgRect19 },
+    { id: 4, reason: "terapie-cuplu", title: "Terapie de cuplu", description: "Sprijin pentru comunicare, reconectare și înțelegere reciprocă.", image: imgRect20 },
+    { id: 5, reason: "dezvoltare-personala", title: "Dezvoltare personală", description: "Programe de autocunoaștere pentru a-ți atinge potențialul maxim.", image: imgRect16 },
   ],
   en: [
-    { id: 0, title: "Sports psychology", description: "Personalized one-to-one sessions to help you manage pressure and anxiety.", image: imgRect16 },
-    { id: 1, title: "Vocational guidance", description: "Counselling for career clarity and confident decision-making.", image: imgRect17 },
-    { id: 2, title: "Performance anxiety", description: "Tools for emotional regulation, focus, and self-trust.", image: imgRect18 },
-    { id: 3, title: "Individual therapy", description: "Tailored sessions for self-awareness, healing, and balance.", image: imgRect19 },
-    { id: 4, title: "Couples therapy", description: "Support for communication, reconnection, and mutual understanding.", image: imgRect20 },
-    { id: 5, title: "Personal development", description: "Self-discovery programs designed to help you reach your potential.", image: imgRect16 },
+    { id: 0, reason: "psihologie-sportiva", title: "Sports psychology", description: "Personalized one-to-one sessions to help you manage pressure and anxiety.", image: imgRect16 },
+    { id: 1, reason: "orientare-vocationala", title: "Vocational guidance", description: "Counselling for career clarity and confident decision-making.", image: imgRect17 },
+    { id: 2, reason: "anxietate-performanta", title: "Performance anxiety", description: "Tools for emotional regulation, focus, and self-trust.", image: imgRect18 },
+    { id: 3, reason: "terapie-individuala", title: "Individual therapy", description: "Tailored sessions for self-awareness, healing, and balance.", image: imgRect19 },
+    { id: 4, reason: "terapie-cuplu", title: "Couples therapy", description: "Support for communication, reconnection, and mutual understanding.", image: imgRect20 },
+    { id: 5, reason: "dezvoltare-personala", title: "Personal development", description: "Self-discovery programs designed to help you reach your potential.", image: imgRect16 },
   ],
 };
 
@@ -41,7 +42,7 @@ function ServiceRow({ service, index }: {
       initial={{ opacity: 0, y: 16 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
-      className="relative cursor-pointer overflow-hidden"
+      className="group relative cursor-pointer overflow-hidden"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -83,31 +84,22 @@ function ServiceRow({ service, index }: {
           {service.description}
         </motion.p>
 
-        {/* Image/CTA slot — image hides on hover, button replaces it */}
-        <div className="relative shrink-0 size-[140px] md:size-[200px] overflow-visible flex items-center justify-center">
-          <motion.img
+        {/* Image/CTA slot — image by default, button on hover. Both stay
+            mounted and cross-fade via CSS group-hover, so leaving the row
+            always restores the image (no stuck JS hover state, no overlap). */}
+        <div className="relative shrink-0 size-[140px] md:size-[200px] flex items-center justify-center">
+          <img
             src={service.image}
             alt={service.title}
-            className="absolute inset-0 w-full h-full object-cover overflow-hidden rounded-2xl"
-            animate={{ opacity: hovered ? 0 : 1, scale: hovered ? 0.96 : 1 }}
-            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className="pointer-events-none absolute inset-0 h-full w-full rounded-2xl object-cover transition-opacity duration-300 group-hover:opacity-0"
           />
-
-          <AnimatePresence>
-            {hovered && (
-              <motion.a
-                href="#contact"
-                initial={{ opacity: 0, scale: 0.94 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.94 }}
-                transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-                className="relative z-10 inline-flex items-center justify-center bg-[#ffba68] text-[#1f1d1a] font-semibold text-sm px-6 py-3 rounded-full transition-all duration-300 hover:bg-[#ffc985] hover:scale-105 whitespace-nowrap"
-                style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}
-              >
-                {language === "ro" ? "Programează-te acum" : "Book a session"}
-              </motion.a>
-            )}
-          </AnimatePresence>
+          <Link
+            to={`/contact?reason=${service.reason}`}
+            className="relative z-10 inline-flex items-center justify-center whitespace-nowrap rounded-full bg-[#ffba68] px-6 py-3 text-sm font-semibold text-[#1f1d1a] opacity-0 transition-all duration-300 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto hover:bg-[#ffc985]"
+            style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}
+          >
+            {language === "ro" ? "Programează-te acum" : "Book a session"}
+          </Link>
         </div>
       </div>
     </motion.div>

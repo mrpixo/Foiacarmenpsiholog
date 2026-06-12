@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
 import { Linkedin, Instagram, Facebook } from "lucide-react";
+import { Link } from "react-router";
 import { useLanguage } from "../i18n";
 
 export function SocialCTA() {
@@ -63,13 +64,13 @@ export function SocialCTA() {
             </a>
           ))}
 
-          <a
-            href="#contact"
+          <Link
+            to="/contact"
             className="mt-2 inline-flex items-center justify-center bg-[#ffba68] text-[#1f1d1b] md:ml-4 md:mt-0 font-semibold text-base px-7 py-3.5 rounded-full transition-all duration-300 hover:bg-[#ffc985] hover:scale-105"
             style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}
           >
             {language === "ro" ? "Programează-te acum" : "Book a session"}
-          </a>
+          </Link>
         </motion.div>
       </div>
     </section>

@@ -1,37 +1,57 @@
 import { Linkedin, Instagram, Facebook } from "lucide-react";
+import { Link } from "react-router";
 import svgPaths from "../../imports/Header/svg-txdvk9yxpl";
 import { useLanguage } from "../i18n";
+import { useConsent } from "../lib/consent";
 
-const footerLinks = [
-  {
-    label: "Servicii",
-    links: ["Consiliere", "Companii"],
-  },
-  {
-    label: "Despre",
-    links: ["Despre mine"],
-  },
-  {
-    label: "Resources",
-    links: ["Blog", "Întrebări frecvente"],
-  },
-  {
-    label: "Legal",
-    links: ["Politica de confidentialitate", "Termeni și condiții"],
-  },
-];
+type FooterLink = { label: string; to?: string; href?: string; action?: "cookies" };
+type FooterColumn = { label: string; links: FooterLink[] };
 
 export function Footer() {
   const { language } = useLanguage();
-  const footerLinksTranslated = language === "ro" ? footerLinks : [
-    { label: "Services", links: ["Counselling", "Companies"] },
-    { label: "About", links: ["About me"] },
-    { label: "Resources", links: ["Blog", "Frequently asked questions"] },
-    { label: "Legal", links: ["Privacy policy", "Terms and conditions"] },
+  const { openSettings } = useConsent();
+  const ro = language === "ro";
+
+  const columns: FooterColumn[] = [
+    {
+      label: ro ? "Servicii" : "Services",
+      links: [
+        { label: ro ? "Consiliere" : "Counselling", href: "/#servicii" },
+        { label: ro ? "Companii" : "Companies", href: "/#servicii" },
+      ],
+    },
+    {
+      label: ro ? "Despre" : "About",
+      links: [{ label: ro ? "Despre mine" : "About me", href: "/#despre" }],
+    },
+    {
+      label: "Resources",
+      links: [
+        { label: "Blog", to: "/blog" },
+        { label: ro ? "Întrebări frecvente" : "FAQ", to: "/intrebari-frecvente" },
+      ],
+    },
+    {
+      label: "Legal",
+      links: [
+        { label: ro ? "Politica de confidențialitate" : "Privacy Policy", to: "/privacy" },
+        { label: ro ? "Termeni și condiții" : "Terms & Conditions", to: "/terms" },
+        { label: ro ? "Setări cookie-uri" : "Cookie settings", action: "cookies" },
+      ],
+    },
   ];
+
+  const linkClass = "block py-3 text-white/90 transition-colors duration-200 hover:text-white";
+  const linkStyle = { fontFamily: "'Oakes Grotesk', 'Inter', sans-serif", fontWeight: 500, fontSize: "16px", lineHeight: 1.5 } as const;
+  const renderLink = (l: FooterLink) => {
+    if (l.to) return <Link key={l.label} to={l.to} className={linkClass} style={linkStyle}>{l.label}</Link>;
+    if (l.action === "cookies")
+      return <button key={l.label} type="button" onClick={openSettings} className={`${linkClass} cursor-pointer text-left`} style={linkStyle}>{l.label}</button>;
+    return <a key={l.label} href={l.href} className={linkClass} style={linkStyle}>{l.label}</a>;
+  };
   return (
     <footer className="relative w-full overflow-hidden" style={{ background: "#054943" }}>
-      <div className="relative z-10 px-8 md:px-[164px] pt-24 pb-[200px] flex flex-col gap-8">
+      <div className="relative z-10 px-8 md:px-[164px] pt-24 md:pt-[96px] pb-[clamp(160px,24vw,390px)] flex flex-col gap-8">
         {/* Top: logo + social + CTA */}
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           {/* Logo */}
@@ -99,39 +119,30 @@ export function Footer() {
               ))}
             </div>
 
-            <a
-              href="#contact"
+            <Link
+              to="/contact"
               className="inline-flex items-center justify-center bg-[#ffba68] text-[#1f1d1b] font-semibold text-base px-7 py-3.5 rounded-full transition-all duration-300 hover:bg-[#ffc985] hover:scale-105"
               style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}
             >
               {language === "ro" ? "Programează-te acum" : "Book a session"}
-            </a>
+            </Link>
           </div>
         </div>
 
         {/* Divider */}
         <div className="w-full h-px bg-white/8 rounded-full" />
 
-        {/* Nav columns */}
-        <div className="flex flex-wrap gap-12">
-          {footerLinksTranslated.map((col) => (
-            <div key={col.label} className="flex flex-col gap-5 min-w-[120px]">
+        {/* Nav columns — equal width, spread across full width (per Figma) */}
+        <div className="flex flex-col gap-10 sm:flex-row sm:gap-12">
+          {columns.map((col) => (
+            <div key={col.label} className="flex flex-1 flex-col gap-5">
               <p
                 className="text-white/70"
                 style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif", fontWeight: 400, fontSize: "16px", lineHeight: 1.5 }}
               >
                 {col.label}
               </p>
-              {col.links.map((link) => (
-                <a
-                  key={link}
-                  href="#"
-                  className="text-white/90 hover:text-white transition-colors duration-200"
-                  style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif", fontWeight: 500, fontSize: "16px", lineHeight: 1.5 }}
-                >
-                  {link}
-                </a>
-              ))}
+              <div className="flex flex-col">{col.links.map(renderLink)}</div>
             </div>
           ))}
         </div>
@@ -141,15 +152,19 @@ export function Footer() {
 
         {/* Copyright */}
         <p
-          className="text-white/70"
+          className="w-full text-white/70"
           style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif", fontWeight: 400, fontSize: "16px", lineHeight: 1.5 }}
         >
-          {language === "ro" ? "© 2025 Carmen Foia Psiholog clinician și educațional" : "© 2025 Carmen Foia Clinical and Educational Psychologist"}
+          {language === "ro" ? "© 2026 Carmen Foia Psiholog clinician și educațional" : "© 2026 Carmen Foia Clinical and Educational Psychologist"}
         </p>
       </div>
 
-      {/* Large watermark text */}
-      <div className="absolute bottom-0 left-[-17px] pointer-events-none select-none leading-none">
+      {/* Large watermark text — fills the bottom padding (per Figma).
+          Both lines are 283px and overlap (~0.6em line advance), in #12524c. */}
+      <div
+        className="absolute left-[-17px] z-0 pointer-events-none select-none leading-none"
+        style={{ bottom: "-0.25em", fontSize: "clamp(80px,16vw,283px)" }}
+      >
         <div
           style={{
             fontFamily: "'Oakes Grotesk', 'Inter', sans-serif",
@@ -166,10 +181,11 @@ export function Footer() {
           style={{
             fontFamily: "'Oakes Grotesk', 'Inter', sans-serif",
             fontWeight: 700,
-            fontSize: "clamp(65px,13vw,230px)",
+            fontSize: "clamp(80px,16vw,283px)",
             lineHeight: 1,
             color: "#12524c",
             whiteSpace: "nowrap",
+            marginTop: "-0.4em",
           }}
         >
           Carmen Foia

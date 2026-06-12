@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
+import { Link } from "react-router";
 import { useLanguage } from "../i18n";
 
 const introText = {
@@ -68,13 +69,13 @@ export function Intro() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <a
-            href="#contact"
+          <Link
+            to="/contact"
             className="inline-flex items-center justify-center bg-[#ffba68] text-[#1f1d1b] font-semibold text-base px-7 py-3.5 rounded-full transition-all duration-300 hover:bg-[#ffc985] hover:scale-105"
             style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}
           >
             {language === "ro" ? "Programează-te acum" : "Book a session"}
-          </a>
+          </Link>
         </motion.div>
       </div>
     </section>

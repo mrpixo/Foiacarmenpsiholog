@@ -1,32 +1,27 @@
 import { useRef } from "react";
-import { motion, useInView, useScroll, useTransform } from "motion/react";
+import { motion, useInView } from "motion/react";
 import { useLanguage } from "../i18n";
 
 export function Mission() {
   const { language } = useLanguage();
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-10%" });
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const watermarkY = useTransform(scrollYProgress, [0, 1], [-24, 24]);
 
   return (
     <section
       ref={ref}
-      className="relative w-full overflow-hidden py-24 md:py-36"
+      className="relative w-full overflow-hidden py-[96px]"
       style={{ background: "#f5eee9", position: "relative" }}
     >
-      {/* Watermark */}
-      <motion.div
-        style={{ y: watermarkY }}
-        className="absolute bottom-0 left-[-14px] pointer-events-none select-none leading-none will-change-transform opacity-40"
-      >
+      {/* Watermark — sits flush at the bottom of the section (per Figma) */}
+      <div className="absolute bottom-0 left-[-14px] pointer-events-none select-none leading-none">
         <div
-          className="text-[clamp(80px,14vw,283px)] font-black whitespace-nowrap text-white"
+          className="text-[clamp(80px,14vw,283px)] font-black whitespace-nowrap text-white/40"
           style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif", lineHeight: 1 }}
         >
           {language === "ro" ? "Misiunea mea" : "My mission"}
         </div>
-      </motion.div>
+      </div>
 
       <div className="relative z-10 px-8 md:px-24 flex flex-col items-end gap-10">
         <motion.p

@@ -1,5 +1,6 @@
 import { Linkedin, Instagram, Facebook } from "lucide-react";
 import { useLanguage } from "../i18n";
+import { FlagGB } from "./Flags";
 
 export function TopBar() {
   const { language } = useLanguage();
@@ -11,8 +12,8 @@ export function TopBar() {
         style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}
       >
         WhatsApp:{" "}
-        <a href="tel:0770111222" className="font-bold hover:text-[#ffba68] transition-colors">
-          0770 111 222
+        <a href="tel:+407949514255" className="font-bold hover:text-[#ffba68] transition-colors">
+          +40 7949 514 255
         </a>
       </p>
 
@@ -21,7 +22,7 @@ export function TopBar() {
         <span className="text-white text-sm" style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}>
           I'm a British citizen and provide therapy in english
         </span>
-        <span className="text-lg">🇬🇧</span>
+        <FlagGB className="size-6" />
       </div>
 
       {/* Social icons */}
