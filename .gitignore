@@ -1,3 +1,11 @@
+# Dependencies
+node_modules
+
+# Build output
+dist
 
 # Local env
 .env
+
+# OS / editor
+.DS_Store
