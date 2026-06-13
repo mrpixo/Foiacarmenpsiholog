@@ -32,12 +32,12 @@ export function FaqItem({
           aria-controls={panelId}
           onClick={onToggle}
           className={[
-            "group flex w-full cursor-pointer items-center justify-between gap-5 px-6 py-5 text-left outline-none transition-colors duration-300 md:px-8 md:py-6",
+            "group flex w-full cursor-pointer items-center justify-between gap-5 px-6 py-5 text-left outline-none md:px-8 md:py-6",
             "focus-visible:ring-2 focus-visible:ring-[#d9b46f] focus-visible:ring-offset-2 focus-visible:ring-offset-white",
             isOpen ? "text-white" : "text-[#39342e]",
           ].join(" ")}
         >
-          <span className="flex-1 font-medium leading-snug transition-colors duration-300" style={{ ...FONT, fontSize: "clamp(16px,1.5vw,22px)" }}>
+          <span className="flex-1 font-medium leading-snug" style={{ ...FONT, fontSize: "clamp(16px,1.5vw,22px)" }}>
             {question}
           </span>
           <span aria-hidden="true" className="flex size-8 shrink-0 items-center justify-center">

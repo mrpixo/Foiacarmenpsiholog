@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 
 /** True when the viewport is below the `md` breakpoint (768px). */
 export function useIsMobile(): boolean {
-  const [isMobile, setIsMobile] = useState(false);
+  // Read synchronously on first render so entrance animations pick the right
+  // axis immediately (otherwise the first paint uses the desktop offset).
+  const [isMobile, setIsMobile] = useState(
+    () => typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches,
+  );
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 767px)");
     const update = () => setIsMobile(mq.matches);

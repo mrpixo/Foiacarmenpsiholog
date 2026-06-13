@@ -29,6 +29,8 @@ export function Testimonials() {
   }, [items.length]);
 
   const go = (i: number) => { setCurrent(i); startTimer(); };
+  const next = () => go((current + 1) % items.length);
+  const prev = () => go((current - 1 + items.length) % items.length);
 
   if (items.length === 0) return null;
   const t = items[current];
@@ -43,7 +45,14 @@ export function Testimonials() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -120 }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="relative w-full max-w-[1000px] flex flex-col gap-14"
+            className="relative w-full max-w-[1000px] flex cursor-grab flex-col gap-14 active:cursor-grabbing"
+            drag={items.length > 1 ? "x" : false}
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.2}
+            onDragEnd={(_, info) => {
+              if (info.offset.x < -60) next();
+              else if (info.offset.x > 60) prev();
+            }}
           >
             <motion.div
               className="flex items-center justify-between"
