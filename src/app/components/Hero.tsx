@@ -103,7 +103,7 @@ export function HeroTop() {
           >
             <Link
               to="/contact"
-              className="inline-flex w-full items-center justify-start bg-[#ffba68] text-[#1f1d1b] font-semibold text-base px-7 py-3.5 rounded-full transition-all duration-300 hover:bg-[#ffc985] md:w-auto md:justify-center md:hover:scale-105"
+              className="inline-flex w-full items-center justify-center bg-[#ffba68] text-[#1f1d1b] font-semibold text-base px-7 py-3.5 rounded-full transition-all duration-300 hover:bg-[#ffc985] md:w-auto md:justify-center md:hover:scale-105"
               style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}
             >
               {language === "ro" ? "Programează-te acum" : "Book a session"}
@@ -113,7 +113,7 @@ export function HeroTop() {
 
         {/* RIGHT: Quote text */}
         <motion.p
-          className="w-full max-w-none will-change-transform"
+          className="w-full max-w-none text-left will-change-transform md:text-right"
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
@@ -124,7 +124,6 @@ export function HeroTop() {
             fontSize: "clamp(18px,2.4vw,40px)",
             lineHeight: 1.5,
             color: "#675949",
-            textAlign: "right",
             maxWidth: "none",
           }}
         >

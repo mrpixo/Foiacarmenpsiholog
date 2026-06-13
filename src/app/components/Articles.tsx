@@ -41,10 +41,10 @@ export function Articles() {
             initial={{ opacity: 0, x: 20 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.15 }}
-            className="flex flex-col items-end gap-3"
+            className="flex flex-col items-start md:items-end gap-3"
           >
             <p
-              className="text-[#39342e] text-right text-base max-w-[420px]"
+              className="text-[#39342e] text-left md:text-right text-base max-w-[420px]"
               style={{ ...FONT, fontWeight: 400, lineHeight: 1.5 }}
             >
               {language === "ro"
@@ -53,7 +53,7 @@ export function Articles() {
             </p>
             <Link
               to="/blog"
-              className="inline-flex w-full items-center justify-start bg-[#ffba68] text-[#1f1d1b] font-semibold text-base px-7 py-3.5 rounded-full transition-all duration-300 hover:bg-[#ffc985] md:w-auto md:justify-center md:hover:scale-105"
+              className="inline-flex w-full items-center justify-center bg-[#ffba68] text-[#1f1d1b] font-semibold text-base px-7 py-3.5 rounded-full transition-all duration-300 hover:bg-[#ffc985] md:w-auto md:justify-center md:hover:scale-105"
               style={FONT}
             >
               {language === "ro" ? "Vezi toate articolele" : "See all articles"}

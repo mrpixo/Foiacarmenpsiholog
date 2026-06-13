@@ -48,7 +48,7 @@ export function FAQ() {
           <motion.div initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.25 }}>
             <Link
               to="/intrebari-frecvente"
-              className="mt-8 inline-flex w-full items-center justify-start rounded-full bg-[#ffba68] px-7 py-3.5 text-base font-semibold text-[#1f1d1b] transition-all duration-300 hover:bg-[#ffc985] md:w-auto md:justify-center md:hover:scale-105"
+              className="mt-8 inline-flex w-full items-center justify-center rounded-full bg-[#ffba68] px-7 py-3.5 text-base font-semibold text-[#1f1d1b] transition-all duration-300 hover:bg-[#ffc985] md:w-auto md:justify-center md:hover:scale-105"
               style={FONT}
             >
               {language === "ro" ? "Vezi toate întrebările" : "See all questions"}

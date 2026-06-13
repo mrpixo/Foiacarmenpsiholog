@@ -246,7 +246,7 @@ export function Navbar() {
               <Link
                 to="/contact"
                 onClick={() => setMobileOpen(false)}
-                className="inline-flex flex-1 items-center justify-start rounded-full bg-[#ffba68] px-6 py-3 text-left text-[16px] font-semibold leading-6 tracking-[-0.3125px] text-[#1f1d1b] transition-all duration-300 hover:bg-[#ffc985]"
+                className="inline-flex flex-1 items-center justify-center rounded-full bg-[#ffba68] px-6 py-3 text-center text-[16px] font-semibold leading-6 tracking-[-0.3125px] text-[#1f1d1b] transition-all duration-300 hover:bg-[#ffc985]"
                 style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}
               >
                 {language === "ro" ? "Programează-te acum" : "Book a session"}
