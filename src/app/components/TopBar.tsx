@@ -19,10 +19,10 @@ export function TopBar() {
 
       {/* English text */}
       <div className="flex items-center gap-3">
+        <FlagGB className="size-6 shrink-0" />
         <span className="text-white text-sm" style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}>
           I'm a British citizen and provide therapy in english
         </span>
-        <FlagGB className="size-6" />
       </div>
 
       {/* Social icons */}

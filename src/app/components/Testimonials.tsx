@@ -34,8 +34,8 @@ export function Testimonials() {
   const t = items[current];
 
   return (
-    <section className="relative w-full overflow-hidden py-24 md:py-[126px]" style={{ background: "#f5eee9" }}>
-      <div className="relative z-10 px-6 md:px-[164px] flex flex-col items-center gap-24">
+    <section className="relative w-full overflow-hidden py-16 md:py-[126px]" style={{ background: "#f5eee9" }}>
+      <div className="relative z-10 px-6 md:px-[164px] flex flex-col items-center gap-12 md:gap-24">
         <AnimatePresence mode="popLayout" initial={false}>
           <motion.div
             key={t.id}

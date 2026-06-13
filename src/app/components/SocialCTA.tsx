@@ -3,9 +3,11 @@ import { motion, useInView } from "motion/react";
 import { Linkedin, Instagram, Facebook } from "lucide-react";
 import { Link } from "react-router";
 import { useLanguage } from "../i18n";
+import { useIsMobile, entrance } from "../lib/useIsMobile";
 
 export function SocialCTA() {
   const { language } = useLanguage();
+  const isMobile = useIsMobile();
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-10%" });
 
@@ -43,8 +45,8 @@ export function SocialCTA() {
 
         {/* CTA first, then social icon buttons (centered) */}
         <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          animate={inView ? { opacity: 1, x: 0 } : {}}
+          initial={{ opacity: 0, ...entrance(isMobile, 20) }}
+          animate={inView ? { opacity: 1, x: 0, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.15 }}
           className="flex w-full flex-col items-center gap-5 md:w-auto md:flex-row md:items-center md:gap-4"
         >

@@ -26,7 +26,7 @@ export function Logos() {
   const track = [...oneSet, ...oneSet];
 
   return (
-    <section className="w-full overflow-hidden py-20" style={{ background: "#f5eee9" }}>
+    <section className="w-full overflow-hidden py-16 md:py-20" style={{ background: "#f5eee9" }}>
       <div ref={ref} className="px-6 md:px-[128px] mb-8">
         <motion.p
           initial={{ opacity: 0, y: 12 }}

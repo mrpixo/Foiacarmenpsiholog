@@ -5,12 +5,14 @@ import { useLanguage } from "../i18n";
 import { isSupabaseConfigured } from "../lib/supabase";
 import { listPublishedNews, type NewsItem } from "../lib/news";
 import { NewsCard } from "./news/NewsCard";
+import { useIsMobile, entrance } from "../lib/useIsMobile";
 
 const FONT = { fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" } as const;
 
 /** News section — GREEN background, "Ultimele noutăți". Shows the latest 6 updates. */
 export function News() {
   const { language } = useLanguage();
+  const isMobile = useIsMobile();
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-10%" });
   const [items, setItems] = useState<NewsItem[]>([]);
@@ -21,7 +23,7 @@ export function News() {
   }, []);
 
   return (
-    <section className="w-full py-24 md:py-[156px]" style={{ background: "#006960" }} id="noutati">
+    <section className="w-full py-16 md:py-[156px]" style={{ background: "#006960" }} id="noutati">
       <div className="px-6 md:px-[126px] flex flex-col gap-12">
         {/* Header row */}
         <div ref={ref} className="flex flex-col md:flex-row items-start justify-between gap-8">
@@ -31,7 +33,7 @@ export function News() {
             </p>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, x: 20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.5, delay: 0.15 }} className="flex flex-col items-start md:items-end gap-3">
+          <motion.div initial={{ opacity: 0, ...entrance(isMobile, 20) }} animate={inView ? { opacity: 1, x: 0, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.15 }} className="flex flex-col items-start md:items-end gap-3">
             <p className="text-white text-left md:text-right text-base max-w-[420px]" style={{ ...FONT, fontWeight: 400, lineHeight: 1.5 }}>
               {language === "ro"
                 ? "Evenimente, resurse și actualizări din activitatea mea în psihologie, echilibru și performanță."

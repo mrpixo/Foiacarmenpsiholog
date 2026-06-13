@@ -10,7 +10,7 @@ export function Mission() {
   return (
     <section
       ref={ref}
-      className="relative w-full overflow-hidden py-[96px]"
+      className="relative w-full overflow-hidden py-16 md:py-[96px]"
       style={{ background: "#f5eee9", position: "relative" }}
     >
       {/* Watermark — sits flush at the bottom of the section (per Figma) */}

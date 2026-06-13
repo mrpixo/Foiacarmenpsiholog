@@ -54,7 +54,30 @@ function ServiceRow({ service, index }: {
         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
       />
 
-      <div className="relative z-10 px-6 md:px-[126px] py-10 flex flex-col md:flex-row items-start md:items-center gap-8 md:gap-10 overflow-visible">
+      {/* MOBILE layout — image (16:9, full width) → title → body → full-width CTA */}
+      <div className="relative z-10 flex flex-col gap-5 px-6 py-8 md:hidden">
+        <img
+          src={service.image}
+          alt={service.title}
+          className="aspect-video w-full rounded-2xl object-cover"
+        />
+        <p style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif", fontWeight: 700, fontSize: "22px", lineHeight: 1.3, color: "#39342e" }}>
+          {service.title}
+        </p>
+        <p style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif", fontSize: "16px", lineHeight: 1.5, color: "#45556c" }}>
+          {service.description}
+        </p>
+        <Link
+          to={`/contact?reason=${service.reason}`}
+          className="inline-flex w-full items-center justify-center rounded-full bg-[#ffba68] px-6 py-3.5 text-base font-semibold text-[#1f1d1a] transition-colors duration-300 hover:bg-[#ffc985]"
+          style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}
+        >
+          {language === "ro" ? "Programează-te acum" : "Book a session"}
+        </Link>
+      </div>
+
+      {/* DESKTOP layout — title + description + hover image/CTA swap */}
+      <div className="relative z-10 hidden md:flex px-[126px] py-10 flex-row items-center gap-10 overflow-visible">
         <motion.div
           aria-hidden="true"
           className="absolute inset-0 -z-10 bg-[#006960]"
@@ -84,10 +107,8 @@ function ServiceRow({ service, index }: {
           {service.description}
         </motion.p>
 
-        {/* Image/CTA slot — image by default, button on hover. Both stay
-            mounted and cross-fade via CSS group-hover, so leaving the row
-            always restores the image (no stuck JS hover state, no overlap). */}
-        <div className="relative shrink-0 size-[140px] md:size-[200px] flex items-center justify-center">
+        {/* Image/CTA slot — image by default, button on hover (cross-fade). */}
+        <div className="relative shrink-0 size-[200px] flex items-center justify-center">
           <img
             src={service.image}
             alt={service.title}
@@ -113,7 +134,7 @@ export function Services() {
   const inView = useInView(ref, { once: true, margin: "-10%" });
 
   return (
-    <section className="w-full bg-white py-24 md:py-[156px]" id="servicii">
+    <section className="w-full bg-white py-16 md:py-[156px]" id="servicii">
       {/* Header */}
       <div ref={ref} className="px-6 md:px-[126px] mb-12 md:mb-16">
         <motion.h2

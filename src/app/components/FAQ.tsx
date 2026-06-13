@@ -21,7 +21,7 @@ export function FAQ() {
   }, []);
 
   return (
-    <section className="w-full bg-white py-24 md:py-[156px]" id="faq">
+    <section className="w-full bg-white py-16 md:py-[156px]" id="faq">
       <div className="px-6 md:px-[126px] flex flex-col md:flex-row gap-16 items-start">
         {/* Left: text */}
         <div ref={ref} className="shrink-0 w-full md:w-[465px]">

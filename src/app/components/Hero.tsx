@@ -4,6 +4,7 @@ import { Link } from "react-router";
 import imgPortrait from "../../imports/Body/0246f3802382d4dbbdc1a474bf81eaf76c14991a.webp";
 import imgHeroBg from "../../imports/Body/019dd9eeb6b49b7cdb6f1dd68088dd908e2ec026.webp";
 import { useLanguage } from "../i18n";
+import { useIsMobile, entrance } from "../lib/useIsMobile";
 
 const heroServices = {
   ro: ["Orientare în carieră", "Psihologie sportivă", "Terapie individuală", "Motivare", "Dezvoltare personală", "Studenți"],
@@ -18,6 +19,7 @@ const heroQuote = {
 /** Top beige section — service list (left) + quote (right) + watermark */
 export function HeroTop() {
   const { language } = useLanguage();
+  const isMobile = useIsMobile();
   const services = heroServices[language];
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
@@ -67,21 +69,21 @@ export function HeroTop() {
       </motion.div>
 
       {/* Content row */}
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 items-center gap-10 px-6 md:px-[126px] py-24 md:py-[96px] min-h-[760px]">
+      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 items-center gap-10 px-6 md:px-[126px] py-16 md:py-[96px] min-h-[760px]">
 
         {/* LEFT: Service categories */}
         <motion.div
           style={{ y: listY }}
           className="flex w-full flex-col will-change-transform"
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, ...entrance(isMobile, -20) }}
+          animate={{ opacity: 1, x: 0, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
         >
           {services.map((service, i) => (
             <motion.p
               key={service}
-              initial={{ opacity: 0, x: -16 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, ...entrance(isMobile, -16) }}
+              animate={{ opacity: 1, x: 0, y: 0 }}
               transition={{ duration: 0.5, delay: 0.15 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
               className="text-[#1f1d1a] cursor-default"
               style={{
@@ -114,8 +116,8 @@ export function HeroTop() {
         {/* RIGHT: Quote text */}
         <motion.p
           className="w-full max-w-none text-left will-change-transform md:text-right"
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, ...entrance(isMobile, 20) }}
+          animate={{ opacity: 1, x: 0, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
           style={{
             y: quoteY,

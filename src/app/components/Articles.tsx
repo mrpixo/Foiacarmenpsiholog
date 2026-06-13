@@ -5,12 +5,14 @@ import { useLanguage } from "../i18n";
 import { isSupabaseConfigured } from "../lib/supabase";
 import { listPublishedArticles, type Article } from "../lib/articles";
 import { ArticleCard } from "./blog/ArticleCard";
+import { useIsMobile, entrance } from "../lib/useIsMobile";
 
 const FONT = { fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" } as const;
 
 /** Blog articles section — WHITE background. Shows the 3 latest published posts. */
 export function Articles() {
   const { language } = useLanguage();
+  const isMobile = useIsMobile();
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-10%" });
   const [articles, setArticles] = useState<Article[]>([]);
@@ -23,8 +25,8 @@ export function Articles() {
   }, []);
 
   return (
-    <section className="w-full bg-white py-24 md:py-[156px]" id="articole">
-      <div className="px-6 md:px-[126px] flex flex-col gap-[98px]">
+    <section className="w-full bg-white py-16 md:py-[156px]" id="articole">
+      <div className="px-6 md:px-[126px] flex flex-col gap-12 md:gap-[98px]">
         {/* Header */}
         <div ref={ref} className="flex flex-col md:flex-row items-start justify-between gap-8">
           <motion.p
@@ -38,8 +40,8 @@ export function Articles() {
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
+            initial={{ opacity: 0, ...entrance(isMobile, 20) }}
+            animate={inView ? { opacity: 1, x: 0, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.15 }}
             className="flex flex-col items-start md:items-end gap-3"
           >
