@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { motion } from "motion/react";
 import { Search } from "lucide-react";
 import { HomeLink } from "../HomeLink";
+import { useSeo } from "../../lib/seo";
 import { useLanguage } from "../../i18n";
 import { isSupabaseConfigured } from "../../lib/supabase";
 import {
@@ -44,6 +45,14 @@ const copy = {
 export function BlogList() {
   const { language } = useLanguage();
   const t = copy[language];
+  useSeo({
+    title: { ro: "Blog — Psihologie, terapie și echilibru", en: "Blog — Psychology, therapy and balance" },
+    description: {
+      ro: "Articole despre psihologie, terapie, echilibru emoțional și dezvoltare personală, scrise de Carmen Foia, psiholog în Oradea.",
+      en: "Articles on psychology, therapy, emotional balance and personal growth by Carmen Foia, psychologist in Oradea.",
+    },
+    path: "/blog",
+  });
   const [articles, setArticles] = useState<Article[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [activeCat, setActiveCat] = useState<string>("all");

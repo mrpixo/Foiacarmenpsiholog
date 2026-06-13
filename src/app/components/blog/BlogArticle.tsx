@@ -14,6 +14,7 @@ import {
   type Article,
 } from "../../lib/articles";
 import { NotConfigured } from "./NotConfigured";
+import { useSeo } from "../../lib/seo";
 
 const FONT = { fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" } as const;
 
@@ -38,6 +39,16 @@ export function BlogArticle() {
   const [article, setArticle] = useState<Article | null>(null);
   const [related, setRelated] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
+
+  useSeo({
+    title: article
+      ? { ro: title(article, "ro"), en: title(article, "en") }
+      : { ro: "Articol blog", en: "Blog article" },
+    description: article
+      ? { ro: excerpt(article, "ro") || title(article, "ro"), en: excerpt(article, "en") || title(article, "en") }
+      : { ro: "Articol de blog — Carmen Foia, psiholog Oradea.", en: "Blog article — Carmen Foia, psychologist in Oradea." },
+    path: slug ? `/blog/${slug}` : "/blog",
+  });
 
   useEffect(() => {
     if (!isSupabaseConfigured || !slug) {

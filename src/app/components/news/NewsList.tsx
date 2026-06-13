@@ -5,6 +5,7 @@ import { isSupabaseConfigured } from "../../lib/supabase";
 import { listPublishedNews, type NewsItem } from "../../lib/news";
 import { NewsCard } from "./NewsCard";
 import { HomeLink } from "../HomeLink";
+import { useSeo } from "../../lib/seo";
 
 const FONT = { fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" } as const;
 
@@ -16,6 +17,14 @@ const copy = {
 export function NewsList() {
   const { language } = useLanguage();
   const t = copy[language];
+  useSeo({
+    title: { ro: "Noutăți și evenimente — Carmen Foia", en: "News and events — Carmen Foia" },
+    description: {
+      ro: "Evenimente, resurse și actualizări din activitatea Carmen Foia, psiholog în Oradea.",
+      en: "Events, resources and updates from Carmen Foia, psychologist in Oradea.",
+    },
+    path: "/noutati",
+  });
   const [items, setItems] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
 

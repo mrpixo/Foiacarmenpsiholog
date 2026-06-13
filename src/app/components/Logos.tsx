@@ -1,11 +1,11 @@
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
 import { useLanguage } from "../i18n";
-import imgCsm from "../../imports/CSM_Oradea_logo-en.png";
-import imgUni from "../../imports/Universitate Oradea-logo.png";
-import imgSpital from "../../imports/Spitalul Judetean Oradea-logo.jpeg";
-import imgDaso from "../../imports/DASO-logo.png";
-import imgAsoc from "../../imports/Asociatia Psihologi-logo.png";
+import imgCsm from "../../imports/CSM_Oradea_logo-en.webp";
+import imgUni from "../../imports/Universitate Oradea-logo.webp";
+import imgSpital from "../../imports/Spitalul Judetean Oradea-logo.webp";
+import imgDaso from "../../imports/DASO-logo.webp";
+import imgAsoc from "../../imports/Asociatia Psihologi-logo.webp";
 
 /** Partner / experience logos (files in src/imports/). */
 const logos = [

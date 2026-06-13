@@ -6,6 +6,7 @@ import { isSupabaseConfigured } from "../../lib/supabase";
 import { listPublishedFaq, faqQuestion, faqAnswer, faqCategory, type Faq } from "../../lib/community";
 import { FaqItem } from "./FaqItem";
 import { HomeLink } from "../HomeLink";
+import { useSeo } from "../../lib/seo";
 
 const FONT = { fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" } as const;
 
@@ -17,6 +18,14 @@ const copy = {
 export function FaqPage() {
   const { language } = useLanguage();
   const t = copy[language];
+  useSeo({
+    title: { ro: "Întrebări frecvente — Psiholog Oradea", en: "FAQ — Psychologist in Oradea" },
+    description: {
+      ro: "Răspunsuri la întrebări frecvente despre ședințe, programări, confidențialitate și terapie cu Carmen Foia, psiholog în Oradea.",
+      en: "Answers to frequently asked questions about sessions, bookings, confidentiality and therapy with Carmen Foia, psychologist in Oradea.",
+    },
+    path: "/intrebari-frecvente",
+  });
   const [faqs, setFaqs] = useState<Faq[]>([]);
   const [loading, setLoading] = useState(true);
   const [openId, setOpenId] = useState<string>("");

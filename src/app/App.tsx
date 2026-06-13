@@ -33,7 +33,8 @@ import { CookieBanner } from "./components/CookieBanner";
 import { LanguageProvider } from "./i18n";
 import { AuthProvider } from "./lib/auth";
 import { ConsentProvider } from "./lib/consent";
-import imgHeroBg from "../imports/Body/019dd9eeb6b49b7cdb6f1dd68088dd908e2ec026.png";
+import { useSeo } from "./lib/seo";
+import imgHeroBg from "../imports/Body/019dd9eeb6b49b7cdb6f1dd68088dd908e2ec026.webp";
 
 function FullWidthPhoto() {
   return (
@@ -50,6 +51,14 @@ function FullWidthPhoto() {
 }
 
 function Home() {
+  useSeo({
+    title: { ro: "Psiholog Oradea — Terapie & Consiliere", en: "Psychologist in Oradea — Therapy & Counselling" },
+    description: {
+      ro: "Carmen Foia, psiholog clinician în Oradea. Terapie individuală și de cuplu, consiliere, psihologie sportivă și dezvoltare personală. Programează o ședință.",
+      en: "Carmen Foia, clinical psychologist in Oradea. Individual and couples therapy, counselling, sports psychology and personal development. Book a session.",
+    },
+    path: "/",
+  });
   return (
     <main>
       {/* 1. Beige section with service categories */}

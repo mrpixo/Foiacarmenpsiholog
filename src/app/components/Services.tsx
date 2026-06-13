@@ -1,11 +1,11 @@
 import { useState, useRef } from "react";
 import { motion, useInView } from "motion/react";
 import { Link } from "react-router";
-import imgRect16 from "../../imports/Body/73056bd19e50c0720161c9b18d983fc7721ddf7a.png";
-import imgRect17 from "../../imports/Body/49859db54fbf9aeb6aea41ad98bcc853a0a36328.png";
-import imgRect18 from "../../imports/Body/c5ec97bda42d210a1e3d698f4949c7b911ec514d.png";
-import imgRect19 from "../../imports/Body/1bfa4bbb6a33afca33b5187e6c60ca7c54685315.png";
-import imgRect20 from "../../imports/Body/8fda238a3766c34f1aa3d3b52bab3293794ab0d4.png";
+import imgRect16 from "../../imports/Body/73056bd19e50c0720161c9b18d983fc7721ddf7a.webp";
+import imgRect17 from "../../imports/Body/49859db54fbf9aeb6aea41ad98bcc853a0a36328.webp";
+import imgRect18 from "../../imports/Body/c5ec97bda42d210a1e3d698f4949c7b911ec514d.webp";
+import imgRect19 from "../../imports/Body/1bfa4bbb6a33afca33b5187e6c60ca7c54685315.webp";
+import imgRect20 from "../../imports/Body/8fda238a3766c34f1aa3d3b52bab3293794ab0d4.webp";
 import { useLanguage } from "../i18n";
 
 const services = {

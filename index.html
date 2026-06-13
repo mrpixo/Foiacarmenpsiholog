@@ -1,22 +1,73 @@
+<!DOCTYPE html>
+<html lang="ro">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Psychologist Portfolio Website</title>
-      <meta name="description" content="Showcase your psychology practice with a premium portfolio website that exudes elegance and trust, enhancing client engagement and accessibility." />
-      <meta name="robots" content="noindex, nofollow" />
-      <style>html, body { height: 100%; margin: 0; } #root { height: 100%; }</style>
-      
-    </head>
+    <!-- Primary SEO -->
+    <title>Psiholog Oradea — Carmen Foia | Terapie & Consiliere</title>
+    <meta
+      name="description"
+      content="Carmen Foia — psiholog clinician în Oradea. Terapie individuală și de cuplu, consiliere, psihologie sportivă și dezvoltare personală. Programează o ședință online sau la cabinet."
+    />
+    <meta
+      name="keywords"
+      content="Psiholog Oradea, Carmen Foia, Psiholog Carmen Foia, Terapie Oradea, psiholog clinician Oradea, consiliere psihologică Oradea, terapie de cuplu Oradea"
+    />
+    <meta name="author" content="Carmen Foia" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://psihologcarmenfoia.ro/" />
+    <meta name="theme-color" content="#006960" />
 
-    <body>
-      
-      <div id="root"></div>
-      <script type="module" src="/src/main.tsx"></script>
-      
-    </body>
-  </html>
-  
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Carmen Foia Psiholog" />
+    <meta property="og:title" content="Psiholog Oradea — Carmen Foia | Terapie & Consiliere" />
+    <meta
+      property="og:description"
+      content="Psiholog clinician în Oradea. Terapie individuală și de cuplu, consiliere și dezvoltare personală. Programează o ședință."
+    />
+    <meta property="og:url" content="https://psihologcarmenfoia.ro/" />
+    <meta property="og:locale" content="ro_RO" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:image" content="https://psihologcarmenfoia.ro/og-image.jpg" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Psiholog Oradea — Carmen Foia" />
+    <meta name="twitter:description" content="Psiholog clinician în Oradea. Terapie, consiliere și dezvoltare personală." />
+    <meta name="twitter:image" content="https://psihologcarmenfoia.ro/og-image.jpg" />
+
+    <!-- Local business / Psychologist structured data (rich for "Psiholog Oradea") -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Psychologist",
+        "name": "Cabinet Individual Psihologie Carmen Foia",
+        "alternateName": "Carmen Foia Psiholog",
+        "description": "Psiholog clinician în Oradea — terapie individuală și de cuplu, consiliere, psihologie sportivă și dezvoltare personală.",
+        "url": "https://psihologcarmenfoia.ro/",
+        "telephone": "+407949514255",
+        "email": "contact@psihologcarmenfoia.ro",
+        "founder": { "@type": "Person", "name": "Carmen Foia", "jobTitle": "Psiholog Clinician" },
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Str. Vasile Alecsandri nr. 7",
+          "addressLocality": "Oradea",
+          "addressRegion": "Bihor",
+          "addressCountry": "RO"
+        },
+        "areaServed": { "@type": "City", "name": "Oradea" },
+        "knowsLanguage": ["ro", "en"],
+        "priceRange": "RON"
+      }
+    </script>
+
+    <style>html, body { height: 100%; margin: 0; } #root { height: 100%; }</style>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

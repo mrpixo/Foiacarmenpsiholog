@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { Link } from "react-router";
-import imgPortrait from "../../imports/Body/0246f3802382d4dbbdc1a474bf81eaf76c14991a.png";
-import imgHeroBg from "../../imports/Body/019dd9eeb6b49b7cdb6f1dd68088dd908e2ec026.png";
+import imgPortrait from "../../imports/Body/0246f3802382d4dbbdc1a474bf81eaf76c14991a.webp";
+import imgHeroBg from "../../imports/Body/019dd9eeb6b49b7cdb6f1dd68088dd908e2ec026.webp";
 import { useLanguage } from "../i18n";
 
 const heroServices = {

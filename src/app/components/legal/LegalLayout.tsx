@@ -1,4 +1,4 @@
-import { type ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 import { Link } from "react-router";
 import { motion } from "motion/react";
 import { ArrowLeft } from "lucide-react";
@@ -18,6 +18,10 @@ export function LegalLayout({
   children: ReactNode;
 }) {
   const { language } = useLanguage();
+  useEffect(() => {
+    document.title = `${title} | Carmen Foia — Psiholog Oradea`;
+    document.documentElement.lang = language;
+  }, [title, language]);
   return (
     <section className="w-full px-6 pb-24 pt-36 md:px-24 md:pb-[156px] md:pt-44">
       <div className="mx-auto max-w-[820px]">

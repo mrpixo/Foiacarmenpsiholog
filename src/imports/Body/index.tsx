@@ -1,14 +1,14 @@
 import svgPaths from "./svg-egl36ue873";
-import imgImage9 from "./019dd9eeb6b49b7cdb6f1dd68088dd908e2ec026.png";
-import imgGeminiGeneratedImage2Dhjtw2Dhjtw2Dhj1 from "./0246f3802382d4dbbdc1a474bf81eaf76c14991a.png";
-import imgRectangle16 from "./73056bd19e50c0720161c9b18d983fc7721ddf7a.png";
-import imgRectangle17 from "./49859db54fbf9aeb6aea41ad98bcc853a0a36328.png";
-import imgRectangle18 from "./c5ec97bda42d210a1e3d698f4949c7b911ec514d.png";
-import imgRectangle19 from "./1bfa4bbb6a33afca33b5187e6c60ca7c54685315.png";
-import imgRectangle20 from "./8fda238a3766c34f1aa3d3b52bab3293794ab0d4.png";
-import imgRectangle2 from "./2c9abaa741df4f12ecad8571b4ecafe26351a587.png";
-import imgRectangle3 from "./c82ebfae41c60afda563655b053f3a79e3493e39.png";
-import imgRectangle4 from "./dc7d1ed2839bf6067ea97d1e9ff0fea5e2bbb81a.png";
+import imgImage9 from "./019dd9eeb6b49b7cdb6f1dd68088dd908e2ec026.webp";
+import imgGeminiGeneratedImage2Dhjtw2Dhjtw2Dhj1 from "./0246f3802382d4dbbdc1a474bf81eaf76c14991a.webp";
+import imgRectangle16 from "./73056bd19e50c0720161c9b18d983fc7721ddf7a.webp";
+import imgRectangle17 from "./49859db54fbf9aeb6aea41ad98bcc853a0a36328.webp";
+import imgRectangle18 from "./c5ec97bda42d210a1e3d698f4949c7b911ec514d.webp";
+import imgRectangle19 from "./1bfa4bbb6a33afca33b5187e6c60ca7c54685315.webp";
+import imgRectangle20 from "./8fda238a3766c34f1aa3d3b52bab3293794ab0d4.webp";
+import imgRectangle2 from "./2c9abaa741df4f12ecad8571b4ecafe26351a587.webp";
+import imgRectangle3 from "./c82ebfae41c60afda563655b053f3a79e3493e39.webp";
+import imgRectangle4 from "./dc7d1ed2839bf6067ea97d1e9ff0fea5e2bbb81a.webp";
 
 function Group25() {
   return (

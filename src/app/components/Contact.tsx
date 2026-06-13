@@ -6,6 +6,7 @@ import Cal, { getCalApi } from "@calcom/embed-react";
 import { useLanguage } from "../i18n";
 import { CAL_USERNAME, EVENT_SLUG, bookingReasons, SESSION_PRICE, ENTITY, type BookingReason } from "../booking";
 import { HomeLink } from "./HomeLink";
+import { useSeo } from "../lib/seo";
 
 const copy = {
   ro: {
@@ -45,6 +46,14 @@ const PRICE_LABEL = `${SESSION_PRICE.amount} ${SESSION_PRICE.currency}`;
 export function Contact() {
   const { language } = useLanguage();
   const t = copy[language];
+  useSeo({
+    title: { ro: "Programează o ședință — Psiholog Oradea", en: "Book a session — Psychologist in Oradea" },
+    description: {
+      ro: "Programează o ședință de terapie sau consiliere cu Carmen Foia, psiholog în Oradea. Alege tipul de sesiune și un interval disponibil.",
+      en: "Book a therapy or counselling session with Carmen Foia, psychologist in Oradea. Choose your session type and an available slot.",
+    },
+    path: "/contact",
+  });
   const [searchParams] = useSearchParams();
   // Deep-link support: /contact?reason=<id> pre-selects a reason and jumps
   // straight to the slot picker (e.g. from a "Domenii de activitate" card).

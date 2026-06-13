@@ -7,6 +7,7 @@ import { isSupabaseConfigured } from "../../lib/supabase";
 import { getPublishedNewsBySlug, newsTitle, newsExcerpt, newsBody, type NewsItem } from "../../lib/news";
 import { NewsContent } from "./NewsContent";
 import { NotConfigured } from "../blog/NotConfigured";
+import { useSeo } from "../../lib/seo";
 
 const FONT = { fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" } as const;
 
@@ -26,6 +27,16 @@ export function NewsDetail() {
   const t = copy[language];
   const [item, setItem] = useState<NewsItem | null>(null);
   const [loading, setLoading] = useState(true);
+
+  useSeo({
+    title: item
+      ? { ro: newsTitle(item, "ro"), en: newsTitle(item, "en") }
+      : { ro: "Noutate", en: "Update" },
+    description: item
+      ? { ro: newsExcerpt(item, "ro") || newsTitle(item, "ro"), en: newsExcerpt(item, "en") || newsTitle(item, "en") }
+      : { ro: "Noutăți — Carmen Foia, psiholog Oradea.", en: "News — Carmen Foia, psychologist in Oradea." },
+    path: slug ? `/noutati/${slug}` : "/noutati",
+  });
 
   useEffect(() => {
     if (!isSupabaseConfigured || !slug) { setLoading(false); return; }
