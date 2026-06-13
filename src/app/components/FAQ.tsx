@@ -22,7 +22,7 @@ export function FAQ() {
 
   return (
     <section className="w-full bg-white py-24 md:py-[156px]" id="faq">
-      <div className="px-8 md:px-[126px] flex flex-col md:flex-row gap-16 items-start">
+      <div className="px-6 md:px-[126px] flex flex-col md:flex-row gap-16 items-start">
         {/* Left: text */}
         <div ref={ref} className="shrink-0 w-full md:w-[465px]">
           <motion.p
@@ -48,7 +48,7 @@ export function FAQ() {
           <motion.div initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.25 }}>
             <Link
               to="/intrebari-frecvente"
-              className="mt-8 inline-flex items-center justify-center rounded-full bg-[#ffba68] px-7 py-3.5 text-base font-semibold text-[#1f1d1b] transition-all duration-300 hover:bg-[#ffc985] hover:scale-105"
+              className="mt-8 inline-flex w-full items-center justify-start rounded-full bg-[#ffba68] px-7 py-3.5 text-base font-semibold text-[#1f1d1b] transition-all duration-300 hover:bg-[#ffc985] md:w-auto md:justify-center md:hover:scale-105"
               style={FONT}
             >
               {language === "ro" ? "Vezi toate întrebările" : "See all questions"}

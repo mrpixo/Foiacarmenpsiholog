@@ -23,7 +23,7 @@ export function Mission() {
         </div>
       </div>
 
-      <div className="relative z-10 px-8 md:px-24 flex flex-col items-end gap-10">
+      <div className="relative z-10 px-6 md:px-24 flex flex-col items-end gap-10">
         <motion.p
           initial={{ opacity: 0, y: 32 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}

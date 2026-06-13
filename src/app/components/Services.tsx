@@ -54,7 +54,7 @@ function ServiceRow({ service, index }: {
         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
       />
 
-      <div className="relative z-10 px-8 md:px-[126px] py-10 flex flex-col md:flex-row items-start md:items-center gap-8 md:gap-10 overflow-visible">
+      <div className="relative z-10 px-6 md:px-[126px] py-10 flex flex-col md:flex-row items-start md:items-center gap-8 md:gap-10 overflow-visible">
         <motion.div
           aria-hidden="true"
           className="absolute inset-0 -z-10 bg-[#006960]"
@@ -115,7 +115,7 @@ export function Services() {
   return (
     <section className="w-full bg-white py-24 md:py-[156px]" id="servicii">
       {/* Header */}
-      <div ref={ref} className="px-8 md:px-[126px] mb-12 md:mb-16">
+      <div ref={ref} className="px-6 md:px-[126px] mb-12 md:mb-16">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}

@@ -41,7 +41,7 @@ export function Intro() {
       style={{ background: "#006960", position: "relative" }}
       id="despre"
     >
-      <div className="max-w-none px-8 md:px-24 flex flex-col items-start gap-12">
+      <div className="max-w-none px-6 md:px-24 flex flex-col items-start gap-12">
         <p
           className="w-full max-w-none text-left"
           style={{
@@ -71,7 +71,7 @@ export function Intro() {
         >
           <Link
             to="/contact"
-            className="inline-flex items-center justify-center bg-[#ffba68] text-[#1f1d1b] font-semibold text-base px-7 py-3.5 rounded-full transition-all duration-300 hover:bg-[#ffc985] hover:scale-105"
+            className="inline-flex w-full items-center justify-start bg-[#ffba68] text-[#1f1d1b] font-semibold text-base px-7 py-3.5 rounded-full transition-all duration-300 hover:bg-[#ffc985] md:w-auto md:justify-center md:hover:scale-105"
             style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}
           >
             {language === "ro" ? "Programează-te acum" : "Book a session"}

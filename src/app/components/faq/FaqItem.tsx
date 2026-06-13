@@ -1,3 +1,5 @@
+const FONT = { fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" } as const;
+
 /** Accordion FAQ item — shared by the homepage section and the FAQ page. */
 export function FaqItem({
   question,
@@ -35,7 +37,7 @@ export function FaqItem({
             isOpen ? "text-white" : "text-[#39342e]",
           ].join(" ")}
         >
-          <span className="flex-1 font-['Oakes_Grotesk'] font-medium leading-snug transition-colors duration-300" style={{ fontSize: "clamp(16px,1.5vw,22px)" }}>
+          <span className="flex-1 font-medium leading-snug transition-colors duration-300" style={{ ...FONT, fontSize: "clamp(16px,1.5vw,22px)" }}>
             {question}
           </span>
           <span aria-hidden="true" className="flex size-8 shrink-0 items-center justify-center">
@@ -54,8 +56,8 @@ export function FaqItem({
       >
         <div className="min-h-0 overflow-hidden">
           <p
-            className={["whitespace-pre-line px-6 pb-6 pr-14 font-['Oakes_Grotesk'] leading-relaxed transition-colors duration-300 md:px-8 md:pb-8 md:pr-20", isOpen ? "text-white/82" : "text-[#39342e]/70"].join(" ")}
-            style={{ fontSize: "clamp(14px,1.3vw,17px)" }}
+            className={["whitespace-pre-line px-6 pb-6 pr-14 leading-relaxed transition-colors duration-300 md:px-8 md:pb-8 md:pr-20", isOpen ? "text-white/82" : "text-[#39342e]/70"].join(" ")}
+            style={{ ...FONT, fontSize: "clamp(14px,1.3vw,17px)" }}
           >
             {answer}
           </p>

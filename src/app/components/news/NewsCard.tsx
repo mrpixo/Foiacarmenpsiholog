@@ -42,8 +42,9 @@ export function NewsCard({ item, index }: { item: NewsItem; index: number }) {
       className="group flex h-full flex-1 basis-0 flex-col gap-4 min-w-0"
     >
       <Link to={`/noutati/${item.slug}`} className="flex h-full flex-col gap-4">
-        {imageFirst && image}
-        <div className="flex flex-col gap-4">
+        {/* On mobile always image → title → link; on desktop alternate. */}
+        <div className={!imageFirst ? "md:order-2" : ""}>{image}</div>
+        <div className={["flex flex-col gap-4", !imageFirst ? "md:order-1" : ""].join(" ")}>
           <p className="text-white" style={{ ...FONT, fontWeight: 400, fontSize: "clamp(18px,2vw,32px)", lineHeight: 1.5 }}>
             {newsTitle(item, language)}
           </p>
@@ -61,7 +62,6 @@ export function NewsCard({ item, index }: { item: NewsItem; index: number }) {
             </span>
           </div>
         </div>
-        {!imageFirst && image}
       </Link>
     </motion.article>
   );

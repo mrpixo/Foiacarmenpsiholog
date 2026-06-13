@@ -67,7 +67,7 @@ export function HeroTop() {
       </motion.div>
 
       {/* Content row */}
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 items-center gap-10 px-8 md:px-[126px] py-24 md:py-[96px] min-h-[760px]">
+      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 items-center gap-10 px-6 md:px-[126px] py-24 md:py-[96px] min-h-[760px]">
 
         {/* LEFT: Service categories */}
         <motion.div
@@ -103,7 +103,7 @@ export function HeroTop() {
           >
             <Link
               to="/contact"
-              className="inline-flex items-center justify-center bg-[#ffba68] text-[#1f1d1b] font-semibold text-base px-7 py-3.5 rounded-full transition-all duration-300 hover:bg-[#ffc985] hover:scale-105"
+              className="inline-flex w-full items-center justify-start bg-[#ffba68] text-[#1f1d1b] font-semibold text-base px-7 py-3.5 rounded-full transition-all duration-300 hover:bg-[#ffc985] md:w-auto md:justify-center md:hover:scale-105"
               style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}
             >
               {language === "ro" ? "Programează-te acum" : "Book a session"}

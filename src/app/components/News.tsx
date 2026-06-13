@@ -22,7 +22,7 @@ export function News() {
 
   return (
     <section className="w-full py-24 md:py-[156px]" style={{ background: "#006960" }} id="noutati">
-      <div className="px-8 md:px-[126px] flex flex-col gap-12">
+      <div className="px-6 md:px-[126px] flex flex-col gap-12">
         {/* Header row */}
         <div ref={ref} className="flex flex-col md:flex-row items-start justify-between gap-8">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }}>
@@ -39,7 +39,7 @@ export function News() {
             </p>
             <Link
               to="/noutati"
-              className="inline-flex items-center justify-center bg-[#ffba68] text-[#1f1d1b] font-semibold text-base px-7 py-3.5 rounded-full transition-all duration-300 hover:bg-[#ffc985] hover:scale-105"
+              className="inline-flex w-full items-center justify-start bg-[#ffba68] text-[#1f1d1b] font-semibold text-base px-7 py-3.5 rounded-full transition-all duration-300 hover:bg-[#ffc985] md:w-auto md:justify-center md:hover:scale-105"
               style={FONT}
             >
               {language === "ro" ? "Vezi toate noutățile" : "See all news"}

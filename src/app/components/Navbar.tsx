@@ -101,12 +101,14 @@ export function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className={[
-        "fixed left-1/2 top-4 z-50 flex h-[76px] w-[calc(100%-2rem)] md:w-[calc(100%-252px)] -translate-x-1/2 items-center justify-between rounded-full px-4 backdrop-blur-[5px] transition-[background-color,box-shadow] duration-500",
-        scrolled ? "bg-white/82 shadow-[0_8px_32px_rgba(0,105,96,0.12)]" : "bg-white/58 shadow-[0_4px_24px_rgba(0,0,0,0.06)]",
+        "fixed left-1/2 top-4 z-50 flex h-[76px] w-[calc(100%-2rem)] xl:w-[calc(100%-252px)] -translate-x-1/2 items-center justify-between transition-[background-color,box-shadow] duration-500",
+        // Bar visuals only on desktop; on mobile the logo + hamburger float as separate pills.
+        "xl:rounded-full xl:px-4 xl:backdrop-blur-[5px]",
+        scrolled ? "xl:bg-white/82 xl:shadow-[0_8px_32px_rgba(0,105,96,0.12)]" : "xl:bg-white/58 xl:shadow-[0_4px_24px_rgba(0,0,0,0.06)]",
       ].join(" ")}
     >
       {/* Logo — matched to imported Figma header */}
-      <Link to="/" className="flex shrink-0 items-center gap-4" aria-label={language === "ro" ? "Carmen Foia Psiholog homepage" : "Carmen Foia Psychologist homepage"}>
+      <Link to="/" className="flex shrink-0 items-center gap-4 rounded-full border border-[#0d121a]/10 bg-white/82 px-3 py-2 shadow-[0_4px_24px_rgba(0,0,0,0.08)] backdrop-blur-[5px] xl:border-0 xl:bg-transparent xl:p-0 xl:shadow-none xl:backdrop-blur-0" aria-label={language === "ro" ? "Carmen Foia Psiholog homepage" : "Carmen Foia Psychologist homepage"}>
         <HeaderLogoMark />
         <div className="hidden h-[45px] flex-col items-start leading-[1.5] whitespace-nowrap sm:flex">
           <span className="text-[18px] font-semibold leading-[27px] text-[#1d293d]" style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}>
@@ -146,7 +148,7 @@ export function Navbar() {
         })}
       </nav>
 
-      <div className="hidden items-center gap-3 md:flex">
+      <div className="hidden items-center gap-3 xl:flex">
         {/* CTA — imported 24px x 12px sizing */}
         <Link
           to="/contact"
@@ -197,9 +199,9 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile toggle */}
+      {/* Mobile toggle — its own floating bordered pill */}
       <button
-        className="rounded-full p-2 text-[#39342e] transition-colors hover:bg-[#006960]/8 xl:hidden"
+        className="flex size-[52px] items-center justify-center rounded-full border border-[#0d121a]/10 bg-white/82 text-[#39342e] shadow-[0_4px_24px_rgba(0,0,0,0.08)] backdrop-blur-[5px] transition-colors hover:bg-white xl:hidden"
         onClick={() => setMobileOpen(!mobileOpen)}
         aria-label="Toggle menu"
         aria-expanded={mobileOpen}
@@ -244,7 +246,7 @@ export function Navbar() {
               <Link
                 to="/contact"
                 onClick={() => setMobileOpen(false)}
-                className="inline-flex flex-1 items-center justify-center rounded-full bg-[#ffba68] px-6 py-3 text-center text-[16px] font-semibold leading-6 tracking-[-0.3125px] text-[#1f1d1b] transition-all duration-300 hover:bg-[#ffc985] hover:scale-105"
+                className="inline-flex flex-1 items-center justify-start rounded-full bg-[#ffba68] px-6 py-3 text-left text-[16px] font-semibold leading-6 tracking-[-0.3125px] text-[#1f1d1b] transition-all duration-300 hover:bg-[#ffc985]"
                 style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}
               >
                 {language === "ro" ? "Programează-te acum" : "Book a session"}

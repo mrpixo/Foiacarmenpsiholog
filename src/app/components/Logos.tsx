@@ -27,7 +27,7 @@ export function Logos() {
 
   return (
     <section className="w-full overflow-hidden py-20" style={{ background: "#f5eee9" }}>
-      <div ref={ref} className="px-8 md:px-[128px] mb-8">
+      <div ref={ref} className="px-6 md:px-[128px] mb-8">
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}

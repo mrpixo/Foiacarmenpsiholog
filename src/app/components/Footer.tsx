@@ -51,7 +51,7 @@ export function Footer() {
   };
   return (
     <footer className="relative w-full overflow-hidden" style={{ background: "#054943" }}>
-      <div className="relative z-10 px-8 md:px-[164px] pt-24 md:pt-[96px] pb-[clamp(160px,24vw,390px)] flex flex-col gap-8">
+      <div className="relative z-10 px-6 md:px-[164px] pt-24 md:pt-[96px] pb-[clamp(160px,24vw,390px)] flex flex-col gap-8">
         {/* Top: logo + social + CTA */}
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           {/* Logo */}
@@ -99,9 +99,9 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Social + CTA */}
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-3">
+          {/* Social + CTA — mobile: full-width CTA then centered socials; desktop: socials then CTA */}
+          <div className="flex w-full flex-col items-center gap-5 md:w-auto md:flex-row md:items-center md:gap-4">
+            <div className="order-2 flex flex-wrap items-center justify-center gap-3 md:order-1">
               {[
                 { icon: <Linkedin size={20} /> },
                 { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.53V6.77a4.86 4.86 0 0 1-1.01-.08z"/></svg> },
@@ -121,7 +121,7 @@ export function Footer() {
 
             <Link
               to="/contact"
-              className="inline-flex items-center justify-center bg-[#ffba68] text-[#1f1d1b] font-semibold text-base px-7 py-3.5 rounded-full transition-all duration-300 hover:bg-[#ffc985] hover:scale-105"
+              className="order-1 flex w-full items-center justify-start rounded-full bg-[#ffba68] px-7 py-3.5 text-base font-semibold text-[#1f1d1b] transition-all duration-300 hover:bg-[#ffc985] md:order-2 md:w-auto md:justify-center md:hover:scale-105"
               style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}
             >
               {language === "ro" ? "Programează-te acum" : "Book a session"}
