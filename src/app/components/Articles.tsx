@@ -33,10 +33,10 @@ export function Articles() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="text-[#39342e] whitespace-nowrap"
+            className="text-[#39342e] max-w-[560px]"
             style={{ ...FONT, fontWeight: 700, fontSize: "clamp(32px,4vw,64px)", lineHeight: 1.1 }}
           >
-            {language === "ro" ? "Articole din blog" : "Blog articles"}
+            {language === "ro" ? "Blog" : "Blog"}
           </motion.p>
 
           <motion.div
@@ -50,8 +50,8 @@ export function Articles() {
               style={{ ...FONT, fontWeight: 400, lineHeight: 1.5 }}
             >
               {language === "ro"
-                ? "Fiecare persoană este unică, iar abordarea terapeutică este adaptată nevoilor și obiectivelor tale specifice, într-un mediu bazat pe empatie și respect."
-                : "Thoughtful articles on therapy, wellbeing, performance, and personal growth."}
+                ? "Articole despre psihologie, anxietate, performanță și dezvoltare personală."
+                : "Articles on psychology, anxiety, performance, and personal development."}
             </p>
             <Link
               to="/blog"

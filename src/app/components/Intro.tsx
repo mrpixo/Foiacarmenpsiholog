@@ -4,8 +4,8 @@ import { Link } from "react-router";
 import { useLanguage } from "../i18n";
 
 const introText = {
-  ro: "Fiecare persoană este unică, iar abordarea terapeutică este adaptată nevoilor și obiectivelor tale specifice, într-un mediu bazat pe empatie și respect.",
-  en: "Every person is unique, and the therapeutic approach is tailored to your specific needs and goals, in a space grounded in empathy and respect.",
+  ro: "Fiecare persoană are provocări diferite. Împreună identificăm soluții practice care te ajută să obții mai multă claritate, încredere și echilibru.",
+  en: "Every person faces different challenges. Together we find practical solutions that help you gain more clarity, confidence, and balance.",
 };
 
 function Word({ word, index, total, scrollYProgress }: {

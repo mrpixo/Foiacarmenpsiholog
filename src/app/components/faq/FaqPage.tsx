@@ -11,8 +11,8 @@ import { useSeo } from "../../lib/seo";
 const FONT = { fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" } as const;
 
 const copy = {
-  ro: { eyebrow: "Ajutor", title: "Întrebări frecvente", subtitle: "Răspunsuri la cele mai frecvente întrebări, organizate pe categorii.", uncategorised: "Altele", empty: "Nicio întrebare încă.", noResults: "Nicio întrebare găsită.", searchPlaceholder: "Caută în întrebări...", loading: "Se încarcă..." },
-  en: { eyebrow: "Help", title: "Frequently asked questions", subtitle: "Answers to the most common questions, organised by category.", uncategorised: "Other", empty: "No questions yet.", noResults: "No questions found.", searchPlaceholder: "Search questions...", loading: "Loading..." },
+  ro: { eyebrow: "Ajutor", title: "Întrebări frecvente", subtitle: "Răspunsuri rapide la cele mai comune întrebări despre procesul terapeutic.", uncategorised: "Altele", empty: "Nicio întrebare încă.", noResults: "Nicio întrebare găsită.", searchPlaceholder: "Caută în întrebări...", loading: "Se încarcă..." },
+  en: { eyebrow: "Help", title: "Frequently asked questions", subtitle: "Quick answers to the most common questions about the therapy process.", uncategorised: "Other", empty: "No questions yet.", noResults: "No questions found.", searchPlaceholder: "Search questions...", loading: "Loading..." },
 };
 
 export function FaqPage() {

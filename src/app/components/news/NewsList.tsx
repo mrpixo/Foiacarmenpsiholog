@@ -10,8 +10,8 @@ import { useSeo } from "../../lib/seo";
 const FONT = { fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" } as const;
 
 const copy = {
-  ro: { eyebrow: "Noutăți", title: "Toate noutățile", subtitle: "Evenimente, resurse și actualizări din activitatea mea.", empty: "Nicio noutate încă.", loading: "Se încarcă...", notConfigured: "Secțiunea nu este încă configurată. Vezi BLOG_SETUP.md." },
-  en: { eyebrow: "News", title: "All news", subtitle: "Events, resources, and updates from my work.", empty: "No news yet.", loading: "Loading...", notConfigured: "This section isn't configured yet. See BLOG_SETUP.md." },
+  ro: { eyebrow: "Noutăți", title: "Noutăți", subtitle: "Evenimente, conferințe, workshopuri, interviuri și proiectele în care sunt implicată.", empty: "Nicio noutate încă.", loading: "Se încarcă...", notConfigured: "Secțiunea nu este încă configurată. Vezi BLOG_SETUP.md." },
+  en: { eyebrow: "News", title: "News", subtitle: "Events, conferences, workshops, interviews, and the projects I'm involved in.", empty: "No news yet.", loading: "Loading...", notConfigured: "This section isn't configured yet. See BLOG_SETUP.md." },
 };
 
 export function NewsList() {

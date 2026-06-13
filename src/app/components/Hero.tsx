@@ -12,8 +12,8 @@ const heroServices = {
 };
 
 const heroQuote = {
-  ro: "Fiecare persoană este unică, iar abordarea terapeutică este adaptată nevoilor și obiectivelor tale specifice, într-un mediu bazat pe empatie și respect.",
-  en: "Every person is unique, and the therapeutic approach is tailored to your specific needs and goals, in a space grounded in empathy and respect.",
+  ro: "Te ajut să gestionezi anxietatea, să depășești blocajele emoționale și să faci pași mai siguri către obiectivele tale personale, profesionale sau sportive.",
+  en: "I help you manage anxiety, overcome emotional blocks, and take surer steps toward your personal, professional, or athletic goals.",
 };
 
 /** Top beige section — service list (left) + quote (right) + watermark */
@@ -108,7 +108,7 @@ export function HeroTop() {
               className="inline-flex w-full items-center justify-center bg-[#ffba68] text-[#1f1d1b] font-semibold text-base px-7 py-3.5 rounded-full transition-all duration-300 hover:bg-[#ffc985] md:w-auto md:justify-center md:hover:scale-105"
               style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}
             >
-              {language === "ro" ? "Programează-te acum" : "Book a session"}
+              {language === "ro" ? "Programează o consultație" : "Book a consultation"}
             </Link>
           </motion.div>
         </motion.div>

@@ -35,7 +35,7 @@ export function Logos() {
           className="text-left text-[#39342e]"
           style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif", fontWeight: 700, fontSize: "clamp(28px,4vw,64px)", lineHeight: 1.5 }}
         >
-          {language === "ro" ? "Experiența cu" : "Experience with"}
+          {language === "ro" ? "Experiență și colaborări" : "Experience and collaborations"}
         </motion.p>
       </div>
 

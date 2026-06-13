@@ -42,8 +42,8 @@ export function FAQ() {
             style={{ ...FONT, fontWeight: 400, fontSize: "clamp(16px,1.4vw,22px)", lineHeight: 1.5 }}
           >
             {language === "ro"
-              ? "Fiecare persoană este unică, iar abordarea terapeutică este adaptată nevoilor și obiectivelor tale specifice, într-un mediu bazat pe empatie și respect."
-              : "Every person is unique, and therapy is adapted to your specific needs and goals in a space based on empathy and respect."}
+              ? "Răspunsuri rapide la cele mai comune întrebări despre procesul terapeutic."
+              : "Quick answers to the most common questions about the therapy process."}
           </motion.p>
           <motion.div initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.25 }}>
             <Link

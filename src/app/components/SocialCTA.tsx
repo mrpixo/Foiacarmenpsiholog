@@ -37,10 +37,10 @@ export function SocialCTA() {
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-white whitespace-nowrap"
-          style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif", fontWeight: 700, fontSize: "clamp(28px,4vw,64px)", lineHeight: 1.5 }}
+          className="text-white max-w-[520px]"
+          style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif", fontWeight: 700, fontSize: "clamp(28px,4vw,64px)", lineHeight: 1.2 }}
         >
-          {language === "ro" ? "Urmărește-mă și pe" : "Follow me on"}
+          {language === "ro" ? "Sunt și sociabilă" : "I'm sociable too"}
         </motion.p>
 
         {/* CTA first, then social icon buttons (centered) */}

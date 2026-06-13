@@ -3,27 +3,27 @@ import { motion, useInView } from "motion/react";
 import { Link } from "react-router";
 import imgRect16 from "../../imports/Body/73056bd19e50c0720161c9b18d983fc7721ddf7a.webp";
 import imgRect17 from "../../imports/Body/49859db54fbf9aeb6aea41ad98bcc853a0a36328.webp";
-import imgRect18 from "../../imports/Body/c5ec97bda42d210a1e3d698f4949c7b911ec514d.webp";
 import imgRect19 from "../../imports/Body/1bfa4bbb6a33afca33b5187e6c60ca7c54685315.webp";
 import imgRect20 from "../../imports/Body/8fda238a3766c34f1aa3d3b52bab3293794ab0d4.webp";
+import imgAnxietate from "../../imports/Body/anxietate-performanta.webp";
 import { useLanguage } from "../i18n";
 
 const services = {
   ro: [
-    { id: 0, reason: "psihologie-sportiva", title: "Psihologie sportivă", description: "Sesiuni 1-la-1 personalizate pentru a te ajuta să depășești anxietatea.", image: imgRect16 },
-    { id: 1, reason: "orientare-vocationala", title: "Orientare vocațională", description: "Consiliere pentru claritate profesională și decizii asumate.", image: imgRect17 },
-    { id: 2, reason: "anxietate-performanta", title: "Anxietate de performanță", description: "Strategii pentru reglare emoțională, focus și încredere.", image: imgRect18 },
-    { id: 3, reason: "terapie-individuala", title: "Terapie individuală", description: "Sesiuni personalizate pentru autocunoaștere și echilibru.", image: imgRect19 },
-    { id: 4, reason: "terapie-cuplu", title: "Terapie de cuplu", description: "Sprijin pentru comunicare, reconectare și înțelegere reciprocă.", image: imgRect20 },
-    { id: 5, reason: "dezvoltare-personala", title: "Dezvoltare personală", description: "Programe de autocunoaștere pentru a-ți atinge potențialul maxim.", image: imgRect16 },
+    { id: 0, reason: "psihologie-sportiva", title: "Psihologie sportivă", description: "Dezvoltarea concentrării, încrederii și performanței în sport.", image: imgRect16 },
+    { id: 1, reason: "orientare-vocationala", title: "Orientare vocațională", description: "Claritate în alegerea carierei și a direcției profesionale.", image: imgRect17 },
+    { id: 2, reason: "anxietate-performanta", title: "Anxietate de performanță", description: "Gestionarea emoțiilor și a presiunii în situații importante.", image: imgAnxietate },
+    { id: 3, reason: "terapie-individuala", title: "Terapie individuală", description: "Sprijin pentru dificultăți emoționale și provocări personale.", image: imgRect20 },
+    { id: 4, reason: "terapie-cuplu", title: "Terapie de cuplu", description: "Îmbunătățirea comunicării și consolidarea relației.", image: imgRect19 },
+    { id: 5, reason: "dezvoltare-personala", title: "Dezvoltare personală", description: "Creșterea încrederii, autocunoaștere și atingerea potențialului personal.", image: imgRect16 },
   ],
   en: [
-    { id: 0, reason: "psihologie-sportiva", title: "Sports psychology", description: "Personalized one-to-one sessions to help you manage pressure and anxiety.", image: imgRect16 },
-    { id: 1, reason: "orientare-vocationala", title: "Vocational guidance", description: "Counselling for career clarity and confident decision-making.", image: imgRect17 },
-    { id: 2, reason: "anxietate-performanta", title: "Performance anxiety", description: "Tools for emotional regulation, focus, and self-trust.", image: imgRect18 },
-    { id: 3, reason: "terapie-individuala", title: "Individual therapy", description: "Tailored sessions for self-awareness, healing, and balance.", image: imgRect19 },
-    { id: 4, reason: "terapie-cuplu", title: "Couples therapy", description: "Support for communication, reconnection, and mutual understanding.", image: imgRect20 },
-    { id: 5, reason: "dezvoltare-personala", title: "Personal development", description: "Self-discovery programs designed to help you reach your potential.", image: imgRect16 },
+    { id: 0, reason: "psihologie-sportiva", title: "Sports psychology", description: "Building focus, confidence, and performance in sport.", image: imgRect16 },
+    { id: 1, reason: "orientare-vocationala", title: "Vocational guidance", description: "Clarity in choosing your career and professional direction.", image: imgRect17 },
+    { id: 2, reason: "anxietate-performanta", title: "Performance anxiety", description: "Managing emotions and pressure in important moments.", image: imgAnxietate },
+    { id: 3, reason: "terapie-individuala", title: "Individual therapy", description: "Support for emotional difficulties and personal challenges.", image: imgRect20 },
+    { id: 4, reason: "terapie-cuplu", title: "Couples therapy", description: "Improving communication and strengthening your relationship.", image: imgRect19 },
+    { id: 5, reason: "dezvoltare-personala", title: "Personal development", description: "Building confidence, self-awareness, and reaching your potential.", image: imgRect16 },
   ],
 };
 
@@ -150,10 +150,10 @@ export function Services() {
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-[rgba(29,41,61,0.7)] mt-5 max-w-[660px]"
+          className="text-[rgba(29,41,61,0.7)] mt-5 max-w-[660px] [text-wrap:balance]"
           style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif", fontWeight: 400, fontSize: "clamp(16px,1.6vw,24px)", lineHeight: 1.5 }}
         >
-          {language === "ro" ? "Fiecare persoană este unică, iar abordarea terapeutică este adaptată nevoilor și obiectivelor tale specifice, într-un mediu bazat pe empatie și respect." : "Explore the main areas where I can support you, with an approach tailored to each person."}
+          {language === "ro" ? "Sprijin adaptat nevoilor tale, indiferent de etapa în care te afli." : "Support tailored to your needs, whatever stage you're at."}
         </motion.p>
       </div>
 

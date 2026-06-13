@@ -36,7 +36,7 @@ export function Mission() {
             lineHeight: 1.5,
           }}
         >
-          {language === "ro" ? "Fiecare persoană este unică, iar abordarea terapeutică este adaptată nevoilor și obiectivelor tale specifice, într-un mediu bazat pe empatie și respect." : "Every person is unique, and therapy should meet their specific needs and goals within an environment built on empathy and respect."}
+          {language === "ro" ? "Misiunea mea e să ofer un spațiu sigur și profesionist în care să te simți ascultat, înțeles și susținut în procesul tău de schimbare și dezvoltare." : "My mission is to offer a safe, professional space where you feel heard, understood, and supported throughout your process of change and growth."}
         </motion.p>
       </div>
     </section>

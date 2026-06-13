@@ -23,7 +23,7 @@ const copy = {
   ro: {
     eyebrow: "Blog",
     title: "Articole din blog",
-    subtitle: "Gânduri, resurse și ghiduri despre psihologie, echilibru și dezvoltare personală.",
+    subtitle: "Articole despre psihologie, anxietate, performanță și dezvoltare personală.",
     searchPlaceholder: "Caută articole...",
     all: "Toate",
     empty: "Niciun articol găsit.",
@@ -33,7 +33,7 @@ const copy = {
   en: {
     eyebrow: "Blog",
     title: "From the blog",
-    subtitle: "Thoughts, resources and guides on psychology, balance and personal growth.",
+    subtitle: "Articles on psychology, anxiety, performance, and personal development.",
     searchPlaceholder: "Search articles...",
     all: "All",
     empty: "No articles found.",
