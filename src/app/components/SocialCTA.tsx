@@ -13,7 +13,7 @@ export function SocialCTA() {
 
   return (
     <section
-      className="relative w-full overflow-hidden py-16 md:py-[64px]"
+      className="selection-teal relative w-full overflow-hidden py-16 md:py-[64px]"
       style={{ background: "#054943" }}
     >
       {/* Big watermark */}

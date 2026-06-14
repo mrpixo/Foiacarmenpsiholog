@@ -2,3 +2,23 @@
 @import './tailwind.css';
 @import './theme.css';
 @import './blog.css';
+
+/* Global text selection colour */
+::selection {
+  background: #39342e;
+  color: #ffffff;
+}
+::-moz-selection {
+  background: #39342e;
+  color: #ffffff;
+}
+
+/* On teal/green background sections, use a bright-green selection */
+.selection-teal ::selection {
+  background: #3eeb72;
+  color: #39342e;
+}
+.selection-teal ::-moz-selection {
+  background: #3eeb72;
+  color: #39342e;
+}

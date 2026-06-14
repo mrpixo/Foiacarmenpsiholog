@@ -34,7 +34,7 @@ export function NewsList() {
   }, []);
 
   return (
-    <section className="w-full px-6 pb-24 pt-36 md:px-24 md:pb-[156px] md:pt-44" style={{ background: "#006960" }}>
+    <section className="selection-teal w-full px-6 pb-24 pt-36 md:px-24 md:pb-[156px] md:pt-44" style={{ background: "#006960" }}>
       <div className="mx-auto max-w-[1200px]">
         <HomeLink tone="light" />
         <motion.div

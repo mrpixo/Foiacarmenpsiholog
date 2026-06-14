@@ -50,7 +50,7 @@ export function Footer() {
     return <a key={l.label} href={l.href} className={linkClass} style={linkStyle}>{l.label}</a>;
   };
   return (
-    <footer className="relative w-full overflow-hidden" style={{ background: "#054943" }}>
+    <footer className="selection-teal relative w-full overflow-hidden" style={{ background: "#054943" }}>
       <div className="relative z-10 px-6 md:px-[164px] pt-24 md:pt-[96px] pb-[clamp(160px,24vw,390px)] flex flex-col gap-8">
         {/* Top: logo + social + CTA */}
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">

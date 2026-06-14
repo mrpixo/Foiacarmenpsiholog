@@ -37,7 +37,7 @@ export function Intro() {
   return (
     <section
       ref={ref}
-      className="relative w-full py-32 md:py-40"
+      className="selection-teal relative w-full py-32 md:py-40"
       style={{ background: "#006960", position: "relative" }}
       id="despre"
     >

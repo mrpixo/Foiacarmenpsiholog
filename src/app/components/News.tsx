@@ -23,7 +23,7 @@ export function News() {
   }, []);
 
   return (
-    <section className="w-full py-16 md:py-[156px]" style={{ background: "#006960" }} id="noutati">
+    <section className="selection-teal w-full py-16 md:py-[156px]" style={{ background: "#006960" }} id="noutati">
       <div className="px-6 md:px-[126px] flex flex-col gap-12">
         {/* Header row */}
         <div ref={ref} className="flex flex-col md:flex-row items-start justify-between gap-8">
