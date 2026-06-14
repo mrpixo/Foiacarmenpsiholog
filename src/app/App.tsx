@@ -100,9 +100,6 @@ function Home() {
 
       {/* 13. White FAQ */}
       <FAQ />
-
-      {/* 14. Final call to action */}
-      <FinalCTA />
     </main>
   );
 }

@@ -34,7 +34,7 @@ export function News() {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, ...entrance(isMobile, 20) }} animate={inView ? { opacity: 1, x: 0, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.15 }} className="flex flex-col items-start md:items-end gap-3">
-            <p className="text-white text-left md:text-right text-base max-w-[420px]" style={{ ...FONT, fontWeight: 400, lineHeight: 1.5 }}>
+            <p className="text-white text-left md:text-right max-w-[520px]" style={{ ...FONT, fontWeight: 400, fontSize: "clamp(16px,1.6vw,24px)", lineHeight: 1.5 }}>
               {language === "ro"
                 ? "Evenimente, conferințe, workshopuri, interviuri și proiectele în care sunt implicată."
                 : "Events, conferences, workshops, interviews, and the projects I'm involved in."}

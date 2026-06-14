@@ -46,8 +46,8 @@ export function Articles() {
             className="flex flex-col items-start md:items-end gap-3"
           >
             <p
-              className="text-[#39342e] text-left md:text-right text-base max-w-[420px]"
-              style={{ ...FONT, fontWeight: 400, lineHeight: 1.5 }}
+              className="text-[#39342e] text-left md:text-right max-w-[520px]"
+              style={{ ...FONT, fontWeight: 400, fontSize: "clamp(16px,1.6vw,24px)", lineHeight: 1.5 }}
             >
               {language === "ro"
                 ? "Articole despre psihologie, anxietate, performanță și dezvoltare personală."

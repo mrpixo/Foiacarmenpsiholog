@@ -32,7 +32,7 @@ const navLinks: Record<"ro" | "en", NavLink[]> = {
 
 function HeaderLogoMark() {
   return (
-    <div className="relative size-[60px] shrink-0">
+    <div className="relative size-12 shrink-0 md:size-[60px]">
       <div className="absolute inset-[-3.33%]">
         <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 64 64" aria-hidden="true">
           <circle cx="32" cy="32" fill="#D9D9D9" r="31" stroke="#0D121A" strokeWidth="2" />
@@ -108,13 +108,13 @@ export function Navbar() {
       ].join(" ")}
     >
       {/* Logo — matched to imported Figma header */}
-      <Link to="/" className="flex shrink-0 items-center gap-4 rounded-full border border-[#0d121a]/10 bg-white/82 px-3 py-2 shadow-[0_4px_24px_rgba(0,0,0,0.08)] backdrop-blur-[5px] md:border-0 md:bg-transparent md:p-0 md:shadow-none md:backdrop-blur-0" aria-label={language === "ro" ? "Carmen Foia Psiholog homepage" : "Carmen Foia Psychologist homepage"}>
+      <Link to="/" className="flex shrink-0 items-center gap-3 rounded-full border border-[#0d121a]/10 bg-white/82 px-3 py-2 shadow-[0_4px_24px_rgba(0,0,0,0.08)] backdrop-blur-[5px] md:gap-4 md:border-0 md:bg-transparent md:p-0 md:shadow-none md:[backdrop-filter:none]" aria-label={language === "ro" ? "Carmen Foia Psiholog homepage" : "Carmen Foia Psychologist homepage"}>
         <HeaderLogoMark />
-        <div className="hidden h-[45px] flex-col items-start leading-[1.5] whitespace-nowrap sm:flex">
-          <span className="text-[18px] font-semibold leading-[27px] text-[#1d293d]" style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}>
+        <div className="flex flex-col items-start whitespace-nowrap leading-[1.5] md:h-[45px]">
+          <span className="text-[15px] font-semibold leading-tight text-[#1d293d] md:text-[18px] md:leading-[27px]" style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}>
             {language === "ro" ? "Carmen Foia Psiholog" : "Carmen Foia Psychologist"}
           </span>
-          <span className="text-[12px] font-medium uppercase leading-[18px] tracking-[2.1172px] text-[#62748e]" style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}>
+          <span className="text-[10px] font-medium uppercase leading-tight tracking-[1.5px] text-[#62748e] md:text-[12px] md:leading-[18px] md:tracking-[2.1172px]" style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}>
             {language === "ro" ? "Psiholog Clinician" : "Clinical Psychologist"}
           </span>
         </div>
