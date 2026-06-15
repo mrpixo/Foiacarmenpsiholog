@@ -18,11 +18,17 @@
 export const CAL_USERNAME = "psiholog-carmen-foia";
 
 /**
- * Single Cal.com event type used for every session (same length + price).
- * The chosen reason below is passed into the booking notes so the therapist
- * knows what kind of session is coming. Set this to your event's URL slug.
+ * Cal.com event types. Each session can be booked online (Google Meet link in
+ * the calendar invite) or in person (cabinet address, no link) — these map to
+ * two separate event types so the chosen location is enforced by Cal.com.
+ * The chosen reason is passed into the booking notes.
  */
-export const EVENT_SLUG = "terapie";
+export type SessionMode = "online" | "cabinet";
+
+export const EVENT_SLUG_BY_MODE: Record<SessionMode, string> = {
+  online: "sesiune-terapie-online",
+  cabinet: "sesiune-terapie-cabinet",
+};
 
 /** Standard price per session, charged by card via Stripe. Display-only here;
  *  the authoritative amount is set on each Cal.com event type. */

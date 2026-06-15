@@ -1,10 +1,10 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { useSearchParams } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
-import { Mail, Phone, MapPin, ArrowLeft, Check } from "lucide-react";
+import { Mail, Phone, MapPin, ArrowLeft, Check, MapPin as Pin, Video } from "lucide-react";
 import Cal, { getCalApi } from "@calcom/embed-react";
 import { useLanguage } from "../i18n";
-import { CAL_USERNAME, EVENT_SLUG, bookingReasons, SESSION_PRICE, ENTITY, type BookingReason } from "../booking";
+import { CAL_USERNAME, EVENT_SLUG_BY_MODE, bookingReasons, SESSION_PRICE, ENTITY, type BookingReason, type SessionMode } from "../booking";
 import { HomeLink } from "./HomeLink";
 import { useSeo } from "../lib/seo";
 
@@ -22,6 +22,10 @@ const copy = {
     location: "Cabinet",
     perSession: "/ ședință",
     paymentNote: "Plata se face securizat cu cardul, la pasul de confirmare.",
+    cabinet: "La cabinet",
+    online: "Sesiune online",
+    locCabinet: "La cabinet · Vasile Alecsandri nr. 7, Oradea",
+    locOnline: "Sesiune online · primești link de Google Meet",
   },
   en: {
     eyebrow: "Booking",
@@ -36,6 +40,10 @@ const copy = {
     location: "Office",
     perSession: "/ session",
     paymentNote: "Payment is taken securely by card at the confirmation step.",
+    cabinet: "In person",
+    online: "Online session",
+    locCabinet: "In person · Vasile Alecsandri nr. 7, Oradea",
+    locOnline: "Online · you'll receive a Google Meet link",
   },
 };
 
@@ -55,10 +63,15 @@ export function Contact() {
     path: "/contact",
   });
   const [searchParams] = useSearchParams();
-  // Deep-link support: /contact?reason=<id> pre-selects a reason and jumps
-  // straight to the slot picker (e.g. from a "Domenii de activitate" card).
+  // Deep-link support: /contact?reason=<id>&mode=online|cabinet pre-selects and
+  // jumps straight to the slot picker. Both are required to reach the picker.
   const initialReason = bookingReasons.find((r) => r.id === searchParams.get("reason")) ?? null;
+  const initialMode = (["online", "cabinet"] as const).find((m) => m === searchParams.get("mode")) ?? null;
   const [reason, setReason] = useState<BookingReason | null>(initialReason);
+  const [mode, setMode] = useState<SessionMode | null>(initialMode);
+
+  const pick = (r: BookingReason, m: SessionMode) => { setReason(r); setMode(m); };
+  const reset = () => { setReason(null); setMode(null); };
 
   // Initialise the Cal.com embed UI to match the site's branding.
   useEffect(() => {
@@ -99,8 +112,8 @@ export function Contact() {
         </motion.div>
 
         <AnimatePresence mode="wait">
-          {!reason ? (
-            /* Step 1 — choose the reason */
+          {!(reason && mode) ? (
+            /* Step 1 — choose the session type + location */
             <motion.div
               key="reasons"
               initial={{ opacity: 0, y: 16 }}
@@ -113,13 +126,11 @@ export function Contact() {
               </h2>
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {bookingReasons.map((r) => (
-                  <button
-                    key={r.slug}
-                    type="button"
-                    onClick={() => setReason(r)}
-                    className="group flex cursor-pointer flex-col items-start gap-2 rounded-2xl border-2 border-transparent bg-white p-6 text-left transition-all duration-300 hover:-translate-y-0.5 hover:border-[#006960] hover:shadow-[0_8px_30px_rgba(0,105,96,0.1)]"
+                  <div
+                    key={r.id}
+                    className="flex flex-col items-start gap-2 rounded-2xl border-2 border-transparent bg-white p-6 text-left transition-all duration-300 hover:border-[#006960] hover:shadow-[0_8px_30px_rgba(0,105,96,0.1)]"
                   >
-                    <span className="text-[17px] font-semibold text-[#39342e] transition-colors group-hover:text-[#006960]" style={FONT}>
+                    <span className="text-[17px] font-semibold text-[#39342e]" style={FONT}>
                       {r.label[language]}
                     </span>
                     <span className="text-sm leading-6 text-[#5c554d]" style={FONT}>
@@ -128,7 +139,26 @@ export function Contact() {
                     <span className="mt-1 inline-flex items-center rounded-full bg-[#006960]/8 px-3 py-1 text-sm font-semibold text-[#006960]" style={FONT}>
                       {PRICE_LABEL} <span className="ml-1 font-normal text-[#006960]/70">{t.perSession}</span>
                     </span>
-                  </button>
+                    {/* Location choice — drives the Cal.com event type (online has a Meet link) */}
+                    <div className="mt-3 flex w-full flex-col gap-2">
+                      <button
+                        type="button"
+                        onClick={() => pick(r, "cabinet")}
+                        className="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full border border-[#006960] px-4 py-2 text-sm font-semibold text-[#006960] transition-colors hover:bg-[#006960] hover:text-white"
+                        style={FONT}
+                      >
+                        <Pin size={15} /> {t.cabinet}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => pick(r, "online")}
+                        className="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full border border-[#006960] px-4 py-2 text-sm font-semibold text-[#006960] transition-colors hover:bg-[#006960] hover:text-white"
+                        style={FONT}
+                      >
+                        <Video size={15} /> {t.online}
+                      </button>
+                    </div>
+                  </div>
                 ))}
               </div>
             </motion.div>
@@ -144,17 +174,23 @@ export function Contact() {
               <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
                 <button
                   type="button"
-                  onClick={() => setReason(null)}
+                  onClick={reset}
                   className="inline-flex cursor-pointer items-center gap-2 text-sm font-medium text-[#006960] transition-colors hover:text-[#054943]"
                   style={FONT}
                 >
                   <ArrowLeft size={16} />
                   {t.back}
                 </button>
-                <span className="inline-flex items-center gap-2 rounded-full bg-[#006960]/8 px-4 py-2 text-sm font-medium text-[#006960]" style={FONT}>
-                  <Check size={15} />
-                  {t.selected}: {reason.label[language]}
-                </span>
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="inline-flex items-center gap-2 rounded-full bg-[#006960]/8 px-4 py-2 text-sm font-medium text-[#006960]" style={FONT}>
+                    <Check size={15} />
+                    {reason.label[language]}
+                  </span>
+                  <span className="inline-flex items-center gap-2 rounded-full bg-[#006960] px-4 py-2 text-sm font-medium text-white" style={FONT}>
+                    {mode === "online" ? <Video size={15} /> : <Pin size={15} />}
+                    {mode === "online" ? t.locOnline : t.locCabinet}
+                  </span>
+                </div>
               </div>
 
               <h2 className="mb-4 text-lg font-semibold text-[#39342e]" style={FONT}>
@@ -167,7 +203,7 @@ export function Contact() {
               <div className="overflow-hidden rounded-3xl border border-[#e4dcd3] bg-white">
                 <Cal
                   namespace="booking"
-                  calLink={`${CAL_USERNAME}/${EVENT_SLUG}`}
+                  calLink={`${CAL_USERNAME}/${EVENT_SLUG_BY_MODE[mode]}`}
                   style={{ width: "100%", height: "100%", overflow: "scroll" }}
                   config={{
                     layout: "month_view",
