@@ -186,7 +186,7 @@ export function Contact() {
                     <Check size={15} />
                     {reason.label[language]}
                   </span>
-                  <span className="inline-flex items-center gap-2 rounded-full bg-[#006960] px-4 py-2 text-sm font-medium text-white" style={FONT}>
+                  <span className="inline-flex items-center gap-2 rounded-full bg-[#006960]/8 px-4 py-2 text-sm font-medium text-[#006960]" style={FONT}>
                     {mode === "online" ? <Video size={15} /> : <Pin size={15} />}
                     {mode === "online" ? t.locOnline : t.locCabinet}
                   </span>
