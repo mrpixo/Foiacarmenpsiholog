@@ -33,4 +33,21 @@ export default defineConfig({
 
   // File types to support raw imports. Never add .css, .tsx, or .ts files to this.
   assetsInclude: ['**/*.svg', '**/*.csv'],
+
+  build: {
+    rollupOptions: {
+      output: {
+        // Split large, stable vendor libraries into their own chunks so they
+        // cache independently and don't block first paint of the app code.
+        manualChunks(id) {
+          if (!id.includes('node_modules')) return
+          if (id.includes('react-dom') || id.includes('/react/') || id.includes('react-router') || id.includes('scheduler')) return 'react'
+          if (id.includes('motion')) return 'motion'
+          if (id.includes('@radix-ui')) return 'radix'
+          if (id.includes('@supabase')) return 'supabase'
+          if (id.includes('@tiptap') || id.includes('prosemirror')) return 'tiptap'
+        },
+      },
+    },
+  },
 })

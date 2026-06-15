@@ -1,8 +1,7 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router";
 import { motion, useScroll, useSpring } from "motion/react";
 import { Navbar } from "./components/Navbar";
-import { Contact } from "./components/Contact";
 import { HeroTop, HeroPhoto } from "./components/Hero";
 import { TopBar } from "./components/TopBar";
 import { Intro } from "./components/Intro";
@@ -15,21 +14,25 @@ import { Testimonials } from "./components/Testimonials";
 import { Articles } from "./components/Articles";
 import { FAQ } from "./components/FAQ";
 import { Footer } from "./components/Footer";
-import { BlogList } from "./components/blog/BlogList";
-import { BlogArticle } from "./components/blog/BlogArticle";
-import { AdminGate } from "./components/admin/AdminGate";
-import { AdminDashboard } from "./components/admin/AdminDashboard";
-import { AdminEditor } from "./components/admin/AdminEditor";
-import { AdminNewsDashboard } from "./components/admin/AdminNewsDashboard";
-import { AdminNewsEditor } from "./components/admin/AdminNewsEditor";
-import { NewsList } from "./components/news/NewsList";
-import { NewsDetail } from "./components/news/NewsDetail";
-import { FaqPage } from "./components/faq/FaqPage";
-import { AdminTestimonials } from "./components/admin/AdminTestimonials";
-import { AdminFaq } from "./components/admin/AdminFaq";
-import { PrivacyPolicy } from "./components/legal/PrivacyPolicy";
-import { TermsOfUse } from "./components/legal/TermsOfUse";
 import { CookieBanner } from "./components/CookieBanner";
+
+// Non-homepage routes are code-split so the landing page doesn't ship the
+// Cal.com booking embed, the TipTap-based news/admin surfaces, etc.
+const Contact = lazy(() => import("./components/Contact").then((m) => ({ default: m.Contact })));
+const BlogList = lazy(() => import("./components/blog/BlogList").then((m) => ({ default: m.BlogList })));
+const BlogArticle = lazy(() => import("./components/blog/BlogArticle").then((m) => ({ default: m.BlogArticle })));
+const NewsList = lazy(() => import("./components/news/NewsList").then((m) => ({ default: m.NewsList })));
+const NewsDetail = lazy(() => import("./components/news/NewsDetail").then((m) => ({ default: m.NewsDetail })));
+const FaqPage = lazy(() => import("./components/faq/FaqPage").then((m) => ({ default: m.FaqPage })));
+const PrivacyPolicy = lazy(() => import("./components/legal/PrivacyPolicy").then((m) => ({ default: m.PrivacyPolicy })));
+const TermsOfUse = lazy(() => import("./components/legal/TermsOfUse").then((m) => ({ default: m.TermsOfUse })));
+const AdminGate = lazy(() => import("./components/admin/AdminGate").then((m) => ({ default: m.AdminGate })));
+const AdminDashboard = lazy(() => import("./components/admin/AdminDashboard").then((m) => ({ default: m.AdminDashboard })));
+const AdminEditor = lazy(() => import("./components/admin/AdminEditor").then((m) => ({ default: m.AdminEditor })));
+const AdminNewsDashboard = lazy(() => import("./components/admin/AdminNewsDashboard").then((m) => ({ default: m.AdminNewsDashboard })));
+const AdminNewsEditor = lazy(() => import("./components/admin/AdminNewsEditor").then((m) => ({ default: m.AdminNewsEditor })));
+const AdminTestimonials = lazy(() => import("./components/admin/AdminTestimonials").then((m) => ({ default: m.AdminTestimonials })));
+const AdminFaq = lazy(() => import("./components/admin/AdminFaq").then((m) => ({ default: m.AdminFaq })));
 import { LanguageProvider } from "./i18n";
 import { AuthProvider } from "./lib/auth";
 import { ConsentProvider } from "./lib/consent";
@@ -44,6 +47,8 @@ function FullWidthPhoto() {
         alt=""
         className="absolute inset-0 w-full h-full object-cover rounded-2xl"
         aria-hidden
+        loading="lazy"
+        decoding="async"
       />
       <div className="absolute inset-0 bg-[rgba(33,30,27,0.15)]" />
     </div>
@@ -167,6 +172,7 @@ function AppShell() {
         </>
       )}
 
+      <Suspense fallback={<div className="min-h-screen" aria-hidden />}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
@@ -186,6 +192,7 @@ function AppShell() {
         <Route path="/admin/testimonials" element={<AdminGate><AdminTestimonials /></AdminGate>} />
         <Route path="/admin/faq" element={<AdminGate><AdminFaq /></AdminGate>} />
       </Routes>
+      </Suspense>
 
       {!isAdmin && (
         <>

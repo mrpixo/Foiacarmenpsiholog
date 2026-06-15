@@ -162,6 +162,8 @@ export function HeroPhoto() {
           src={imgHeroBg}
           alt={language === "ro" ? "Cabinet psiholog" : "Psychology office"}
           className="w-full h-full object-cover rounded-2xl"
+          decoding="async"
+          {...{ fetchpriority: "high" }}
         />
       </motion.div>
 

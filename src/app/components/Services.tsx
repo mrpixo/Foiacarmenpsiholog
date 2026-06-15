@@ -60,6 +60,8 @@ function ServiceRow({ service, index }: {
           src={service.image}
           alt={service.title}
           className="aspect-video w-full rounded-2xl object-cover"
+          loading="lazy"
+          decoding="async"
         />
         <p style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif", fontWeight: 700, fontSize: "22px", lineHeight: 1.3, color: "#39342e" }}>
           {service.title}
@@ -113,6 +115,8 @@ function ServiceRow({ service, index }: {
             src={service.image}
             alt={service.title}
             className="pointer-events-none absolute inset-0 h-full w-full rounded-2xl object-cover transition-opacity duration-300 group-hover:opacity-0"
+            loading="lazy"
+            decoding="async"
           />
           <Link
             to={`/contact?reason=${service.reason}`}
