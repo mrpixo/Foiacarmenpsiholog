@@ -85,6 +85,26 @@ async function fetchSlugs(env, table) {
   }
 }
 
+/**
+ * Launch a headless browser. On Linux CI (e.g. Vercel) the build image lacks
+ * Chrome's system shared libraries, so use the self-contained @sparticuz/chromium
+ * build with puppeteer-core. Locally (macOS/Windows) use full puppeteer's
+ * bundled Chrome.
+ */
+async function launchBrowser() {
+  if (process.platform === "linux") {
+    const chromium = (await import("@sparticuz/chromium")).default;
+    const puppeteer = (await import("puppeteer-core")).default;
+    return puppeteer.launch({
+      args: [...chromium.args, "--no-sandbox", "--disable-setuid-sandbox"],
+      executablePath: await chromium.executablePath(),
+      headless: chromium.headless ?? "new",
+    });
+  }
+  const puppeteer = (await import("puppeteer")).default;
+  return puppeteer.launch({ headless: "new", args: ["--no-sandbox", "--disable-setuid-sandbox"] });
+}
+
 /** Minimal static server for dist/ with SPA fallback to the original index.html. */
 function startServer(shellHtml) {
   const server = http.createServer(async (req, res) => {
@@ -151,12 +171,8 @@ async function main() {
     ...newsSlugs.map((s) => `/noutati/${s}`),
   ];
 
-  const puppeteer = (await import("puppeteer")).default;
   const server = await startServer(shellHtml);
-  const browser = await puppeteer.launch({
-    headless: "new",
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
-  });
+  const browser = await launchBrowser();
 
   let ok = 0;
   try {
