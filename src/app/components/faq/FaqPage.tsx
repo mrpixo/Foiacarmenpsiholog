@@ -18,6 +18,33 @@ const copy = {
 export function FaqPage() {
   const { language } = useLanguage();
   const t = copy[language];
+  const [faqs, setFaqs] = useState<Faq[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [openId, setOpenId] = useState<string>("");
+  const [query, setQuery] = useState("");
+
+  // FAQPage structured data — ideal for AI answers / rich results. Built from
+  // the published FAQs and captured by the prerenderer.
+  const jsonLd = useMemo(
+    () =>
+      faqs.length
+        ? {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            inLanguage: language,
+            mainEntity: faqs.map((f) => ({
+              "@type": "Question",
+              name: faqQuestion(f, language),
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: faqAnswer(f, language).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim(),
+              },
+            })),
+          }
+        : null,
+    [faqs, language],
+  );
+
   useSeo({
     title: { ro: "Întrebări frecvente — Psiholog Oradea", en: "FAQ — Psychologist in Oradea" },
     description: {
@@ -25,11 +52,8 @@ export function FaqPage() {
       en: "Answers to frequently asked questions about sessions, bookings, confidentiality and therapy with Carmen Foia, psychologist in Oradea.",
     },
     path: "/intrebari-frecvente",
+    jsonLd,
   });
-  const [faqs, setFaqs] = useState<Faq[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [openId, setOpenId] = useState<string>("");
-  const [query, setQuery] = useState("");
 
   useEffect(() => {
     if (!isSupabaseConfigured) { setLoading(false); return; }

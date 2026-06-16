@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router";
 import { motion } from "motion/react";
 import { Clock, ArrowLeft } from "lucide-react";
@@ -14,7 +14,7 @@ import {
   type Article,
 } from "../../lib/articles";
 import { NotConfigured } from "./NotConfigured";
-import { useSeo } from "../../lib/seo";
+import { useSeo, SITE_URL } from "../../lib/seo";
 
 const FONT = { fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" } as const;
 
@@ -40,6 +40,27 @@ export function BlogArticle() {
   const [related, setRelated] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const jsonLd = useMemo(
+    () =>
+      article
+        ? {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: title(article, language),
+            description: excerpt(article, language) || title(article, language),
+            inLanguage: language,
+            datePublished: article.published_at || undefined,
+            dateModified: article.updated_at || article.published_at || undefined,
+            image: article.cover_url || undefined,
+            articleSection: article.category ? catName(article.category, language) : undefined,
+            author: { "@type": "Person", name: "Carmen Foia", jobTitle: "Psiholog Clinician" },
+            publisher: { "@type": "Organization", name: "Carmen Foia Psiholog", url: SITE_URL },
+            mainEntityOfPage: `${SITE_URL}/blog/${slug}`,
+          }
+        : null,
+    [article, language, slug],
+  );
+
   useSeo({
     title: article
       ? { ro: title(article, "ro"), en: title(article, "en") }
@@ -48,6 +69,7 @@ export function BlogArticle() {
       ? { ro: excerpt(article, "ro") || title(article, "ro"), en: excerpt(article, "en") || title(article, "en") }
       : { ro: "Articol de blog — Carmen Foia, psiholog Oradea.", en: "Blog article — Carmen Foia, psychologist in Oradea." },
     path: slug ? `/blog/${slug}` : "/blog",
+    jsonLd,
   });
 
   useEffect(() => {

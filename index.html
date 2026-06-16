@@ -45,21 +45,65 @@
         "@type": "Psychologist",
         "name": "Cabinet Individual Psihologie Carmen Foia",
         "alternateName": "Carmen Foia Psiholog",
-        "description": "Psiholog clinician în Oradea — terapie individuală și de cuplu, consiliere, psihologie sportivă și dezvoltare personală.",
+        "description": "Psiholog clinician în Oradea — terapie individuală și de cuplu, consiliere, psihologie sportivă și dezvoltare personală. Ședințe la cabinet sau online, în limba română și engleză.",
         "url": "https://psihologcarmenfoia.ro/",
+        "image": "https://psihologcarmenfoia.ro/og-image.jpg",
         "telephone": "+407949514255",
         "email": "contact@psihologcarmenfoia.ro",
-        "founder": { "@type": "Person", "name": "Carmen Foia", "jobTitle": "Psiholog Clinician" },
+        "vatID": "54513889",
+        "founder": {
+          "@type": "Person",
+          "name": "Carmen Foia",
+          "jobTitle": "Psiholog Clinician",
+          "knowsLanguage": ["ro", "en"]
+        },
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Str. Vasile Alecsandri nr. 7",
           "addressLocality": "Oradea",
           "addressRegion": "Bihor",
+          "postalCode": "410079",
           "addressCountry": "RO"
         },
-        "areaServed": { "@type": "City", "name": "Oradea" },
+        "areaServed": [
+          { "@type": "City", "name": "Oradea" },
+          { "@type": "AdministrativeArea", "name": "Bihor" },
+          { "@type": "Country", "name": "Romania" }
+        ],
+        "availableLanguage": [
+          { "@type": "Language", "name": "Romanian" },
+          { "@type": "Language", "name": "English" }
+        ],
         "knowsLanguage": ["ro", "en"],
-        "priceRange": "RON"
+        "knowsAbout": [
+          "Individual therapy",
+          "Couples therapy",
+          "Psychological counselling",
+          "Sports psychology",
+          "Performance anxiety",
+          "Career and vocational guidance",
+          "Personal development",
+          "Anxiety management"
+        ],
+        "availableService": [
+          { "@type": "MedicalTherapy", "name": "Terapie individuală" },
+          { "@type": "MedicalTherapy", "name": "Terapie de cuplu" },
+          { "@type": "MedicalTherapy", "name": "Consiliere psihologică" },
+          { "@type": "MedicalTherapy", "name": "Psihologie sportivă" },
+          { "@type": "MedicalTherapy", "name": "Anxietate de performanță" },
+          { "@type": "MedicalTherapy", "name": "Orientare vocațională" }
+        ],
+        "makesOffer": {
+          "@type": "Offer",
+          "name": "Ședință de terapie / consiliere",
+          "priceSpecification": {
+            "@type": "PriceSpecification",
+            "price": "150",
+            "priceCurrency": "RON"
+          },
+          "availableDeliveryMethod": ["http://schema.org/OnSitePickup", "https://schema.org/OnlineEventAttendanceMode"]
+        },
+        "priceRange": "$$"
       }
     </script>
 

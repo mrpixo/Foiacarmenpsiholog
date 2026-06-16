@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router";
 import { motion } from "motion/react";
 import { ArrowLeft } from "lucide-react";
@@ -7,7 +7,7 @@ import { isSupabaseConfigured } from "../../lib/supabase";
 import { getPublishedNewsBySlug, newsTitle, newsExcerpt, newsBody, type NewsItem } from "../../lib/news";
 import { NewsContent } from "./NewsContent";
 import { NotConfigured } from "../blog/NotConfigured";
-import { useSeo } from "../../lib/seo";
+import { useSeo, SITE_URL } from "../../lib/seo";
 
 const FONT = { fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" } as const;
 
@@ -28,6 +28,26 @@ export function NewsDetail() {
   const [item, setItem] = useState<NewsItem | null>(null);
   const [loading, setLoading] = useState(true);
 
+  const jsonLd = useMemo(
+    () =>
+      item
+        ? {
+            "@context": "https://schema.org",
+            "@type": "NewsArticle",
+            headline: newsTitle(item, language),
+            description: newsExcerpt(item, language) || newsTitle(item, language),
+            inLanguage: language,
+            datePublished: item.published_at || undefined,
+            dateModified: item.updated_at || item.published_at || undefined,
+            image: item.cover_url || undefined,
+            author: { "@type": "Person", name: "Carmen Foia", jobTitle: "Psiholog Clinician" },
+            publisher: { "@type": "Organization", name: "Carmen Foia Psiholog", url: SITE_URL },
+            mainEntityOfPage: `${SITE_URL}/noutati/${slug}`,
+          }
+        : null,
+    [item, language, slug],
+  );
+
   useSeo({
     title: item
       ? { ro: newsTitle(item, "ro"), en: newsTitle(item, "en") }
@@ -36,6 +56,7 @@ export function NewsDetail() {
       ? { ro: newsExcerpt(item, "ro") || newsTitle(item, "ro"), en: newsExcerpt(item, "en") || newsTitle(item, "en") }
       : { ro: "Noutăți — Carmen Foia, psiholog Oradea.", en: "News — Carmen Foia, psychologist in Oradea." },
     path: slug ? `/noutati/${slug}` : "/noutati",
+    jsonLd,
   });
 
   useEffect(() => {

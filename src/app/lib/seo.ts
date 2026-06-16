@@ -30,10 +30,32 @@ type SeoInput = {
   description: { ro: string; en: string };
   /** Path part of the canonical URL, e.g. "/blog". */
   path?: string;
+  /** Optional per-page JSON-LD (Article, FAQPage, BreadcrumbList, …). Injected
+   *  into <head> and captured by the prerenderer for rich results / AI search. */
+  jsonLd?: object | object[] | null;
 };
 
-/** Sets document title + meta description/OG/canonical per page, per language. */
-export function useSeo({ title, description, path = "" }: SeoInput) {
+/** Sets/removes the per-page JSON-LD <script> (id'd so it's replaced, not piled up). */
+function setJsonLd(data: object | object[] | null | undefined) {
+  const id = "page-jsonld";
+  let el = document.getElementById(id) as HTMLScriptElement | null;
+  if (!data) {
+    el?.remove();
+    return;
+  }
+  if (!el) {
+    el = document.createElement("script");
+    el.type = "application/ld+json";
+    el.id = id;
+    document.head.appendChild(el);
+  }
+  el.textContent = JSON.stringify(data);
+}
+
+export { SITE_URL };
+
+/** Sets document title + meta description/OG/canonical (+ optional JSON-LD) per page, per language. */
+export function useSeo({ title, description, path = "", jsonLd = null }: SeoInput) {
   const { language } = useLanguage();
   useEffect(() => {
     const t = `${title[language]} | ${SUFFIX}`;
@@ -50,5 +72,7 @@ export function useSeo({ title, description, path = "" }: SeoInput) {
     setMeta("name", "twitter:title", t);
     setMeta("name", "twitter:description", d);
     setCanonical(url);
-  }, [language, title, description, path]);
+    setJsonLd(jsonLd);
+    return () => setJsonLd(null);
+  }, [language, title, description, path, jsonLd]);
 }
