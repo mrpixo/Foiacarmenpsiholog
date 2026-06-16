@@ -25,12 +25,10 @@ export function ArticleCard({ article, index = 0 }: { article: Article; index?: 
         {/* Image */}
         <div className="aspect-[400/300] w-full overflow-hidden rounded-2xl bg-[#f5eee9]">
           {article.cover_url ? (
-            <motion.img
+            <img
               src={article.cover_url}
               alt={title(article, language)}
-              className="h-full w-full rounded-2xl object-cover"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.5 }}
+              className="h-full w-full rounded-2xl object-cover transition-transform duration-500 group-hover:scale-105"
             />
           ) : (
             <div className="h-full w-full rounded-2xl bg-gradient-to-br from-[#dfeeec] to-[#f5eee9] transition-transform duration-500 group-hover:scale-105" />

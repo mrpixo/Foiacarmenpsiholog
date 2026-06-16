@@ -55,7 +55,7 @@ export function NewsList() {
         ) : items.length === 0 ? (
           <p className="text-white/80" style={FONT}>{t.empty}</p>
         ) : (
-          <div className="grid grid-cols-1 items-stretch gap-12 auto-rows-fr md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
             {items.map((item, i) => (
               <NewsCard key={item.id} item={item} index={i} />
             ))}
