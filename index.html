@@ -63,6 +63,35 @@
       }
     </script>
 
+    <!-- Inter font — loaded without blocking first paint (preconnect, then
+         swap the stylesheet in once it's fetched). -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      />
+    </noscript>
+
+    <!-- Preload the LCP hero image so it downloads in parallel with the JS
+         instead of only after React renders (the browser picks the right
+         size from the srcset). -->
+    <link
+      rel="preload"
+      as="image"
+      fetchpriority="high"
+      imagesrcset="/hero-office-768.webp 768w, /hero-office-1280.webp 1280w, /hero-office-1728.webp 1728w"
+      imagesizes="100vw"
+      href="/hero-office-1280.webp"
+    />
+
     <style>html, body { height: 100%; margin: 0; } #root { height: 100%; }</style>
   </head>
 

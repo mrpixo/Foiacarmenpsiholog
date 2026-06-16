@@ -2,7 +2,6 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { Link } from "react-router";
 import imgPortrait from "../../imports/Body/carmen-portrait-new.webp";
-import imgHeroBg from "../../imports/Body/019dd9eeb6b49b7cdb6f1dd68088dd908e2ec026.webp";
 import { useLanguage } from "../i18n";
 import { useIsMobile, entrance } from "../lib/useIsMobile";
 
@@ -159,7 +158,9 @@ export function HeroPhoto() {
         className="absolute inset-[-10%] will-change-transform"
       >
         <img
-          src={imgHeroBg}
+          src="/hero-office-1280.webp"
+          srcSet="/hero-office-768.webp 768w, /hero-office-1280.webp 1280w, /hero-office-1728.webp 1728w"
+          sizes="100vw"
           alt={language === "ro" ? "Cabinet psiholog" : "Psychology office"}
           className="w-full h-full object-cover rounded-2xl"
           decoding="async"

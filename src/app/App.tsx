@@ -37,13 +37,14 @@ import { LanguageProvider } from "./i18n";
 import { AuthProvider } from "./lib/auth";
 import { ConsentProvider } from "./lib/consent";
 import { useSeo } from "./lib/seo";
-import imgHeroBg from "../imports/Body/019dd9eeb6b49b7cdb6f1dd68088dd908e2ec026.webp";
 
 function FullWidthPhoto() {
   return (
     <div id="despre" className="relative w-full overflow-hidden" style={{ height: "clamp(300px,40vw,700px)" }}>
       <img
-        src={imgHeroBg}
+        src="/hero-office-1280.webp"
+        srcSet="/hero-office-768.webp 768w, /hero-office-1280.webp 1280w, /hero-office-1728.webp 1728w"
+        sizes="100vw"
         alt=""
         className="absolute inset-0 w-full h-full object-cover rounded-2xl"
         aria-hidden
