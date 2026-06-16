@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import { motion, useInView } from "motion/react";
 import { useLanguage } from "../i18n";
-import { isSupabaseConfigured } from "../lib/supabase";
-import { listPublishedNews, type NewsItem } from "../lib/news";
+import { isSupabaseConfigured } from "../lib/supabase-config";
+import type { NewsItem } from "../lib/news-format";
 import { NewsCard } from "./news/NewsCard";
 import { useIsMobile, entrance } from "../lib/useIsMobile";
 
@@ -19,7 +19,7 @@ export function News() {
 
   useEffect(() => {
     if (!isSupabaseConfigured) return;
-    listPublishedNews(6).then(setItems).catch(() => {});
+    import("../lib/news").then((m) => m.listPublishedNews(6)).then(setItems).catch(() => {});
   }, []);
 
   return (

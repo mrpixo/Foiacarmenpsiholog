@@ -2,8 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router";
 import { motion, useInView } from "motion/react";
 import { useLanguage } from "../i18n";
-import { isSupabaseConfigured } from "../lib/supabase";
-import { listHomepageFaq, faqQuestion, faqAnswer, type Faq } from "../lib/community";
+import { isSupabaseConfigured } from "../lib/supabase-config";
+import { faqQuestion, faqAnswer, type Faq } from "../lib/community-format";
 import { FaqItem } from "./faq/FaqItem";
 
 const FONT = { fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" } as const;
@@ -17,7 +17,7 @@ export function FAQ() {
 
   useEffect(() => {
     if (!isSupabaseConfigured) return;
-    listHomepageFaq(6).then(setFaqs).catch(() => {});
+    import("../lib/community").then((m) => m.listHomepageFaq(6)).then(setFaqs).catch(() => {});
   }, []);
 
   return (

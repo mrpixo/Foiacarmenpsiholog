@@ -1,6 +1,9 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import type { Session } from "@supabase/supabase-js";
-import { supabase } from "./supabase";
+
+// The Supabase client (~54 KB) is loaded lazily so it stays off the homepage's
+// critical path — it's only pulled in once auth is actually needed.
+const getSupabase = () => import("./supabase").then((m) => m.supabase);
 
 type AuthState = {
   session: Session | null;
@@ -16,20 +19,31 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
-      setSession(data.session);
-      setLoading(false);
+    let unsub: (() => void) | undefined;
+    let active = true;
+    getSupabase().then((supabase) => {
+      if (!active) return;
+      supabase.auth.getSession().then(({ data }) => {
+        setSession(data.session);
+        setLoading(false);
+      });
+      const { data: sub } = supabase.auth.onAuthStateChange((_event, s) => setSession(s));
+      unsub = () => sub.subscription.unsubscribe();
     });
-    const { data: sub } = supabase.auth.onAuthStateChange((_event, s) => setSession(s));
-    return () => sub.subscription.unsubscribe();
+    return () => {
+      active = false;
+      unsub?.();
+    };
   }, []);
 
   const signIn: AuthState["signIn"] = async (email, password) => {
+    const supabase = await getSupabase();
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     return { error: error?.message ?? null };
   };
 
   const signOut = async () => {
+    const supabase = await getSupabase();
     await supabase.auth.signOut();
   };
 

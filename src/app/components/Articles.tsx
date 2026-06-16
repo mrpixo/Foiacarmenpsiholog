@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import { motion, useInView } from "motion/react";
 import { useLanguage } from "../i18n";
-import { isSupabaseConfigured } from "../lib/supabase";
-import { listPublishedArticles, type Article } from "../lib/articles";
+import { isSupabaseConfigured } from "../lib/supabase-config";
+import type { Article } from "../lib/articles-format";
 import { ArticleCard } from "./blog/ArticleCard";
 import { useIsMobile, entrance } from "../lib/useIsMobile";
 
@@ -19,7 +19,8 @@ export function Articles() {
 
   useEffect(() => {
     if (!isSupabaseConfigured) return;
-    listPublishedArticles()
+    import("../lib/articles")
+      .then((m) => m.listPublishedArticles())
       .then((a) => setArticles(a.slice(0, 3)))
       .catch(() => {});
   }, []);

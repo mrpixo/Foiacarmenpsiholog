@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import { motion, useInView } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import { useLanguage } from "../../i18n";
-import { newsTitle, type NewsItem } from "../../lib/news";
+import { newsTitle, type NewsItem } from "../../lib/news-format";
 
 const FONT = { fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" } as const;
 

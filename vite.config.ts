@@ -40,12 +40,14 @@ export default defineConfig({
         // Split large, stable vendor libraries into their own chunks so they
         // cache independently and don't block first paint of the app code.
         manualChunks(id) {
-          if (!id.includes('node_modules')) return
-          if (id.includes('react-dom') || id.includes('/react/') || id.includes('react-router') || id.includes('scheduler')) return 'react'
-          if (id.includes('motion')) return 'motion'
-          if (id.includes('@radix-ui')) return 'radix'
-          if (id.includes('@supabase')) return 'supabase'
-          if (id.includes('@tiptap') || id.includes('prosemirror')) return 'tiptap'
+          if (!id.includes('/node_modules/')) return
+          // Match on the package boundary so scoped packages like
+          // `@tiptap/react` don't get mis-bucketed into `react`.
+          if (/\/node_modules\/(react|react-dom|react-router|react-router-dom|scheduler)\//.test(id)) return 'react'
+          if (/\/node_modules\/(motion|framer-motion)\//.test(id)) return 'motion'
+          if (id.includes('/node_modules/@radix-ui/')) return 'radix'
+          if (id.includes('/node_modules/@supabase/')) return 'supabase'
+          if (id.includes('/node_modules/@tiptap/') || id.includes('/node_modules/prosemirror')) return 'tiptap'
         },
       },
     },

@@ -1,10 +1,11 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
+// Re-exported from the lightweight config module (no client) so existing
+// importers of "./supabase" keep working.
+export { isSupabaseConfigured } from "./supabase-config";
+
 const url = import.meta.env.VITE_SUPABASE_URL as string | undefined;
 const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
-
-/** True once the Supabase project credentials are configured in `.env`. */
-export const isSupabaseConfigured = Boolean(url && anonKey);
 
 /**
  * Shared Supabase client. The anon key is safe to ship to the browser — access

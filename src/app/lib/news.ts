@@ -1,27 +1,9 @@
 import { supabase } from "./supabase";
-import type { Language } from "../i18n";
+import type { NewsItem, NewsStatus, NewsInput } from "./news-format";
 
-export type NewsStatus = "draft" | "published";
-
-export type NewsItem = {
-  id: string;
-  slug: string;
-  status: NewsStatus;
-  title_ro: string;
-  title_en: string;
-  excerpt_ro: string;
-  excerpt_en: string;
-  body_ro: string;
-  body_en: string;
-  cover_url: string | null;
-  published_at: string | null;
-  created_at: string;
-  updated_at: string;
-};
-
-export const newsTitle = (n: NewsItem, lang: Language) => (lang === "ro" ? n.title_ro : n.title_en);
-export const newsExcerpt = (n: NewsItem, lang: Language) => (lang === "ro" ? n.excerpt_ro : n.excerpt_en);
-export const newsBody = (n: NewsItem, lang: Language) => (lang === "ro" ? n.body_ro : n.body_en);
+// Re-export types + formatters so existing importers of "./news" keep working.
+export type { NewsItem, NewsStatus, NewsInput } from "./news-format";
+export { newsTitle, newsExcerpt, newsBody } from "./news-format";
 
 // ── Public reads (published only, enforced by RLS) ───────────────────────────
 export async function listPublishedNews(limit?: number): Promise<NewsItem[]> {
@@ -59,17 +41,6 @@ export async function getNewsById(id: string): Promise<NewsItem | null> {
   if (error) throw error;
   return data;
 }
-
-export type NewsInput = {
-  slug: string;
-  title_ro: string;
-  title_en: string;
-  excerpt_ro: string;
-  excerpt_en: string;
-  body_ro: string;
-  body_en: string;
-  cover_url: string | null;
-};
 
 export async function createNews(input: NewsInput): Promise<NewsItem> {
   const { data, error } = await supabase.from("news").insert({ ...input, status: "draft" }).select("*").single();

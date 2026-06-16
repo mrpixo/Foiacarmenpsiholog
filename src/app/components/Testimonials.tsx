@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { isSupabaseConfigured } from "../lib/supabase";
-import { listPublishedTestimonials, type Testimonial } from "../lib/community";
+import { isSupabaseConfigured } from "../lib/supabase-config";
+import type { Testimonial } from "../lib/community-format";
 
 const FONT = { fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" } as const;
 
@@ -12,7 +12,7 @@ export function Testimonials() {
 
   useEffect(() => {
     if (!isSupabaseConfigured) return;
-    listPublishedTestimonials(5).then(setItems).catch(() => {});
+    import("../lib/community").then((m) => m.listPublishedTestimonials(5)).then(setItems).catch(() => {});
   }, []);
 
   const startTimer = () => {
