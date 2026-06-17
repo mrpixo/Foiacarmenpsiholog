@@ -140,7 +140,41 @@
   </head>
 
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- No-JS / crawler fallback: accurate page text for search engines and AI
+           crawlers that don't run JavaScript. The React app replaces #root on
+           load, so this never affects the interactive experience. -->
+      <noscript>
+        <h1>Psiholog Oradea — Carmen Foia, psiholog clinician</h1>
+        <p>
+          Carmen Foia este psiholog clinician în Oradea. Te ajut să gestionezi anxietatea, să
+          depășești blocajele emoționale și să faci pași mai siguri către obiectivele tale
+          personale, profesionale sau sportive. Ședințele se desfășoară la cabinet, în Oradea,
+          sau online, în limba română și engleză.
+        </p>
+        <h2>Servicii de psihologie și terapie în Oradea</h2>
+        <ul>
+          <li>Terapie individuală</li>
+          <li>Terapie de cuplu</li>
+          <li>Consiliere psihologică</li>
+          <li>Psihologie sportivă</li>
+          <li>Anxietate de performanță</li>
+          <li>Orientare vocațională și în carieră</li>
+          <li>Dezvoltare personală</li>
+          <li>Sprijin pentru studenți și sportivi</li>
+        </ul>
+        <p>
+          Cabinet: Str. Vasile Alecsandri nr. 7, Oradea, Bihor. Programări la
+          <a href="tel:+407949514255">+40 7949 514 255</a> (WhatsApp) sau
+          <a href="mailto:contact@psihologcarmenfoia.ro">contact@psihologcarmenfoia.ro</a>.
+        </p>
+        <p>
+          English: Carmen Foia is a clinical psychologist in Oradea, Romania, offering individual
+          and couples therapy, counselling, sports psychology and personal development — in person
+          or online, in Romanian and English.
+        </p>
+      </noscript>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
