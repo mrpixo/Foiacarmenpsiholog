@@ -174,9 +174,15 @@ async function main() {
   const server = await startServer(shellHtml);
   const browser = await launchBrowser();
 
+  // The homepage is intentionally NOT prerendered — it stays the lean Vite shell
+  // for fastest first load (its SEO is covered by the static JSON-LD + meta in
+  // index.html). Only the content pages are prerendered, since those carry the
+  // long-form, AI-citable text. The homepage is still listed in the sitemap.
+  const crawlRoutes = routes.filter((r) => r !== "/");
+
   let ok = 0;
   try {
-    for (const route of routes) {
+    for (const route of crawlRoutes) {
       const page = await browser.newPage();
       try {
         await page.setViewport({ width: 1280, height: 900 });
@@ -223,7 +229,7 @@ async function main() {
     console.warn("[prerender] sitemap write failed:", e.message);
   }
 
-  console.log(`[prerender] done: ${ok}/${routes.length} routes`);
+  console.log(`[prerender] done: ${ok}/${crawlRoutes.length} routes (homepage left as fast shell)`);
 }
 
 main().catch((e) => {
