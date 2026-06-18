@@ -8,13 +8,24 @@ import { newsTitle, newsExcerpt, type NewsItem } from "../../lib/news-format";
 const FONT = { fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" } as const;
 
 /**
- * News card — same uniform layout as the blog ArticleCard (image → title →
- * excerpt → "read more", no alternation), themed for the green news surface.
+ * News card. By default uniform (image → title → excerpt → "read more"), like the
+ * blog ArticleCard. When `alternate` is set (the desktop homepage strip), the
+ * middle card of each 3-up row flips its text above the image — a zigzag. The
+ * flip only applies at md+; mobile and the /noutati page stay uniform.
  */
-export function NewsCard({ item, index = 0 }: { item: NewsItem; index?: number }) {
+export function NewsCard({
+  item,
+  index = 0,
+  alternate = false,
+}: {
+  item: NewsItem;
+  index?: number;
+  alternate?: boolean;
+}) {
   const { language } = useLanguage();
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-5%" });
+  const flip = alternate && index % 3 === 1;
 
   return (
     <motion.article
@@ -26,7 +37,12 @@ export function NewsCard({ item, index = 0 }: { item: NewsItem; index?: number }
     >
       <Link to={`/noutati/${item.slug}`} className="flex flex-col gap-6">
         {/* Image */}
-        <div className="aspect-[400/300] w-full overflow-hidden rounded-2xl bg-white/10">
+        <div
+          className={[
+            "aspect-[400/300] w-full overflow-hidden rounded-2xl bg-white/10",
+            flip ? "md:order-2" : "",
+          ].join(" ")}
+        >
           {item.cover_url ? (
             <img
               src={item.cover_url}
@@ -38,34 +54,37 @@ export function NewsCard({ item, index = 0 }: { item: NewsItem; index?: number }
           )}
         </div>
 
-        {/* Title */}
-        <p
-          className="text-white"
-          style={{ ...FONT, fontWeight: 400, fontSize: "clamp(18px,2vw,32px)", lineHeight: 1.3 }}
-        >
-          {newsTitle(item, language)}
-        </p>
-
-        {/* Excerpt — 2 lines */}
-        {newsExcerpt(item, language) && (
-          <p className="line-clamp-2 text-base leading-7 text-white/80" style={FONT}>
-            {newsExcerpt(item, language)}
+        {/* Text block */}
+        <div className={["flex flex-col gap-6", flip ? "md:order-1" : ""].join(" ")}>
+          {/* Title */}
+          <p
+            className="text-white"
+            style={{ ...FONT, fontWeight: 400, fontSize: "clamp(18px,2vw,32px)", lineHeight: 1.3 }}
+          >
+            {newsTitle(item, language)}
           </p>
-        )}
 
-        {/* Read more */}
-        <div className="flex items-center gap-3">
-          <span className="text-base text-[#ffba68] underline" style={{ ...FONT, fontWeight: 600 }}>
-            {language === "ro" ? "Vezi mai mult" : "Read more"}
-          </span>
-          <span className="relative size-5 overflow-hidden text-[#ffba68]">
-            <span className="absolute inset-0 flex items-center justify-center transition-all duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-x-[18px] group-hover:-translate-y-[18px] group-hover:opacity-0">
-              <ArrowUpRight size={20} />
+          {/* Excerpt — 2 lines */}
+          {newsExcerpt(item, language) && (
+            <p className="line-clamp-2 text-base leading-7 text-white/80" style={FONT}>
+              {newsExcerpt(item, language)}
+            </p>
+          )}
+
+          {/* Read more */}
+          <div className="flex items-center gap-3">
+            <span className="text-base text-[#ffba68] underline" style={{ ...FONT, fontWeight: 600 }}>
+              {language === "ro" ? "Vezi mai mult" : "Read more"}
             </span>
-            <span className="absolute inset-0 flex translate-x-[-18px] translate-y-[18px] items-center justify-center opacity-0 transition-all duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100">
-              <ArrowUpRight size={20} />
+            <span className="relative size-5 overflow-hidden text-[#ffba68]">
+              <span className="absolute inset-0 flex items-center justify-center transition-all duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-x-[18px] group-hover:-translate-y-[18px] group-hover:opacity-0">
+                <ArrowUpRight size={20} />
+              </span>
+              <span className="absolute inset-0 flex translate-x-[-18px] translate-y-[18px] items-center justify-center opacity-0 transition-all duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100">
+                <ArrowUpRight size={20} />
+              </span>
             </span>
-          </span>
+          </div>
         </div>
       </Link>
     </motion.article>

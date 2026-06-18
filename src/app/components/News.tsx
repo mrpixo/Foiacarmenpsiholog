@@ -53,7 +53,7 @@ export function News() {
         {items.length > 0 && (
           <div className="grid grid-cols-1 items-stretch gap-12 auto-rows-fr md:grid-cols-3">
             {items.map((item, i) => (
-              <NewsCard key={item.id} item={item} index={i} />
+              <NewsCard key={item.id} item={item} index={i} alternate />
             ))}
           </div>
         )}
