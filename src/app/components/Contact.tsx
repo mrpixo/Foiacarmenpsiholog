@@ -230,7 +230,7 @@ export function Contact() {
           transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           className="mt-14 grid grid-cols-1 gap-6 rounded-3xl bg-[#054943] p-7 text-white sm:grid-cols-3 md:p-10"
         >
-          <ContactItem icon={<Phone size={20} />} label="WhatsApp" value="+40 7949 514 255" href="tel:+407949514255" />
+          <ContactItem icon={<Phone size={20} />} label="WhatsApp" value="+40 770 926 562" href="tel:+40770926562" />
           <ContactItem icon={<Mail size={20} />} label="Email" value="contact@psihologcarmenfoia.ro" href="mailto:contact@psihologcarmenfoia.ro" />
           <ContactItem icon={<MapPin size={20} />} label={t.location} value={ENTITY.address} />
         </motion.div>

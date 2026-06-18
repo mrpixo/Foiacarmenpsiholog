@@ -26,7 +26,7 @@ function PrivacyRO() {
         <li><strong>CUI:</strong> 54513889</li>
         <li><strong>Adresă:</strong> Str. Vasile Alecsandri nr. 7, Oradea, România</li>
         <li><strong>Email:</strong> contact@psihologcarmenfoia.ro</li>
-        <li><strong>Telefon / WhatsApp:</strong> +40 7949 514 255</li>
+        <li><strong>Telefon / WhatsApp:</strong> +40 770 926 562</li>
       </ul>
 
       <h2>2. Ce date colectăm</h2>
@@ -165,7 +165,7 @@ function PrivacyEN() {
         <li><strong>Tax ID (CUI):</strong> 54513889</li>
         <li><strong>Address:</strong> Str. Vasile Alecsandri nr. 7, Oradea, Romania</li>
         <li><strong>Email:</strong> contact@psihologcarmenfoia.ro</li>
-        <li><strong>Phone / WhatsApp:</strong> +40 7949 514 255</li>
+        <li><strong>Phone / WhatsApp:</strong> +40 770 926 562</li>
       </ul>
 
       <h2>2. What data we collect</h2>

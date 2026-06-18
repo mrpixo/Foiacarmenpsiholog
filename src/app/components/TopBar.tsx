@@ -12,8 +12,8 @@ export function TopBar() {
         style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}
       >
         WhatsApp:{" "}
-        <a href="tel:+407949514255" className="font-bold hover:text-[#ffba68] transition-colors">
-          +40 7949 514 255
+        <a href="tel:+40770926562" className="font-bold hover:text-[#ffba68] transition-colors">
+          +40 770 926 562
         </a>
       </p>
 
