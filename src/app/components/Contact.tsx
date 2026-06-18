@@ -19,6 +19,7 @@ const copy = {
     back: "Înapoi la tipuri de sesiune",
     selected: "Tip sesiune selectat",
     details: "Date de contact",
+    phone: "Telefon / WhatsApp",
     location: "Cabinet",
     perSession: "/ ședință",
     paymentNote: "Plata se face securizat cu cardul, la pasul de confirmare.",
@@ -37,6 +38,7 @@ const copy = {
     back: "Back to session types",
     selected: "Selected session type",
     details: "Contact details",
+    phone: "Phone / WhatsApp",
     location: "Office",
     perSession: "/ session",
     paymentNote: "Payment is taken securely by card at the confirmation step.",
@@ -230,7 +232,7 @@ export function Contact() {
           transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           className="mt-14 grid grid-cols-1 gap-6 rounded-3xl bg-[#054943] p-7 text-white sm:grid-cols-3 md:p-10"
         >
-          <ContactItem icon={<Phone size={20} />} label="WhatsApp" value="+40 770 926 562" href="tel:+40770926562" />
+          <ContactItem icon={<Phone size={20} />} label={t.phone} value="+40 770 926 562" href="tel:+40770926562" />
           <ContactItem icon={<Mail size={20} />} label="Email" value="contact@psihologcarmenfoia.ro" href="mailto:contact@psihologcarmenfoia.ro" />
           <ContactItem icon={<MapPin size={20} />} label={t.location} value={ENTITY.address} />
         </motion.div>
