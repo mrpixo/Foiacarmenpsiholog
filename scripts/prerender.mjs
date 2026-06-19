@@ -174,11 +174,16 @@ async function main() {
   const server = await startServer(shellHtml);
   const browser = await launchBrowser();
 
-  // The homepage is intentionally NOT prerendered — it stays the lean Vite shell
-  // for fastest first load (its SEO is covered by the static JSON-LD + meta in
-  // index.html). Only the content pages are prerendered, since those carry the
-  // long-form, AI-citable text. The homepage is still listed in the sitemap.
-  const crawlRoutes = routes.filter((r) => r !== "/");
+  // Routes left as the lean Vite shell (NOT prerendered):
+  //  • "/"        — fastest first load; its SEO is covered by the static
+  //                 JSON-LD + meta + no-JS fallback in index.html.
+  //  • "/contact" — the Cal.com booking embed self-injects scripts and must
+  //                 initialise live; prerendering bakes a stale bootstrap that
+  //                 breaks the iframe. It's an interactive page, not SEO content.
+  // Both stay in the sitemap. Everything else (articles, news, FAQ, legal) is
+  // prerendered since it carries long-form, AI-citable text.
+  const SKIP_PRERENDER = new Set(["/", "/contact"]);
+  const crawlRoutes = routes.filter((r) => !SKIP_PRERENDER.has(r));
 
   let ok = 0;
   try {
