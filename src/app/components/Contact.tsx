@@ -190,7 +190,7 @@ export function Contact() {
                         <Tag size={15} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[#a89f95]" />
                         <input
                           value={promoInput}
-                          onChange={(e) => { setPromoInput(e.target.value.toUpperCase()); setPromoError(false); }}
+                          onChange={(e) => { setPromoInput(e.target.value.toUpperCase().replace(/\s/g, "")); setPromoError(false); }}
                           onKeyDown={(e) => { if (e.key === "Enter") applyPromo(); }}
                           placeholder={t.promoPlaceholder}
                           className="w-60 rounded-full border border-[#e4dcd3] bg-white py-2.5 pl-9 pr-4 text-sm uppercase text-[#39342e] outline-none transition-colors placeholder:normal-case placeholder:text-[#a89f95] focus:border-[#006960] focus:ring-2 focus:ring-[#006960]/15"

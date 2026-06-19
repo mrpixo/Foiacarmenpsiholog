@@ -73,7 +73,7 @@ export function AdminPromoCodes() {
               className={`${INPUT} sm:w-48 uppercase`}
               placeholder={ro ? "COD (ex. GRATIS2026)" : "CODE (e.g. FREE2026)"}
               value={code}
-              onChange={(e) => setCode(e.target.value.toUpperCase())}
+              onChange={(e) => setCode(e.target.value.toUpperCase().replace(/\s/g, ""))}
             />
             <input className={INPUT} placeholder={ro ? "Notă internă (opțional)" : "Internal note (optional)"} value={label} onChange={(e) => setLabel(e.target.value)} />
             <button type="button" onClick={add} className="inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 rounded-full bg-[#006960] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#054943]">

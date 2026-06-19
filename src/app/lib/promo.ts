@@ -19,9 +19,9 @@ export type PromoCodeInput = {
 // ── Public validation (no table access — uses the SECURITY DEFINER RPC) ───────
 /** True if the code exists, is active and not expired. Never exposes the list. */
 export async function validatePromoCode(code: string): Promise<boolean> {
-  const trimmed = code.trim();
-  if (!trimmed) return false;
-  const { data, error } = await supabase.rpc("validate_promo_code", { p_code: trimmed });
+  const normalized = code.replace(/\s/g, "");
+  if (!normalized) return false;
+  const { data, error } = await supabase.rpc("validate_promo_code", { p_code: normalized });
   if (error) throw error;
   return data === true;
 }
@@ -39,7 +39,7 @@ export async function listPromoCodes(): Promise<PromoCode[]> {
 export async function createPromoCode(input: PromoCodeInput): Promise<PromoCode> {
   const { data, error } = await supabase
     .from("promo_codes")
-    .insert({ ...input, code: input.code.trim() })
+    .insert({ ...input, code: input.code.replace(/\s/g, "") })
     .select("*")
     .single();
   if (error) throw error;

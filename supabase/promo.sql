@@ -31,9 +31,11 @@ language sql
 security definer
 set search_path = public
 as $$
+  -- Compare case- and whitespace-insensitively so a stray space (or copy/paste
+  -- vs. typing) can never cause a mismatch.
   select exists (
     select 1 from public.promo_codes
-    where upper(code) = upper(btrim(p_code))
+    where upper(regexp_replace(code, '\s', '', 'g')) = upper(regexp_replace(p_code, '\s', '', 'g'))
       and active = true
       and (expires_at is null or expires_at > now())
   );
