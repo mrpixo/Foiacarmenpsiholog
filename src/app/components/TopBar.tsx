@@ -6,13 +6,16 @@ export function TopBar() {
   const { language } = useLanguage();
   return (
     <div className="w-full bg-[#054943] px-6 md:px-24 py-6 flex flex-col md:flex-row items-center justify-between gap-4 flex-wrap">
-      {/* WhatsApp */}
+      {/* Phone / WhatsApp */}
       <p
-        className="text-white text-base whitespace-nowrap"
+        className="text-white text-base text-center md:text-left"
         style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}
       >
-        WhatsApp:{" "}
-        <a href="tel:+40770926562" className="font-bold hover:text-[#ffba68] transition-colors">
+        {language === "ro" ? "Telefon / WhatsApp" : "Phone / WhatsApp"}:{" "}
+        <a
+          href="tel:+40770926562"
+          className="font-bold whitespace-nowrap hover:text-[#ffba68] transition-colors"
+        >
           +40 770 926 562
         </a>
       </p>

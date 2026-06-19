@@ -30,6 +30,16 @@ export const EVENT_SLUG_BY_MODE: Record<SessionMode, string> = {
   cabinet: "sesiune-terapie-cabinet",
 };
 
+/**
+ * Free session event type — booked instead of the paid one when a valid promo
+ * code is applied. A single free event (price 0) serves both modes; its actual
+ * location (online/cabinet) is whatever is configured on that Cal.com event.
+ */
+export const FREE_EVENT_SLUG_BY_MODE: Record<SessionMode, string> = {
+  online: "sesiune-terapie-gratuita",
+  cabinet: "sesiune-terapie-gratuita",
+};
+
 /** Standard price per session, charged by card via Stripe. Display-only here;
  *  the authoritative amount is set on each Cal.com event type. */
 export const SESSION_PRICE = { amount: 150, currency: "RON" } as const;

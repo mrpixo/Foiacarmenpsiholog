@@ -18,7 +18,8 @@ export function AdminTabs() {
   const isNews = pathname.startsWith("/admin/news");
   const isTest = pathname.startsWith("/admin/testimonials");
   const isFaq = pathname.startsWith("/admin/faq");
-  const isBlog = !isNews && !isTest && !isFaq;
+  const isPromo = pathname.startsWith("/admin/promo");
+  const isBlog = !isNews && !isTest && !isFaq && !isPromo;
 
   return (
     <div className="mb-6 inline-flex flex-wrap gap-1 rounded-full border border-[#e4dcd3] bg-white p-1" style={FONT}>
@@ -26,6 +27,7 @@ export function AdminTabs() {
       <Link to="/admin/news" className={tab(isNews)}>{ro ? "Noutăți" : "News"}</Link>
       <Link to="/admin/testimonials" className={tab(isTest)}>{ro ? "Testimoniale" : "Testimonials"}</Link>
       <Link to="/admin/faq" className={tab(isFaq)}>{ro ? "Întrebări" : "FAQ"}</Link>
+      <Link to="/admin/promo" className={tab(isPromo)}>{ro ? "Coduri" : "Codes"}</Link>
     </div>
   );
 }

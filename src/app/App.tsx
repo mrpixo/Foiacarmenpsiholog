@@ -33,6 +33,7 @@ const AdminNewsDashboard = lazy(() => import("./components/admin/AdminNewsDashbo
 const AdminNewsEditor = lazy(() => import("./components/admin/AdminNewsEditor").then((m) => ({ default: m.AdminNewsEditor })));
 const AdminTestimonials = lazy(() => import("./components/admin/AdminTestimonials").then((m) => ({ default: m.AdminTestimonials })));
 const AdminFaq = lazy(() => import("./components/admin/AdminFaq").then((m) => ({ default: m.AdminFaq })));
+const AdminPromoCodes = lazy(() => import("./components/admin/AdminPromoCodes").then((m) => ({ default: m.AdminPromoCodes })));
 import { LanguageProvider } from "./i18n";
 import { AuthProvider } from "./lib/auth";
 import { ConsentProvider } from "./lib/consent";
@@ -192,6 +193,7 @@ function AppShell() {
         <Route path="/admin/news/edit/:id" element={<AdminGate><AdminNewsEditor /></AdminGate>} />
         <Route path="/admin/testimonials" element={<AdminGate><AdminTestimonials /></AdminGate>} />
         <Route path="/admin/faq" element={<AdminGate><AdminFaq /></AdminGate>} />
+        <Route path="/admin/promo" element={<AdminGate><AdminPromoCodes /></AdminGate>} />
       </Routes>
       </Suspense>
 

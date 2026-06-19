@@ -1,12 +1,13 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { useSearchParams } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
-import { Mail, Phone, MapPin, ArrowLeft, Check, MapPin as Pin, Video } from "lucide-react";
+import { Mail, Phone, MapPin, ArrowLeft, Check, MapPin as Pin, Video, Tag, X } from "lucide-react";
 import Cal, { getCalApi } from "@calcom/embed-react";
 import { useLanguage } from "../i18n";
-import { CAL_USERNAME, EVENT_SLUG_BY_MODE, bookingReasons, SESSION_PRICE, ENTITY, type BookingReason, type SessionMode } from "../booking";
+import { CAL_USERNAME, EVENT_SLUG_BY_MODE, FREE_EVENT_SLUG_BY_MODE, bookingReasons, SESSION_PRICE, ENTITY, type BookingReason, type SessionMode } from "../booking";
 import { HomeLink } from "./HomeLink";
 import { useSeo } from "../lib/seo";
+import { validatePromoCode } from "../lib/promo";
 
 const copy = {
   ro: {
@@ -27,6 +28,14 @@ const copy = {
     online: "Sesiune online",
     locCabinet: "La cabinet · Vasile Alecsandri nr. 7, Oradea",
     locOnline: "Sesiune online · primești link de Google Meet",
+    promoLabel: "Ai un cod pentru o ședință gratuită?",
+    promoPlaceholder: "Cod ședință gratuită",
+    promoApply: "Aplică",
+    promoApplied: "Cod aplicat — ședință gratuită",
+    promoRemove: "Elimină codul",
+    promoInvalid: "Cod invalid sau expirat",
+    free: "Gratuit",
+    freeNote: "Ședință gratuită — nu se solicită plata la confirmare.",
   },
   en: {
     eyebrow: "Booking",
@@ -46,6 +55,14 @@ const copy = {
     online: "Online session",
     locCabinet: "In person · Vasile Alecsandri nr. 7, Oradea",
     locOnline: "Online · you'll receive a Google Meet link",
+    promoLabel: "Have a code for a free session?",
+    promoPlaceholder: "Free session code",
+    promoApply: "Apply",
+    promoApplied: "Code applied — free session",
+    promoRemove: "Remove code",
+    promoInvalid: "Invalid or expired code",
+    free: "Free",
+    freeNote: "Free session — no payment is requested at confirmation.",
   },
 };
 
@@ -74,6 +91,30 @@ export function Contact() {
 
   const pick = (r: BookingReason, m: SessionMode) => { setReason(r); setMode(m); };
   const reset = () => { setReason(null); setMode(null); };
+
+  // Promo code → free session. Validated server-side via the Supabase RPC, so a
+  // valid code routes the booking to the free Cal.com event type.
+  const [promoInput, setPromoInput] = useState("");
+  const [promoApplied, setPromoApplied] = useState(false);
+  const [promoChecking, setPromoChecking] = useState(false);
+  const [promoError, setPromoError] = useState(false);
+
+  const applyPromo = async () => {
+    const c = promoInput.trim();
+    if (!c) return;
+    setPromoChecking(true);
+    setPromoError(false);
+    try {
+      if (await validatePromoCode(c)) setPromoApplied(true);
+      else setPromoError(true);
+    } catch {
+      setPromoError(true);
+    } finally {
+      setPromoChecking(false);
+    }
+  };
+
+  const slugByMode = promoApplied ? FREE_EVENT_SLUG_BY_MODE : EVENT_SLUG_BY_MODE;
 
   // Initialise the Cal.com embed UI to match the site's branding.
   useEffect(() => {
@@ -126,6 +167,51 @@ export function Contact() {
               <h2 className="mb-6 text-lg font-semibold text-[#39342e]" style={FONT}>
                 {t.step1}
               </h2>
+
+              {/* Promo code → free session */}
+              <div className="mb-6">
+                {promoApplied ? (
+                  <div className="inline-flex items-center gap-2 rounded-full bg-[#006960]/10 px-4 py-2 text-sm font-semibold text-[#006960]" style={FONT}>
+                    <Check size={15} /> {t.promoApplied}
+                    <button
+                      type="button"
+                      onClick={() => { setPromoApplied(false); setPromoInput(""); }}
+                      aria-label={t.promoRemove}
+                      className="ml-1 inline-flex cursor-pointer items-center text-[#006960]/70 transition-colors hover:text-[#d32c26]"
+                    >
+                      <X size={15} />
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex flex-col gap-2">
+                    <label className="text-sm font-medium text-[#5c554d]" style={FONT}>{t.promoLabel}</label>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <div className="relative">
+                        <Tag size={15} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[#a89f95]" />
+                        <input
+                          value={promoInput}
+                          onChange={(e) => { setPromoInput(e.target.value.toUpperCase()); setPromoError(false); }}
+                          onKeyDown={(e) => { if (e.key === "Enter") applyPromo(); }}
+                          placeholder={t.promoPlaceholder}
+                          className="w-60 rounded-full border border-[#e4dcd3] bg-white py-2.5 pl-9 pr-4 text-sm uppercase text-[#39342e] outline-none transition-colors placeholder:normal-case placeholder:text-[#a89f95] focus:border-[#006960] focus:ring-2 focus:ring-[#006960]/15"
+                          style={FONT}
+                        />
+                      </div>
+                      <button
+                        type="button"
+                        onClick={applyPromo}
+                        disabled={!promoInput.trim() || promoChecking}
+                        className="inline-flex cursor-pointer items-center rounded-full bg-[#006960] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#054943] disabled:opacity-40"
+                        style={FONT}
+                      >
+                        {promoChecking ? "…" : t.promoApply}
+                      </button>
+                      {promoError && <span className="text-sm font-medium text-[#d32c26]" style={FONT}>{t.promoInvalid}</span>}
+                    </div>
+                  </div>
+                )}
+              </div>
+
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {bookingReasons.map((r) => (
                   <div
@@ -138,9 +224,15 @@ export function Contact() {
                     <span className="text-sm leading-6 text-[#5c554d]" style={FONT}>
                       {r.description[language]}
                     </span>
-                    <span className="mt-1 inline-flex items-center rounded-full bg-[#006960]/8 px-3 py-1 text-sm font-semibold text-[#006960]" style={FONT}>
-                      {PRICE_LABEL} <span className="ml-1 font-normal text-[#006960]/70">{t.perSession}</span>
-                    </span>
+                    {promoApplied ? (
+                      <span className="mt-1 inline-flex items-center gap-1.5 rounded-full bg-[#006960]/8 px-3 py-1 text-sm font-semibold text-[#006960]" style={FONT}>
+                        <span className="font-normal text-[#006960]/50 line-through">{PRICE_LABEL}</span> {t.free}
+                      </span>
+                    ) : (
+                      <span className="mt-1 inline-flex items-center rounded-full bg-[#006960]/8 px-3 py-1 text-sm font-semibold text-[#006960]" style={FONT}>
+                        {PRICE_LABEL} <span className="ml-1 font-normal text-[#006960]/70">{t.perSession}</span>
+                      </span>
+                    )}
                     {/* Location choice — drives the Cal.com event type (online has a Meet link) */}
                     <div className="mt-3 flex w-full flex-col gap-2">
                       <button
@@ -192,6 +284,11 @@ export function Contact() {
                     {mode === "online" ? <Video size={15} /> : <Pin size={15} />}
                     {mode === "online" ? t.locOnline : t.locCabinet}
                   </span>
+                  {promoApplied && (
+                    <span className="inline-flex items-center gap-2 rounded-full bg-[#006960] px-4 py-2 text-sm font-semibold text-white" style={FONT}>
+                      <Check size={15} /> {t.free}
+                    </span>
+                  )}
                 </div>
               </div>
 
@@ -199,13 +296,13 @@ export function Contact() {
                 {t.step2}
               </h2>
               <p className="mb-6 text-sm text-[#5c554d]" style={FONT}>
-                {t.paymentNote}
+                {promoApplied ? t.freeNote : t.paymentNote}
               </p>
 
               <div className="overflow-hidden rounded-3xl border border-[#e4dcd3] bg-white">
                 <Cal
                   namespace="booking"
-                  calLink={`${CAL_USERNAME}/${EVENT_SLUG_BY_MODE[mode]}`}
+                  calLink={`${CAL_USERNAME}/${slugByMode[mode]}`}
                   style={{ width: "100%", height: "100%", overflow: "scroll" }}
                   config={{
                     layout: "month_view",
