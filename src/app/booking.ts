@@ -37,7 +37,7 @@ export const EVENT_SLUG_BY_MODE: Record<SessionMode, string> = {
  */
 export const FREE_EVENT_SLUG_BY_MODE: Record<SessionMode, string> = {
   online: "sesiune-terapie-gratuita-online",
-  cabinet: "sesiune-terapie-gratuita-cabinet",
+  cabinet: "sesiune-terapie-gratuita-la-cabinet",
 };
 
 /** Standard price per session, charged by card via Stripe. Display-only here;
