@@ -11,9 +11,10 @@ export type ConsentCategories = { analytics: boolean; marketing: boolean };
 
 const STORAGE_KEY = "cf-cookie-consent-v1";
 
-// Set this to your GA4 measurement id (e.g. "G-XXXXXXX") to enable analytics.
+// GA4 measurement id (e.g. "G-XXXXXXX"). Set VITE_GA_MEASUREMENT_ID in the
+// environment (Vercel → Settings → Environment Variables, and .env locally).
 // While empty, no analytics scripts load even if the user consents.
-const GA_MEASUREMENT_ID = "";
+const GA_MEASUREMENT_ID = (import.meta.env.VITE_GA_MEASUREMENT_ID as string | undefined) ?? "";
 
 type StoredConsent = ConsentCategories & { decidedAt: string };
 

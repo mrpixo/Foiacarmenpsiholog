@@ -31,13 +31,13 @@ export const EVENT_SLUG_BY_MODE: Record<SessionMode, string> = {
 };
 
 /**
- * Free session event type — booked instead of the paid one when a valid promo
- * code is applied. A single free event (price 0) serves both modes; its actual
- * location (online/cabinet) is whatever is configured on that Cal.com event.
+ * Free session event types — booked instead of the paid ones when a valid promo
+ * code is applied. One per mode (price 0), each with a single location so the
+ * booker isn't asked to pick again: online → Google Meet, cabinet → In Person.
  */
 export const FREE_EVENT_SLUG_BY_MODE: Record<SessionMode, string> = {
-  online: "sesiune-terapie-gratuita",
-  cabinet: "sesiune-terapie-gratuita",
+  online: "sesiune-terapie-gratuita-online",
+  cabinet: "sesiune-terapie-gratuita-cabinet",
 };
 
 /** Standard price per session, charged by card via Stripe. Display-only here;
