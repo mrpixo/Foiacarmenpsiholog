@@ -1,19 +1,25 @@
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
 import { useLanguage } from "../i18n";
-import imgCsm from "../../imports/CSM_Oradea_logo-en.webp";
-import imgUni from "../../imports/Universitate Oradea-logo.webp";
+import imgUni from "../../imports/universitatea-oradea.webp";
+import imgFssu from "../../imports/facultatea-socio-umane.webp";
 import imgSpital from "../../imports/Spitalul Judetean Oradea-logo.webp";
-import imgDaso from "../../imports/DASO-logo.webp";
-import imgAsoc from "../../imports/Asociatia Psihologi-logo.webp";
+import imgDaso from "../../imports/daso.webp";
+import imgAsoc from "../../imports/asociatia-psihologi.webp";
+import imgCsm from "../../imports/csm-oradea.webp";
+import imgVillage from "../../imports/the-village-school.webp";
+import imgWhitefriars from "../../imports/whitefriars-school.webp";
 
 /** Partner / experience logos (files in src/imports/). */
 const logos = [
-  { src: imgCsm, alt: "CSM Oradea" },
   { src: imgUni, alt: "Universitatea din Oradea" },
+  { src: imgFssu, alt: "Universitatea din Oradea — Facultatea de Științe Socio-Umane" },
   { src: imgSpital, alt: "Spitalul Clinic Județean de Urgență „Gavril Curteanu” Oradea" },
-  { src: imgDaso, alt: "DASO" },
+  { src: imgDaso, alt: "Direcția de Asistență Socială Oradea" },
   { src: imgAsoc, alt: "Asociația Psihologi pentru Comunitate" },
+  { src: imgCsm, alt: "CSM Oradea" },
+  { src: imgVillage, alt: "The Village School" },
+  { src: imgWhitefriars, alt: "Whitefriars School" },
 ];
 
 export function Logos() {
@@ -47,7 +53,7 @@ export function Logos() {
         <motion.div
           className="flex items-center gap-0 will-change-transform"
           animate={{ x: ["0%", "-50%"] }}
-          transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
+          transition={{ duration: 90, repeat: Infinity, ease: "linear" }}
           style={{ width: "max-content" }}
         >
           {track.map((logo, i) => (
