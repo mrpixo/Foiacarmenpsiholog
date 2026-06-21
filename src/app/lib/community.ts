@@ -20,13 +20,13 @@ export async function listAllTestimonials(): Promise<Testimonial[]> {
   return data ?? [];
 }
 
-export async function createTestimonial(input: { name: string; quote: string }): Promise<Testimonial> {
+export async function createTestimonial(input: { name: string; quote: string; rating?: number }): Promise<Testimonial> {
   const { data, error } = await supabase.from("testimonials").insert(input).select("*").single();
   if (error) throw error;
   return data;
 }
 
-export async function updateTestimonial(id: string, input: Partial<{ name: string; quote: string; published: boolean }>): Promise<void> {
+export async function updateTestimonial(id: string, input: Partial<{ name: string; quote: string; rating: number; published: boolean }>): Promise<void> {
   const { error } = await supabase.from("testimonials").update(input).eq("id", id);
   if (error) throw error;
 }

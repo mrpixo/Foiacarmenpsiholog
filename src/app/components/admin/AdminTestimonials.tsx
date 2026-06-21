@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { LogOut, Plus, Trash2, Eye, EyeOff, Save } from "lucide-react";
+import { LogOut, Plus, Trash2, Eye, EyeOff, Save, Star } from "lucide-react";
 import { useLanguage } from "../../i18n";
 import { useAuth } from "../../lib/auth";
 import {
@@ -24,6 +24,7 @@ export function AdminTestimonials() {
   const [error, setError] = useState<string | null>(null);
   const [name, setName] = useState("");
   const [quote, setQuote] = useState("");
+  const [rating, setRating] = useState(5);
 
   const load = () => {
     setLoading(true);
@@ -33,9 +34,10 @@ export function AdminTestimonials() {
 
   const add = async () => {
     if (!name.trim() || !quote.trim()) return;
-    await createTestimonial({ name: name.trim(), quote: quote.trim() });
+    await createTestimonial({ name: name.trim(), quote: quote.trim(), rating });
     setName("");
     setQuote("");
+    setRating(5);
     load();
   };
 
@@ -60,6 +62,10 @@ export function AdminTestimonials() {
           <div className="flex flex-col gap-3">
             <input className={INPUT} placeholder={ro ? "Nume (cine a dat review)" : "Name"} value={name} onChange={(e) => setName(e.target.value)} />
             <textarea className={`${INPUT} resize-none`} rows={3} placeholder={ro ? "Review-ul..." : "The review..."} value={quote} onChange={(e) => setQuote(e.target.value)} />
+            <div className="flex items-center gap-3">
+              <span className="text-sm font-medium text-[#5c554d]">{ro ? "Rating:" : "Rating:"}</span>
+              <StarPicker value={rating} onChange={setRating} />
+            </div>
             <button type="button" onClick={add} className="inline-flex w-fit cursor-pointer items-center gap-2 rounded-full bg-[#006960] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#054943]">
               <Plus size={16} /> {ro ? "Adaugă" : "Add"}
             </button>
@@ -83,17 +89,37 @@ export function AdminTestimonials() {
   );
 }
 
+function StarPicker({ value, onChange }: { value: number; onChange: (n: number) => void }) {
+  return (
+    <div className="flex items-center gap-0.5">
+      {[1, 2, 3, 4, 5].map((n) => (
+        <button
+          key={n}
+          type="button"
+          onClick={() => onChange(n)}
+          aria-label={`${n} ${n === 1 ? "star" : "stars"}`}
+          className="cursor-pointer p-0.5"
+        >
+          <Star size={22} className={n <= value ? "fill-[#ffba68] text-[#ffba68]" : "fill-transparent text-[#d6cfc6]"} />
+        </button>
+      ))}
+    </div>
+  );
+}
+
 function TestimonialRow({ item, onChanged, ro }: { item: Testimonial; onChanged: () => void; ro: boolean }) {
   const [name, setName] = useState(item.name);
   const [quote, setQuote] = useState(item.quote);
-  const dirty = name !== item.name || quote !== item.quote;
+  const [rating, setRating] = useState(item.rating ?? 5);
+  const dirty = name !== item.name || quote !== item.quote || rating !== item.rating;
 
   return (
     <div className="rounded-2xl border border-[#e4dcd3] bg-white p-5" style={FONT}>
       <input className={`${INPUT} mb-2`} value={name} onChange={(e) => setName(e.target.value)} />
       <textarea className={`${INPUT} resize-none`} rows={2} value={quote} onChange={(e) => setQuote(e.target.value)} />
+      <div className="mt-3"><StarPicker value={rating} onChange={setRating} /></div>
       <div className="mt-3 flex items-center gap-2">
-        <button type="button" disabled={!dirty} onClick={async () => { await updateTestimonial(item.id, { name, quote }); onChanged(); }} className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-[#006960] px-4 py-2 text-sm font-semibold text-[#006960] hover:bg-[#006960]/8 disabled:opacity-40">
+        <button type="button" disabled={!dirty} onClick={async () => { await updateTestimonial(item.id, { name, quote, rating }); onChanged(); }} className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-[#006960] px-4 py-2 text-sm font-semibold text-[#006960] hover:bg-[#006960]/8 disabled:opacity-40">
           <Save size={15} /> {ro ? "Salvează" : "Save"}
         </button>
         <button type="button" onClick={async () => { await updateTestimonial(item.id, { published: !item.published }); onChanged(); }} className="inline-flex cursor-pointer items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium text-[#5c554d] hover:text-[#006960]">

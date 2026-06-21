@@ -6,9 +6,13 @@ create table if not exists public.testimonials (
   id         uuid primary key default gen_random_uuid(),
   name       text not null default '',
   quote      text not null default '',
+  rating     int not null default 5,
   published  boolean not null default true,
   created_at timestamptz not null default now()
 );
+
+-- Add the star rating if the table already existed before this column.
+alter table public.testimonials add column if not exists rating int not null default 5;
 
 alter table public.testimonials enable row level security;
 

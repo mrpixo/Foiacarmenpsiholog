@@ -11,6 +11,7 @@ export type Testimonial = {
   id: string;
   name: string;
   quote: string;
+  rating: number; // 1–5 stars
   published: boolean;
   created_at: string;
 };
