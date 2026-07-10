@@ -146,7 +146,9 @@ export function Contact() {
 
   const shareReason = async (r: BookingReason) => {
     const origin = typeof window !== "undefined" ? window.location.origin : "";
-    const url = `${origin}/programare/${r.id}`;
+    // Default to "cabinet" so the recipient lands straight on the slot picker +
+    // form (as if they'd picked "La cabinet"); they can still switch via "back".
+    const url = `${origin}/programare/${r.id}/cabinet`;
     try {
       await navigator.clipboard.writeText(url);
     } catch {
