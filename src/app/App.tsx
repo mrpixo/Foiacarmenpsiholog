@@ -178,6 +178,9 @@ function AppShell() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
+        {/* Pretty, shareable deep-links to a session type (see Contact card share button) */}
+        <Route path="/programare/:reason" element={<Contact />} />
+        <Route path="/programare/:reason/:mode" element={<Contact />} />
         <Route path="/blog" element={<BlogList />} />
         <Route path="/blog/:slug" element={<BlogArticle />} />
         <Route path="/noutati" element={<NewsList />} />

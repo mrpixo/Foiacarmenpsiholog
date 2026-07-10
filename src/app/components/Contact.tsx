@@ -1,7 +1,7 @@
-import { useEffect, useState, type ReactNode } from "react";
-import { useSearchParams } from "react-router";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useSearchParams, useParams } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
-import { Mail, Phone, MapPin, ArrowLeft, Check, MapPin as Pin, Video, Tag, X } from "lucide-react";
+import { Mail, Phone, MapPin, ArrowLeft, Check, MapPin as Pin, Video, Tag, X, Share2 } from "lucide-react";
 import Cal, { getCalApi } from "@calcom/embed-react";
 import { useLanguage } from "../i18n";
 import { CAL_USERNAME, EVENT_SLUG_BY_MODE, FREE_EVENT_SLUG_BY_MODE, bookingReasons, SESSION_PRICE, ENTITY, type BookingReason, type SessionMode } from "../booking";
@@ -36,6 +36,9 @@ const copy = {
     promoInvalid: "Cod invalid sau expirat",
     free: "Gratuit",
     freeNote: "Ședință gratuită — nu se solicită plata la confirmare.",
+    shareLink: "Copiază linkul acestui tip de sesiune",
+    copied: "Link copiat în clipboard",
+    copiedClose: "Închide",
   },
   en: {
     eyebrow: "Booking",
@@ -63,6 +66,9 @@ const copy = {
     promoInvalid: "Invalid or expired code",
     free: "Free",
     freeNote: "Free session — no payment is requested at confirmation.",
+    shareLink: "Copy link to this session type",
+    copied: "Link copied to clipboard",
+    copiedClose: "Close",
   },
 };
 
@@ -82,15 +88,31 @@ export function Contact() {
     path: "/contact",
   });
   const [searchParams] = useSearchParams();
-  // Deep-link support: /contact?reason=<id>&mode=online|cabinet pre-selects and
-  // jumps straight to the slot picker. Both are required to reach the picker.
-  const initialReason = bookingReasons.find((r) => r.id === searchParams.get("reason")) ?? null;
-  const initialMode = (["online", "cabinet"] as const).find((m) => m === searchParams.get("mode")) ?? null;
+  const params = useParams();
+  // Deep-link support. Two shareable forms resolve here:
+  //   /programare/:reason[/:mode]      — pretty, produced by the card share button
+  //   /contact?reason=<id>&mode=<mode> — back-compat query form
+  // With reason + mode we jump straight to the slot picker; with only a reason
+  // we stay on step 1 and highlight that card so the recipient just picks a
+  // location to continue.
+  const reasonParam = params.reason ?? searchParams.get("reason");
+  const modeParam = params.mode ?? searchParams.get("mode");
+  const initialReason = bookingReasons.find((r) => r.id === reasonParam) ?? null;
+  const initialMode = (["online", "cabinet"] as const).find((m) => m === modeParam) ?? null;
   const [reason, setReason] = useState<BookingReason | null>(initialReason);
   const [mode, setMode] = useState<SessionMode | null>(initialMode);
 
   const pick = (r: BookingReason, m: SessionMode) => { setReason(r); setMode(m); };
   const reset = () => { setReason(null); setMode(null); };
+
+  // Reason preselected from the URL but no mode yet → highlight + scroll to it.
+  const preselectedReasonId = initialReason && !initialMode ? initialReason.id : null;
+  const highlightRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (preselectedReasonId && highlightRef.current) {
+      highlightRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [preselectedReasonId]);
 
   // Promo code → free session. Validated server-side via the Supabase RPC, so a
   // valid code routes the booking to the free Cal.com event type.
@@ -115,6 +137,33 @@ export function Contact() {
   };
 
   const slugByMode = promoApplied ? FREE_EVENT_SLUG_BY_MODE : EVENT_SLUG_BY_MODE;
+
+  // Share: copy a pretty deep-link to a session type; confirmation banner
+  // auto-dismisses after 10s.
+  const [copied, setCopied] = useState(false);
+  const copyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => () => { if (copyTimer.current) clearTimeout(copyTimer.current); }, []);
+
+  const shareReason = async (r: BookingReason) => {
+    const origin = typeof window !== "undefined" ? window.location.origin : "";
+    const url = `${origin}/programare/${r.id}`;
+    try {
+      await navigator.clipboard.writeText(url);
+    } catch {
+      // Fallback for older / non-secure-context browsers.
+      const ta = document.createElement("textarea");
+      ta.value = url;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); } catch { /* noop */ }
+      document.body.removeChild(ta);
+    }
+    setCopied(true);
+    if (copyTimer.current) clearTimeout(copyTimer.current);
+    copyTimer.current = setTimeout(() => setCopied(false), 10000);
+  };
 
   // Initialise the Cal.com embed UI to match the site's branding.
   useEffect(() => {
@@ -213,14 +262,28 @@ export function Contact() {
               </div>
 
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {bookingReasons.map((r) => (
+                {bookingReasons.map((r) => {
+                  const isPreselected = r.id === preselectedReasonId;
+                  return (
                   <div
                     key={r.id}
-                    className="flex flex-col items-start gap-2 rounded-2xl border-2 border-transparent bg-white p-6 text-left transition-all duration-300 hover:border-[#006960] hover:shadow-[0_8px_30px_rgba(0,105,96,0.1)]"
+                    ref={isPreselected ? highlightRef : undefined}
+                    className={`flex flex-col items-start gap-2 rounded-2xl border-2 bg-white p-6 text-left transition-all duration-300 hover:border-[#006960] hover:shadow-[0_8px_30px_rgba(0,105,96,0.1)] ${isPreselected ? "border-[#006960] shadow-[0_8px_30px_rgba(0,105,96,0.15)]" : "border-transparent"}`}
                   >
-                    <span className="text-[17px] font-semibold text-[#39342e]" style={FONT}>
-                      {r.label[language]}
-                    </span>
+                    <div className="flex w-full items-start justify-between gap-3">
+                      <span className="text-[17px] font-semibold text-[#39342e]" style={FONT}>
+                        {r.label[language]}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => shareReason(r)}
+                        aria-label={`${t.shareLink}: ${r.label[language]}`}
+                        title={t.shareLink}
+                        className="-mr-1 -mt-1 inline-flex size-8 shrink-0 cursor-pointer items-center justify-center rounded-full text-[#a89f95] transition-colors hover:bg-[#006960]/8 hover:text-[#006960]"
+                      >
+                        <Share2 size={16} />
+                      </button>
+                    </div>
                     <span className="text-sm leading-6 text-[#5c554d]" style={FONT}>
                       {r.description[language]}
                     </span>
@@ -253,7 +316,8 @@ export function Contact() {
                       </button>
                     </div>
                   </div>
-                ))}
+                  );
+                })}
               </div>
             </motion.div>
           ) : (
@@ -339,6 +403,34 @@ export function Contact() {
           {ENTITY.name} · CUI {ENTITY.cui} · {ENTITY.address}
         </p>
       </div>
+
+      {/* Copied-link confirmation banner — auto-dismisses after 10s */}
+      <AnimatePresence>
+        {copied && (
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 24 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed inset-x-0 bottom-6 z-[120] flex justify-center px-4"
+            role="status"
+            aria-live="polite"
+          >
+            <div className="inline-flex items-center gap-3 rounded-full bg-[#054943] py-3 pl-5 pr-3 text-white shadow-[0_8px_30px_rgba(0,0,0,0.18)]">
+              <Check size={17} className="text-[#7fd1c4]" />
+              <span className="text-sm font-medium" style={FONT}>{t.copied}</span>
+              <button
+                type="button"
+                onClick={() => setCopied(false)}
+                aria-label={t.copiedClose}
+                className="ml-1 inline-flex size-7 cursor-pointer items-center justify-center rounded-full text-white/70 transition-colors hover:bg-white/10 hover:text-white"
+              >
+                <X size={15} />
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
