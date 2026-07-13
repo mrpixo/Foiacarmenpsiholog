@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence, type Variants } from "motion/react";
 import { Star, X } from "lucide-react";
 import { useLanguage } from "../i18n";
 import { isSupabaseConfigured } from "../lib/supabase-config";
@@ -29,6 +29,7 @@ export function Testimonials() {
   const ro = language === "ro";
   const [items, setItems] = useState<Testimonial[]>([]);
   const [current, setCurrent] = useState(0);
+  const [direction, setDirection] = useState(0); // -1 = prev (slide from left), 1 = next (slide from right)
   const [modalOpen, setModalOpen] = useState(false);
   const [truncated, setTruncated] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -41,7 +42,10 @@ export function Testimonials() {
 
   const startTimer = () => {
     if (timerRef.current) clearInterval(timerRef.current);
-    timerRef.current = setInterval(() => setCurrent((c) => (items.length ? (c + 1) % items.length : 0)), 10000);
+    timerRef.current = setInterval(() => {
+      setDirection(1);
+      setCurrent((c) => (items.length ? (c + 1) % items.length : 0));
+    }, 10000);
   };
 
   useEffect(() => {
@@ -70,22 +74,40 @@ export function Testimonials() {
     return () => { clearTimeout(id); window.removeEventListener("resize", measure); };
   }, [current, items]);
 
-  const go = (i: number) => { setCurrent(i); startTimer(); };
-  const next = () => go((current + 1) % items.length);
-  const prev = () => go((current - 1 + items.length) % items.length);
+  const go = (i: number, dir?: number) => {
+    setDirection(dir ?? (i >= current ? 1 : -1));
+    setCurrent(i);
+    startTimer();
+  };
+  const next = () => go((current + 1) % items.length, 1);
+  const prev = () => go((current - 1 + items.length) % items.length, -1);
 
   if (items.length === 0) return null;
   const t = items[current];
 
+  // Slide direction follows navigation: next → the new card enters from the
+  // right and the old one exits left; prev → mirrored. `custom={direction}`
+  // re-evaluates the exit variant so the outgoing card leaves the right way.
+  const slide = (dist: number): Variants => ({
+    enter: (dir: number) => ({ opacity: 0, x: dir >= 0 ? dist : -dist }),
+    center: { opacity: 1, x: 0 },
+    exit: (dir: number) => ({ opacity: 0, x: dir >= 0 ? -dist : dist }),
+  });
+  const cardVariants = slide(120);
+  const headerVariants = slide(44);
+  const quoteVariants = slide(76);
+
   return (
     <section className="relative w-full overflow-hidden py-16 md:py-[126px]" style={{ background: "#f5eee9" }}>
       <div className="relative z-10 px-6 md:px-[164px] flex flex-col items-center gap-12 md:gap-24">
-        <AnimatePresence mode="popLayout" initial={false}>
+        <AnimatePresence mode="popLayout" initial={false} custom={direction}>
           <motion.div
             key={t.id}
-            initial={{ opacity: 0, x: 120 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -120 }}
+            custom={direction}
+            variants={cardVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             className="relative w-full max-w-[1000px] flex cursor-grab flex-col gap-8 active:cursor-grabbing md:gap-12"
             drag={items.length > 1 ? "x" : false}
@@ -98,9 +120,11 @@ export function Testimonials() {
           >
             <motion.div
               className="flex items-center justify-between"
-              initial={{ opacity: 0, x: 44 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -44 }}
+              custom={direction}
+              variants={headerVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
               transition={{ opacity: { duration: 0.35, ease: [0.16, 1, 0.3, 1] }, x: { duration: 0.75, ease: [0.16, 1, 0.3, 1] } }}
             >
               <div className="flex flex-col gap-3">
@@ -115,9 +139,11 @@ export function Testimonials() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: 76 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -76 }}
+              custom={direction}
+              variants={quoteVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
               transition={{ opacity: { duration: 0.45, ease: [0.16, 1, 0.3, 1], delay: 0.1 }, x: { duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 } }}
             >
               <p
