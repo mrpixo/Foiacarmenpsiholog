@@ -10,8 +10,8 @@ import { useSeo } from "../../lib/seo";
 const FONT = { fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" } as const;
 
 const copy = {
-  ro: { eyebrow: "Noutăți", title: "Noutăți", subtitle: "Evenimente, conferințe, workshopuri, interviuri și proiectele în care sunt implicată.", empty: "Nicio noutate încă.", loading: "Se încarcă...", notConfigured: "Secțiunea nu este încă configurată. Vezi BLOG_SETUP.md." },
-  en: { eyebrow: "News", title: "News", subtitle: "Events, conferences, workshops, interviews, and the projects I'm involved in.", empty: "No news yet.", loading: "Loading...", notConfigured: "This section isn't configured yet. See BLOG_SETUP.md." },
+  ro: { eyebrow: "Noutăți", title: "Noutăți", subtitle: "Evenimente, conferințe, workshopuri, interviuri și proiectele în care sunt implicată.", empty: "Nicio noutate încă.", loading: "Se încarcă...", notConfigured: "Secțiunea nu este încă configurată. Vezi BLOG_SETUP.md.", loadMore: "Încarcă mai multe" },
+  en: { eyebrow: "News", title: "News", subtitle: "Events, conferences, workshops, interviews, and the projects I'm involved in.", empty: "No news yet.", loading: "Loading...", notConfigured: "This section isn't configured yet. See BLOG_SETUP.md.", loadMore: "Load more" },
 };
 
 export function NewsList() {
@@ -27,6 +27,7 @@ export function NewsList() {
   });
   const [items, setItems] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [visible, setVisible] = useState(6); // reveal 6 at a time via "Load more"
 
   useEffect(() => {
     if (!isSupabaseConfigured) { setLoading(false); return; }
@@ -55,11 +56,25 @@ export function NewsList() {
         ) : items.length === 0 ? (
           <p className="text-white/80" style={FONT}>{t.empty}</p>
         ) : (
-          <div className="grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
-            {items.map((item, i) => (
-              <NewsCard key={item.id} item={item} index={i} />
-            ))}
-          </div>
+          <>
+            <div className="grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
+              {items.slice(0, visible).map((item, i) => (
+                <NewsCard key={item.id} item={item} index={i} />
+              ))}
+            </div>
+            {visible < items.length && (
+              <div className="mt-16 flex justify-center">
+                <button
+                  type="button"
+                  onClick={() => setVisible((v) => v + 6)}
+                  className="inline-flex items-center justify-center rounded-full bg-[#ffba68] px-8 py-3.5 font-semibold text-[#1f1d1b] transition-all duration-300 hover:bg-[#ffc985] md:hover:scale-105"
+                  style={FONT}
+                >
+                  {t.loadMore}
+                </button>
+              </div>
+            )}
+          </>
         )}
       </div>
     </section>
