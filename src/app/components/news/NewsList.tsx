@@ -67,7 +67,7 @@ export function NewsList() {
                 <button
                   type="button"
                   onClick={() => setVisible((v) => v + 6)}
-                  className="inline-flex items-center justify-center rounded-full bg-[#ffba68] px-8 py-3.5 font-semibold text-[#1f1d1b] transition-all duration-300 hover:bg-[#ffc985] md:hover:scale-105"
+                  className="inline-flex cursor-pointer items-center justify-center rounded-full bg-[#ffba68] px-8 py-3.5 font-semibold text-[#1f1d1b] transition-all duration-300 hover:bg-[#ffc985] md:hover:scale-105"
                   style={FONT}
                 >
                   {t.loadMore}
