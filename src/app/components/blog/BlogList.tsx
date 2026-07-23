@@ -148,8 +148,8 @@ export function BlogList() {
 
 function Shell({ t, children }: { t: typeof copy.ro; children: React.ReactNode }) {
   return (
-    <section className="w-full px-6 pb-24 pt-36 md:px-24 md:pb-[156px] md:pt-44">
-      <div className="mx-auto max-w-[1200px]">
+    <section className="w-full px-6 pb-24 pt-36 md:px-[126px] md:pb-[156px] md:pt-44">
+      <div className="w-full">
         <HomeLink />
         <motion.div
           initial={{ opacity: 0, y: 20 }}
