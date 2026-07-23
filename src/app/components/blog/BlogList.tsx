@@ -136,7 +136,7 @@ export function BlogList() {
       ) : filtered.length === 0 ? (
         <p className="text-[#5c554d]" style={FONT}>{t.empty}</p>
       ) : (
-        <div className="grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 sm:gap-x-12 lg:grid-cols-3 lg:gap-x-20">
           {filtered.map((a, i) => (
             <ArticleCard key={a.id} article={a} index={i} />
           ))}
