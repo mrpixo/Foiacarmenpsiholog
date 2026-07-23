@@ -39,7 +39,6 @@ export function Intro() {
       ref={ref}
       className="selection-teal relative w-full py-32 md:py-40"
       style={{ background: "#006960", position: "relative" }}
-      id="despre"
     >
       <div className="max-w-none px-6 md:px-24 flex flex-col items-start gap-12">
         <p

@@ -4,6 +4,7 @@ import { motion, useScroll, useSpring } from "motion/react";
 import { Navbar } from "./components/Navbar";
 import { HeroTop, HeroPhoto } from "./components/Hero";
 import { TopBar } from "./components/TopBar";
+import { AboutMe } from "./components/AboutMe";
 import { Intro } from "./components/Intro";
 import { Mission } from "./components/Mission";
 import { Services } from "./components/Services";
@@ -41,7 +42,7 @@ import { useSeo } from "./lib/seo";
 
 function FullWidthPhoto() {
   return (
-    <div id="despre" className="relative w-full overflow-hidden" style={{ height: "clamp(300px,40vw,700px)" }}>
+    <div className="relative w-full overflow-hidden" style={{ height: "clamp(300px,40vw,700px)" }}>
       <img
         src="/hero-office-1280.webp"
         srcSet="/hero-office-768.webp 768w, /hero-office-1280.webp 1280w, /hero-office-1728.webp 1728w"
@@ -76,6 +77,9 @@ function Home() {
 
       {/* 3. Top bar — WhatsApp + social (below hero) */}
       <TopBar />
+
+      {/* 3b. About me — credentials (owns the #despre anchor) */}
+      <AboutMe />
 
       {/* 4. Green intro statement */}
       <Intro />
