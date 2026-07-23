@@ -148,7 +148,7 @@ export function AboutMe() {
                 <h3 className="text-[#39342e]" style={{ ...FONT, fontWeight: 400, fontSize: "clamp(20px,2vw,24px)", lineHeight: 1.5 }}>
                   {card.title}
                 </h3>
-                <p style={{ ...FONT, fontWeight: 400, fontSize: "16px", lineHeight: 1.5, color: MUTED }}>
+                <p style={{ ...FONT, fontWeight: 400, fontSize: "16px", lineHeight: 1.7, color: MUTED }}>
                   {card.body}
                 </p>
               </div>
