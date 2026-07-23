@@ -1,4 +1,5 @@
-import { useRef } from "react";
+import { useRef, type ReactNode } from "react";
+import { Link } from "react-router";
 import { motion, useInView } from "motion/react";
 import { useLanguage } from "../i18n";
 
@@ -6,29 +7,48 @@ const FONT = { fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" } as const;
 // Muted body colour from the Figma "Despre mine" design.
 const MUTED = "rgba(29,41,61,0.7)";
 
-type Card = { title: string; body: string; icon: string };
+// Bold emphasis inside card bodies (matches the Figma).
+const B = ({ children }: { children: ReactNode }) => <strong className="font-bold">{children}</strong>;
+
+// Bold inline link into the booking page (Contact).
+const BookLink = ({ children }: { children: ReactNode }) => (
+  <Link
+    to="/contact"
+    className="font-bold text-[#006960] underline underline-offset-2 transition-colors hover:text-[#054943]"
+  >
+    {children}
+  </Link>
+);
+
+type Card = { title: string; body: ReactNode; icon: string };
 
 const copy: Record<"ro" | "en", { title: string; intro: string; note: string; cta: string; cards: Card[] }> = {
   ro: {
     title: "Despre mine",
     intro:
-      "Bună, sunt Carmen, psiholog cu peste 15 ani de experiență. Sprijin persoanele care trec prin perioade dificile, se confruntă cu schimbări importante sau își doresc să se înțeleagă mai bine.",
+      "Bună, sunt Carmen, psiholog licențiat cu peste 15 ani de experiență. Sprijin persoanele care trec prin perioade dificile, se confruntă cu schimbări importante sau își doresc să se înțeleagă mai bine.",
     note: "Fiecare persoană este unică. De aceea, adaptez procesul terapeutic nevoilor, ritmului și obiectivelor tale.",
-    cta: "Descoperă mai multe",
+    cta: "Descoperă cum te pot ajuta",
     cards: [
       {
-        title: "Experiență și formare profesională",
-        body: "Am peste 15 ani de experiență profesională și două programe de master în Psihologie Clinică, respectiv Psihologie Educațională și Vocațională. Îmi actualizez constant pregătirea prin formare continuă.",
+        title: "Experiență profesională și formare",
+        body: (
+          <>Am peste <B>15 ani de experiență profesională</B>, iar în 2026 am absolvit două programe de master: <B>Psihologie Educațională și Vocațională, cu media 10</B>, și <B>Psihologie Clinică, cu media 9,94</B>. În ambele cazuri, am obținut cea mai mare medie din promoție. Îmi actualizez constant pregătirea prin formare continuă.</>
+        ),
         icon: "/despre/diploma.svg",
       },
       {
         title: "Experiență clinică în Londra",
-        body: "Am acumulat peste șapte ani de experiență clinică la Londra, lucrând în arii precum evaluarea comportamentală, suportul psihologic în oncologie și sprijinirea persoanelor cu nevoi speciale.",
+        body: (
+          <>Am acumulat <B>peste șapte ani de experiență clinică și educațională la Londra</B>, ca și specialist în suport comportamental la adolescenți, sprijin psihologic în oncologie, asistență persoanelor cu nevoi speciale și intervenții de suport educațional.</>
+        ),
         icon: "/despre/big-ben.svg",
       },
       {
-        title: "Înțelegere biculturală",
-        body: "Ca cetățean român și britanic, cu peste zece ani petrecuți la Londra, ofer ședințe în română și engleză. Înțeleg din interior provocările adaptării, apartenenței și vieții între două culturi.",
+        title: "Înțelegere și empatie biculturală",
+        body: (
+          <>Ca cetățean român și britanic, cu peste zece ani de viață și experiență profesională la Londra, <BookLink>ofer ședințe în limba română și engleză, atât la Cabinetul de Psihologie Carmen Foia din Oradea</BookLink>, cât și online. Înțeleg din proprie experiență provocările adaptării, ale apartenenței și ale vieții între două culturi.</>
+        ),
         icon: "/despre/connected-people.svg",
       },
     ],
@@ -36,23 +56,29 @@ const copy: Record<"ro" | "en", { title: string; intro: string; note: string; ct
   en: {
     title: "About me",
     intro:
-      "Hi, I'm Carmen, a psychologist with over 15 years of experience. I support people going through difficult times, facing major changes, or wanting to understand themselves better.",
+      "Hi, I'm Carmen, a licensed psychologist with over 15 years of experience. I support people going through difficult times, facing major changes, or wanting to understand themselves better.",
     note: "Every person is unique. That's why I adapt the therapeutic process to your needs, pace, and goals.",
-    cta: "Discover more",
+    cta: "Discover how I can help",
     cards: [
       {
-        title: "Experience and professional training",
-        body: "I have over 15 years of professional experience and two master's programs — in Clinical Psychology and in Educational and Vocational Psychology. I keep my training up to date through continuous education.",
+        title: "Professional experience and training",
+        body: (
+          <>I have <B>over 15 years of professional experience</B>, and in 2026 I completed two master's programs: <B>Educational and Vocational Psychology, with a final grade of 10</B>, and <B>Clinical Psychology, with 9.94</B> — graduating top of my class in both. I keep my training up to date through continuous education.</>
+        ),
         icon: "/despre/diploma.svg",
       },
       {
         title: "Clinical experience in London",
-        body: "I gained over seven years of clinical experience in London, working in areas such as behavioural assessment, psychological support in oncology, and supporting people with special needs.",
+        body: (
+          <>I gained <B>over seven years of clinical and educational experience in London</B> — as a specialist in behavioural support for adolescents, psychological support in oncology, care for people with special needs, and educational-support interventions.</>
+        ),
         icon: "/despre/big-ben.svg",
       },
       {
-        title: "Bicultural understanding",
-        body: "As a Romanian and British citizen, with over ten years spent in London, I offer sessions in Romanian and English. I understand from the inside the challenges of adaptation, belonging, and living between two cultures.",
+        title: "Bicultural understanding and empathy",
+        body: (
+          <>As a Romanian and British citizen, with over ten years of life and professional experience in London, <BookLink>I offer sessions in Romanian and English — both at the Carmen Foia Psychology Practice in Oradea</BookLink> and online. I understand from my own experience the challenges of adaptation, belonging, and living between two cultures.</>
+        ),
         icon: "/despre/connected-people.svg",
       },
     ],
