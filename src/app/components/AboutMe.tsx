@@ -118,12 +118,14 @@ export function AboutMe() {
               className="flex flex-col items-start gap-6 md:gap-8"
             >
               <img src={card.icon} alt="" aria-hidden className="size-[72px] md:size-[90px]" />
-              <h3 className="text-[#39342e]" style={{ ...FONT, fontWeight: 400, fontSize: "clamp(20px,2vw,24px)", lineHeight: 1.5 }}>
-                {card.title}
-              </h3>
-              <p style={{ ...FONT, fontWeight: 400, fontSize: "16px", lineHeight: 1.5, color: MUTED }}>
-                {card.body}
-              </p>
+              <div className="flex flex-col gap-3">
+                <h3 className="text-[#39342e]" style={{ ...FONT, fontWeight: 400, fontSize: "clamp(20px,2vw,24px)", lineHeight: 1.5 }}>
+                  {card.title}
+                </h3>
+                <p style={{ ...FONT, fontWeight: 400, fontSize: "16px", lineHeight: 1.5, color: MUTED }}>
+                  {card.body}
+                </p>
+              </div>
             </motion.div>
           ))}
         </div>
