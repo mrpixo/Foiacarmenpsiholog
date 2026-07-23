@@ -65,7 +65,7 @@ export function Articles() {
         </div>
 
         {/* Cards */}
-        <div className="flex flex-col md:flex-row gap-8 items-start">
+        <div className="flex flex-col md:flex-row gap-12 md:gap-20 items-start">
           {articles.map((article, i) => (
             <ArticleCard key={article.id} article={article} index={i} />
           ))}
