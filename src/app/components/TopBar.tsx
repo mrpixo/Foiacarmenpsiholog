@@ -31,13 +31,14 @@ export function TopBar() {
       {/* Social icons */}
       <div className="flex items-center gap-3">
         {[
-          { icon: <Linkedin size={20} />, href: "#" },
+          { icon: <Linkedin size={20} />, href: "https://www.linkedin.com/in/carmen-foia-960604b4" },
           { icon: <Facebook size={20} />, href: "#" },
           { icon: <Instagram size={20} />, href: "#" },
         ].map((social, i) => (
           <a
             key={i}
             href={social.href}
+            {...(social.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
             className="size-12 rounded-full bg-white/8 flex items-center justify-center text-white hover:bg-white/15 transition-colors duration-200"
           >
             {social.icon}

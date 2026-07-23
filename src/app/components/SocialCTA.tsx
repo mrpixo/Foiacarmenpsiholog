@@ -60,15 +60,16 @@ export function SocialCTA() {
 
           <div className="flex flex-wrap items-center justify-center gap-4">
           {[
-            { icon: <Linkedin size={22} /> },
+            { icon: <Linkedin size={22} />, href: "https://www.linkedin.com/in/carmen-foia-960604b4" },
             { icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.53V6.77a4.86 4.86 0 0 1-1.01-.08z"/></svg> },
             { icon: <Instagram size={22} /> },
             { icon: <Facebook size={22} /> },
             { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.74l7.73-8.835L1.254 2.25H8.08l4.263 5.633zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> },
-          ].map((social, i) => (
+          ].map((social: { icon: JSX.Element; href?: string }, i) => (
             <a
               key={i}
-              href="#"
+              href={social.href ?? "#"}
+              {...(social.href?.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               className="size-12 rounded-full bg-white/8 flex items-center justify-center text-white hover:bg-white/15 transition-colors duration-200"
             >
               {social.icon}
