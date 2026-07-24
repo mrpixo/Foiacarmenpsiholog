@@ -18,9 +18,9 @@ export const gad7: ScreeningTest = {
     ro: "Șapte întrebări despre cât de des te-au deranjat anumite probleme în ultimele două săptămâni. Răspunde sincer — nu există răspunsuri corecte sau greșite.",
     en: "Seven questions about how often certain problems have bothered you over the last two weeks. Answer honestly — there are no right or wrong answers.",
   },
-  timeframe: {
-    ro: "În ultimele două săptămâni, cât de des te-au deranjat următoarele probleme?",
-    en: "Over the last two weeks, how often have you been bothered by the following problems?",
+  stem: {
+    ro: "În ultimele două săptămâni, cât de des",
+    en: "Over the last two weeks, how often have you been bothered by",
   },
   disclaimer: {
     ro: "Acest test are caracter orientativ și informativ — nu este un diagnostic și nu confirmă ori exclude o afecțiune. Pentru un rezultat formal și un diagnostic, adresează-te unui specialist.",
@@ -28,13 +28,13 @@ export const gad7: ScreeningTest = {
   },
   scale,
   items: [
-    { text: { ro: "Te-ai simțit nervos(oasă), anxios(oasă) sau tensionat(ă).", en: "Feeling nervous, anxious, or on edge." } },
-    { text: { ro: "Nu ai putut opri sau controla îngrijorarea.", en: "Not being able to stop or control worrying." } },
-    { text: { ro: "Te-ai îngrijorat prea mult din cauza unor lucruri diferite.", en: "Worrying too much about different things." } },
-    { text: { ro: "Ai avut dificultăți în a te relaxa.", en: "Trouble relaxing." } },
-    { text: { ro: "Ai fost atât de neliniștit(ă) încât îți era greu să stai locului.", en: "Being so restless that it's hard to sit still." } },
-    { text: { ro: "Te-ai enervat sau iritat ușor.", en: "Becoming easily annoyed or irritable." } },
-    { text: { ro: "Ți-a fost teamă, ca și cum urma să se întâmple ceva groaznic.", en: "Feeling afraid, as if something awful might happen." } },
+    { text: { ro: "te-ai simțit nervos(oasă), anxios(oasă) sau tensionat(ă)?", en: "feeling nervous, anxious, or on edge?" } },
+    { text: { ro: "nu ai putut opri sau controla îngrijorarea?", en: "not being able to stop or control worrying?" } },
+    { text: { ro: "te-ai îngrijorat prea mult din cauza unor lucruri diferite?", en: "worrying too much about different things?" } },
+    { text: { ro: "ai avut dificultăți în a te relaxa?", en: "trouble relaxing?" } },
+    { text: { ro: "ai fost atât de neliniștit(ă) încât îți era greu să stai locului?", en: "being so restless that it's hard to sit still?" } },
+    { text: { ro: "te-ai enervat sau iritat ușor?", en: "becoming easily annoyed or irritable?" } },
+    { text: { ro: "ți-a fost teamă, ca și cum urma să se întâmple ceva groaznic?", en: "feeling afraid, as if something awful might happen?" } },
   ],
   score: (a) => a.reduce((sum, v) => sum + v, 0),
   scoreMax: 21,

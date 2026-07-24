@@ -21,11 +21,11 @@ export type TestSubmission = {
  */
 export async function submitTest(
   payload: TestSubmission,
-): Promise<{ ok: boolean; error?: string }> {
+): Promise<{ ok: boolean; emailed?: boolean; error?: string }> {
   try {
-    const { error } = await supabase.functions.invoke("submit-test", { body: payload });
+    const { data, error } = await supabase.functions.invoke("submit-test", { body: payload });
     if (error) return { ok: false, error: error.message };
-    return { ok: true };
+    return { ok: true, emailed: (data as { emailed?: boolean } | null)?.emailed === true };
   } catch (e) {
     return { ok: false, error: e instanceof Error ? e.message : "unknown error" };
   }

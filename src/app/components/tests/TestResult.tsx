@@ -14,6 +14,9 @@ const toneStyles: Record<BandTone, { text: string; bg: string }> = {
   concern: { text: "#c0392b", bg: "rgba(211,44,38,0.08)" },
 };
 
+// Format + domain (requires a real TLD, e.g. name@example.ro).
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+
 const copy = {
   ro: {
     yourResult: "Rezultatul tău",
@@ -30,7 +33,9 @@ const copy = {
     send: "Trimite-mi rezultatele",
     sending: "Se trimite…",
     sent: "Gata! Verifică-ți emailul în scurt timp.",
+    savedNoEmail: "Rezultatele au fost salvate. Momentan nu am putut trimite emailul.",
     errorMsg: "Momentan nu am putut trimite emailul. Încearcă din nou mai târziu.",
+    emailInvalid: "Adresa de email nu este validă. Verifică formatul (de ex. nume@exemplu.ro).",
     privacy: "Îți respectăm confidențialitatea. Vezi",
     privacyLink: "Politica de confidențialitate",
     restart: "Reia testul",
@@ -50,7 +55,9 @@ const copy = {
     send: "Email me my results",
     sending: "Sending…",
     sent: "Done! Check your inbox shortly.",
+    savedNoEmail: "Your results were saved. We couldn't send the email right now.",
     errorMsg: "We couldn't send the email right now. Please try again later.",
+    emailInvalid: "That email address isn't valid. Check the format (e.g. name@example.com).",
     privacy: "We respect your privacy. See our",
     privacyLink: "Privacy policy",
     restart: "Retake the test",
@@ -98,11 +105,15 @@ export function TestResult({
   const [email, setEmail] = useState("");
   const [consentResults, setConsentResults] = useState(false);
   const [consentMarketing, setConsentMarketing] = useState(false);
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "savedNoEmail" | "error" | "invalid">("idle");
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!email.trim() || !consentResults) return;
+    if (!consentResults) return;
+    if (!EMAIL_RE.test(email.trim())) {
+      setStatus("invalid");
+      return;
+    }
     setStatus("sending");
     const res = await submitTest({
       slug: test.slug,
@@ -114,7 +125,7 @@ export function TestResult({
       email: email.trim(),
       marketingConsent: consentMarketing,
     });
-    setStatus(res.ok ? "sent" : "error");
+    setStatus(res.ok ? (res.emailed ? "sent" : "savedNoEmail") : "error");
   };
 
   return (
@@ -126,26 +137,22 @@ export function TestResult({
       {/* Safety protocol — leads the result if a sensitive item was endorsed. */}
       {showSafety && test.safety && (
         <div className="mb-8 rounded-3xl border-2 border-[#d32c26]/25 bg-[#d32c26]/5 p-6 md:p-7">
-          <div className="flex items-start gap-4">
-            <span className="mt-0.5 flex size-10 shrink-0 items-center justify-center rounded-full bg-[#d32c26]/10 text-[#c0392b]">
-              <LifeBuoy size={20} />
-            </span>
-            <div>
-              <p className="text-[17px] font-semibold leading-7 text-[#39342e]" style={FONT}>{test.safety.title[language]}</p>
-              <p className="mt-2 text-[15px] leading-7 text-[#5c554d]" style={FONT}>{test.safety.body[language]}</p>
-              <div className="mt-4 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
-                {test.safety.resources.map((r) => (
-                  <a
-                    key={r.value}
-                    href={r.href}
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-[#c0392b] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#a93226]"
-                    style={FONT}
-                  >
-                    <Phone size={15} /> {r.label[language]}: {r.value}
-                  </a>
-                ))}
-              </div>
-            </div>
+          <div className="flex items-center gap-2.5">
+            <LifeBuoy size={20} className="shrink-0 text-[#c0392b]" />
+            <p className="text-[17px] font-semibold leading-6 text-[#39342e]" style={FONT}>{test.safety.title[language]}</p>
+          </div>
+          <p className="mt-3 text-[15px] leading-7 text-[#5c554d]" style={FONT}>{test.safety.body[language]}</p>
+          <div className="mt-4 flex flex-col gap-2.5 sm:flex-row">
+            {test.safety.resources.map((r) => (
+              <a
+                key={r.value}
+                href={r.href}
+                className="inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[#c0392b] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#a93226] sm:w-auto"
+                style={FONT}
+              >
+                <Phone size={15} /> {r.label[language]}: {r.value}
+              </a>
+            ))}
           </div>
         </div>
       )}
@@ -221,9 +228,10 @@ export function TestResult({
         <h2 className="text-xl font-semibold text-[#39342e]">{t.emailTitle}</h2>
         <p className="mt-1 text-sm text-[#5c554d]">{t.emailSub}</p>
 
-        {status === "sent" ? (
-          <p className="mt-5 inline-flex items-center gap-2 rounded-full bg-[#006960]/8 px-4 py-2 text-sm font-semibold text-[#006960]">
-            <Check size={16} /> {t.sent}
+        {status === "sent" || status === "savedNoEmail" ? (
+          <p className={`mt-5 inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold ${status === "sent" ? "bg-[#006960]/8 text-[#006960]" : "bg-[#39342e]/8 text-[#5c554d]"}`}>
+            {status === "sent" && <Check size={16} />}
+            {status === "sent" ? t.sent : t.savedNoEmail}
           </p>
         ) : (
           <>
@@ -231,7 +239,10 @@ export function TestResult({
               type="email"
               required
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                if (status === "invalid" || status === "error") setStatus("idle");
+              }}
               placeholder={t.emailPh}
               className="mt-5 w-full rounded-xl border border-[#e4dcd3] bg-[#faf6f2] px-4 py-3 text-[15px] text-[#39342e] outline-none transition-colors placeholder:text-[#a89f95] focus:border-[#006960] focus:bg-white focus:ring-2 focus:ring-[#006960]/15"
             />
@@ -247,12 +258,13 @@ export function TestResult({
               </label>
             )}
 
+            {status === "invalid" && <p className="mt-3 text-sm font-medium text-[#d32c26]">{t.emailInvalid}</p>}
             {status === "error" && <p className="mt-3 text-sm font-medium text-[#d32c26]">{t.errorMsg}</p>}
 
             <button
               type="submit"
               disabled={status === "sending" || !email.trim() || !consentResults}
-              className="mt-5 inline-flex cursor-pointer items-center justify-center rounded-full bg-[#006960] px-6 py-3 text-base font-semibold text-white transition-colors hover:bg-[#054943] disabled:opacity-40"
+              className="mt-5 inline-flex w-full cursor-pointer items-center justify-center rounded-full bg-[#006960] px-6 py-3 text-base font-semibold text-white transition-colors hover:bg-[#054943] disabled:opacity-40 md:w-auto"
             >
               {status === "sending" ? t.sending : t.send}
             </button>

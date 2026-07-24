@@ -31,10 +31,6 @@ export const bigfive: ScreeningTest = {
     ro: "Douăzeci de afirmații despre cum ești de obicei. Indică cât de exact te descrie fiecare. Nu există răspunsuri bune sau greșite — e doar un profil al personalității tale.",
     en: "Twenty statements about how you usually are. Indicate how accurately each describes you. There are no good or bad answers — it's simply a profile of your personality.",
   },
-  timeframe: {
-    ro: "Cât de exact te descrie fiecare afirmație?",
-    en: "How accurately does each statement describe you?",
-  },
   disclaimer: {
     ro: "Acest test are caracter orientativ, pentru auto-cunoaștere — nu este un diagnostic. Pentru o evaluare formală, adresează-te unui specialist.",
     en: "This test is indicative, for self-knowledge — it is not a diagnosis. For a formal evaluation, please consult a specialist.",

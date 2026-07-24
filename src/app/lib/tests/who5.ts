@@ -20,10 +20,6 @@ export const who5: ScreeningTest = {
     ro: "Cinci afirmații scurte despre cum te-ai simțit în ultimele două săptămâni. Nu există răspunsuri corecte sau greșite — alege ce ți se potrivește cel mai bine.",
     en: "Five short statements about how you've felt over the last two weeks. There are no right or wrong answers — pick what fits you best.",
   },
-  timeframe: {
-    ro: "În ultimele două săptămâni…",
-    en: "Over the last two weeks…",
-  },
   disclaimer: {
     ro: "Acest test are caracter orientativ și informativ — nu este un diagnostic și nu confirmă ori exclude o afecțiune. Pentru un rezultat formal și un diagnostic, adresează-te unui specialist.",
     en: "This test is indicative and for information only — it is not a diagnosis and neither confirms nor rules out any condition. For a formal result and a diagnosis, please consult a specialist.",

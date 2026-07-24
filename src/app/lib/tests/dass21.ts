@@ -40,9 +40,9 @@ export const dass21: ScreeningTest = {
     ro: "Douăzeci și una de afirmații despre cum te-ai simțit în ultima săptămână. Nu petrece prea mult timp la fiecare — alege răspunsul care ți se potrivește cel mai bine.",
     en: "Twenty-one statements about how you've felt over the past week. Don't spend too long on each — pick the answer that fits you best.",
   },
-  timeframe: {
-    ro: "În ultima săptămână, cât de mult ți s-a aplicat fiecare afirmație?",
-    en: "Over the past week, how much did each statement apply to you?",
+  stem: {
+    ro: "În ultima săptămână, cât de mult ți s-a aplicat:",
+    en: "Over the past week, how much did this apply to you:",
   },
   disclaimer: {
     ro: "Acest test are caracter orientativ și informativ — nu este un diagnostic și nu confirmă ori exclude o afecțiune. Pentru un rezultat formal și un diagnostic, adresează-te unui specialist.",

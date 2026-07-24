@@ -127,10 +127,6 @@ export function TestRunner() {
               </div>
             </div>
 
-            {test.timeframe && (
-              <p className="mb-2 text-sm font-medium uppercase tracking-[1px] text-[#006960]" style={FONT}>{test.timeframe[language]}</p>
-            )}
-
             <motion.div
               key={current}
               initial={{ opacity: 0, x: 40 }}
@@ -138,7 +134,7 @@ export function TestRunner() {
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             >
               <p className="text-[22px] font-semibold leading-8 text-[#39342e] md:text-[26px]" style={FONT}>
-                {test.items[current].text[language]}
+                {test.stem ? `${test.stem[language]} ${test.items[current].text[language]}` : test.items[current].text[language]}
               </p>
 
               <div className="mt-8 flex flex-col gap-3">

@@ -52,8 +52,9 @@ export type Dimension = {
 
 export type ScreeningTest = TestSummary & {
   intro: LangText;
-  /** Optional line shown above the items, e.g. "Over the last two weeks…". */
-  timeframe?: LangText;
+  /** Optional lead-in prepended to each item to form one single question, e.g.
+   *  "Over the last two weeks, how often have you been bothered by". */
+  stem?: LangText;
   disclaimer: LangText;
   /** Single response scale shared by all items (WHO-5, GAD-7, … all work this way). */
   scale: TestScaleOption[];

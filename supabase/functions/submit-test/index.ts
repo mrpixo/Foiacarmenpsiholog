@@ -55,7 +55,7 @@ Deno.serve(async (req: Request) => {
 
     const locale = body.locale === "en" ? "en" : "ro";
     const rawEmail = (body.email ?? "").trim().toLowerCase();
-    if (rawEmail && (rawEmail.length > 200 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(rawEmail))) {
+    if (rawEmail && (rawEmail.length > 200 || !/^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(rawEmail))) {
       throw new Error("invalid email");
     }
     const email = rawEmail || null;
@@ -112,6 +112,9 @@ Deno.serve(async (req: Request) => {
         body: JSON.stringify({ from, to: [email], subject, html }),
       });
       emailed = r.ok;
+      if (!r.ok) console.error("Resend send failed:", r.status, await r.text());
+    } else if (email && !resendKey) {
+      console.error("RESEND_API_KEY is not set — email skipped");
     }
 
     return new Response(JSON.stringify({ ok: true, emailed }), {
