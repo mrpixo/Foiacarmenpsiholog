@@ -25,6 +25,8 @@ const BlogArticle = lazy(() => import("./components/blog/BlogArticle").then((m) 
 const NewsList = lazy(() => import("./components/news/NewsList").then((m) => ({ default: m.NewsList })));
 const NewsDetail = lazy(() => import("./components/news/NewsDetail").then((m) => ({ default: m.NewsDetail })));
 const FaqPage = lazy(() => import("./components/faq/FaqPage").then((m) => ({ default: m.FaqPage })));
+const TestsList = lazy(() => import("./components/tests/TestsList").then((m) => ({ default: m.TestsList })));
+const TestRunner = lazy(() => import("./components/tests/TestRunner").then((m) => ({ default: m.TestRunner })));
 const PrivacyPolicy = lazy(() => import("./components/legal/PrivacyPolicy").then((m) => ({ default: m.PrivacyPolicy })));
 const TermsOfUse = lazy(() => import("./components/legal/TermsOfUse").then((m) => ({ default: m.TermsOfUse })));
 const AdminGate = lazy(() => import("./components/admin/AdminGate").then((m) => ({ default: m.AdminGate })));
@@ -190,6 +192,8 @@ function AppShell() {
         <Route path="/noutati" element={<NewsList />} />
         <Route path="/noutati/:slug" element={<NewsDetail />} />
         <Route path="/intrebari-frecvente" element={<FaqPage />} />
+        <Route path="/teste" element={<TestsList />} />
+        <Route path="/teste/:slug" element={<TestRunner />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<TermsOfUse />} />
         <Route path="/admin" element={<AdminGate><AdminDashboard /></AdminGate>} />

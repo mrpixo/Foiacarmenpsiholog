@@ -1,8 +1,8 @@
 import { useLanguage } from "../../i18n";
 import { LegalLayout } from "./LegalLayout";
 
-const UPDATED = "11 iunie 2026";
-const UPDATED_EN = "11 June 2026";
+const UPDATED = "24 iulie 2026";
+const UPDATED_EN = "24 July 2026";
 
 export function PrivacyPolicy() {
   const { language } = useLanguage();
@@ -53,7 +53,8 @@ function PrivacyRO() {
         <li><strong>Cal.com</strong> — sistemul de programări și gestionarea intervalelor disponibile.</li>
         <li><strong>Stripe</strong> — procesarea plăților cu cardul și emiterea chitanțelor.</li>
         <li><strong>Google Calendar</strong> — sincronizarea disponibilității și a programărilor.</li>
-        <li><strong>Supabase</strong> — găzduirea bazei de date a blogului și a secțiunii de administrare.</li>
+        <li><strong>Supabase</strong> — găzduirea bazei de date a blogului, a secțiunii de administrare și a rezultatelor testelor psihologice.</li>
+        <li><strong>Resend</strong> — trimiterea emailurilor cu rezultatele testelor și a newsletter-ului.</li>
         <li><strong>DeepL</strong> — traducerea automată a articolelor de blog (procesează doar textul articolelor, nu datele vizitatorilor).</li>
         <li><strong>Google Analytics</strong> — statistici privind utilizarea site-ului (vezi secțiunea Cookie-uri).</li>
         <li><strong>Furnizorul de găzduire web</strong> — livrarea site-ului.</li>
@@ -140,7 +141,31 @@ function PrivacyRO() {
         Excepțiile sunt cele prevăzute de lege (de ex. existența unui pericol iminent).
       </p>
 
-      <h2>10. Modificări ale acestei politici</h2>
+      <h2>10. Teste psihologice online</h2>
+      <p>
+        Site-ul oferă chestionare psihologice de auto-evaluare (de ex. WHO-5, GAD-7, PHQ-9,
+        Rosenberg, DASS-21, Big Five). Când completezi un test, prelucrăm:
+      </p>
+      <ul>
+        <li><strong>Rezultatul testului</strong> (scorul și interpretarea) — o categorie specială de date privind sănătatea, prelucrată pe baza consimțământului tău explicit (art. 9 alin. 2 lit. a GDPR).</li>
+        <li><strong>Adresa de email</strong>, doar dacă alegi să îți trimitem rezultatele pe email.</li>
+      </ul>
+      <p>
+        <strong>Important:</strong> aceste teste au caracter <strong>orientativ și informativ</strong> și{" "}
+        <strong>nu reprezintă un diagnostic</strong>. Un scor nu confirmă și nu exclude o afecțiune.
+        Pentru o evaluare formală, un diagnostic și un plan de intervenție, este necesar să te adresezi
+        unui specialist (psiholog sau medic). Dacă te confrunți cu gânduri de a-ți face rău, contactează
+        imediat linia de urgență Antisuicid la <strong>0800 801 200</strong> sau sună la <strong>112</strong>.
+      </p>
+      <p>
+        Rezultatele sunt calculate în browserul tău și sunt stocate doar dacă soliciți trimiterea lor pe
+        email. Îți cerem un consimțământ separat și opțional pentru a primi articole și noutăți
+        (newsletter) — îl poți retrage oricând, iar refuzul nu afectează primirea rezultatelor. Nu
+        folosim rezultatele testelor pentru marketing. Poți solicita oricând ștergerea datelor conform
+        secțiunii 6.
+      </p>
+
+      <h2>11. Modificări ale acestei politici</h2>
       <p>
         Putem actualiza periodic această politică. Versiunea curentă este publicată pe această
         pagină, cu data ultimei actualizări.
@@ -192,7 +217,8 @@ function PrivacyEN() {
         <li><strong>Cal.com</strong> — booking system and availability management.</li>
         <li><strong>Stripe</strong> — card payment processing and receipts.</li>
         <li><strong>Google Calendar</strong> — synchronising availability and bookings.</li>
-        <li><strong>Supabase</strong> — hosting the blog database and admin section.</li>
+        <li><strong>Supabase</strong> — hosting the blog database, admin section, and psychological-test results.</li>
+        <li><strong>Resend</strong> — sending test-result emails and the newsletter.</li>
         <li><strong>DeepL</strong> — automatic translation of blog articles (processes only article text, not visitor data).</li>
         <li><strong>Google Analytics</strong> — website usage statistics (see the Cookies section).</li>
         <li><strong>Web hosting provider</strong> — delivering the website.</li>
@@ -278,7 +304,30 @@ function PrivacyEN() {
         provided by law (e.g. an imminent danger).
       </p>
 
-      <h2>10. Changes to this policy</h2>
+      <h2>10. Online psychological tests</h2>
+      <p>
+        The website offers psychological self-assessment questionnaires (e.g. WHO-5, GAD-7, PHQ-9,
+        Rosenberg, DASS-21, Big Five). When you complete a test, we process:
+      </p>
+      <ul>
+        <li><strong>The test result</strong> (score and interpretation) — a special category of health data, processed on the basis of your explicit consent (Art. 9(2)(a) GDPR).</li>
+        <li><strong>Your email address</strong>, only if you choose to have your results emailed to you.</li>
+      </ul>
+      <p>
+        <strong>Important:</strong> these tests are <strong>indicative and informational only</strong> and{" "}
+        <strong>are not a diagnosis</strong>. A score neither confirms nor rules out any condition. For a
+        formal evaluation, a diagnosis and a treatment plan, you need to consult a specialist (a
+        psychologist or physician). If you are experiencing thoughts of harming yourself, contact the
+        Antisuicide crisis line at <strong>0800 801 200</strong> immediately, or call <strong>112</strong>.
+      </p>
+      <p>
+        Results are calculated in your browser and are stored only if you ask to have them emailed. We
+        ask for a separate, optional consent to receive articles and news (newsletter) — you can withdraw
+        it at any time, and declining does not affect receiving your results. We do not use test results
+        for marketing. You can request deletion of your data at any time under section 6.
+      </p>
+
+      <h2>11. Changes to this policy</h2>
       <p>
         We may update this policy from time to time. The current version is published on this page
         with the date of the last update.

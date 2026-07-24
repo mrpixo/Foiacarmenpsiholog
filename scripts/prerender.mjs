@@ -28,6 +28,13 @@ const STATIC_ROUTES = [
   "/blog",
   "/noutati",
   "/intrebari-frecvente",
+  "/teste",
+  "/teste/who-5",
+  "/teste/gad-7",
+  "/teste/phq-9",
+  "/teste/rosenberg",
+  "/teste/big-five",
+  "/teste/dass-21",
   "/privacy",
   "/terms",
 ];
