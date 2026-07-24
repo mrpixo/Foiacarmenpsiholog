@@ -26,12 +26,17 @@ type Body = {
   slug: string;
   testName?: string;
   score: number;
+  scoreMax?: number;
   band: string;
+  bandLabel?: string;
   message?: string;
+  tone?: "good" | "moderate" | "concern";
   locale?: string;
   email?: string;
   marketingConsent?: boolean;
 };
+
+const SITE = "https://psihologcarmenfoia.ro";
 
 const escapeHtml = (s: string) =>
   s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -92,19 +97,54 @@ Deno.serve(async (req: Request) => {
     const resendKey = Deno.env.get("RESEND_API_KEY");
     if (email && resendKey) {
       const from = Deno.env.get("RESULTS_FROM") ?? "Carmen Foia <onboarding@resend.dev>";
-      const heading = locale === "en" ? "Your result" : "Rezultatul tău";
-      const subject = body.testName ? `${heading} — ${body.testName}` : heading;
+      const en = locale === "en";
+      const name = escapeHtml(body.testName ?? (en ? "test" : "test"));
+      const tone = body.tone === "moderate" || body.tone === "concern" ? body.tone : "good";
+      const tc = { good: { t: "#006960", bg: "#ebf3f2" }, moderate: { t: "#a86a12", bg: "#fff1e1" }, concern: { t: "#c0392b", bg: "#fbecea" } }[tone];
+
+      const subject = en ? `Your ${body.testName ?? "test"} result` : `Rezultatul tău la testul ${body.testName ?? ""}`;
+      const intro = en
+        ? "Thank you for completing the test — here is your result:"
+        : "Îți mulțumesc că ai completat testul — iată rezultatul tău:";
+      const role = en ? "Clinical and educational psychologist" : "Psiholog clinician și educațional";
+      const persuasive = en
+        ? "A score is only a starting point. In a session we can explore together what lies behind it and how you can feel better — reaching out is a small but meaningful first step, and you don't have to figure it out alone."
+        : "Un scor este doar un punct de plecare. Într-o ședință putem explora împreună ce se ascunde în spatele lui și cum te poți simți mai bine — un prim pas mic, dar important, și nu trebuie să îl faci singur(ă).";
+      const cta = en ? "Book a session" : "Programează o ședință";
+      const disc = en
+        ? "This test is indicative and for information only — it is not a diagnosis. For a formal evaluation, please consult a specialist."
+        : "Acest test are caracter orientativ și informativ — nu este un diagnostic. Pentru un rezultat formal, adresează-te unui specialist.";
+
+      const resultBlock = body.scoreMax
+        ? `<div style="background:${tc.bg};border-radius:16px;padding:24px;margin:0 0 22px">
+             <div style="font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:${tc.t};margin:0 0 10px">${name}</div>
+             <div style="font-size:44px;font-weight:700;color:${tc.t};line-height:1">${Math.round(body.score)}<span style="font-size:16px;color:#5c554d;font-weight:400"> ${en ? "of" : "din"} ${body.scoreMax}</span></div>
+             ${body.bandLabel ? `<div style="margin-top:12px"><span style="display:inline-block;background:#ffffff;color:${tc.t};font-weight:600;font-size:14px;padding:6px 14px;border-radius:999px">${escapeHtml(body.bandLabel)}</span></div>` : ""}
+           </div>
+           <p style="font-size:15px;line-height:1.7;color:#39342e;margin:0 0 24px">${escapeHtml(body.message ?? "")}</p>`
+        : `<div style="background:${tc.bg};border-radius:16px;padding:22px 24px;margin:0 0 24px">
+             <div style="font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:${tc.t};margin:0 0 10px">${name}</div>
+             <div style="color:${tc.t};font-weight:600;font-size:15px;line-height:1.6">${escapeHtml(body.message ?? "")}</div>
+           </div>`;
+
       const html = `
-        <div style="font-family:Inter,Arial,sans-serif;color:#39342e;max-width:560px;margin:0 auto">
-          <p style="font-size:14px;color:#5c554d;margin:0 0 4px">${escapeHtml(body.testName ?? "")}</p>
-          <p style="margin:0 0 8px"><span style="font-size:40px;font-weight:700;color:#006960">${Math.round(body.score)}</span></p>
-          <p style="font-size:16px;font-weight:600;margin:0 0 12px">${escapeHtml(body.band)}</p>
-          <p style="font-size:15px;line-height:1.6;margin:0 0 20px">${escapeHtml(body.message ?? "")}</p>
-          <p style="font-size:12px;color:#888">${
-            locale === "en"
-              ? "This is a self-assessment tool, not a diagnosis."
-              : "Acesta este un instrument de auto-evaluare, nu un diagnostic."
-          }</p>
+        <div style="background:#f5eee9;padding:24px 12px;font-family:Inter,Arial,sans-serif">
+          <div style="max-width:560px;margin:0 auto;background:#ffffff;border-radius:20px;padding:32px 28px;color:#39342e">
+            <p style="font-size:15px;line-height:1.6;color:#5c554d;margin:0 0 20px">${intro}</p>
+            ${resultBlock}
+            <p style="font-size:15px;line-height:1.7;color:#5c554d;margin:0 0 26px">${persuasive}</p>
+            <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 30px">
+              <tr><td style="border-radius:999px;background:#ffba68">
+                <a href="${SITE}/contact" style="display:inline-block;padding:14px 30px;font-size:16px;font-weight:600;color:#1f1d1b;text-decoration:none">${cta}</a>
+              </td></tr>
+            </table>
+            <div style="border-top:1px solid #eee6df;padding-top:18px;margin:0 0 16px">
+              <p style="font-size:14px;font-weight:700;color:#39342e;margin:0 0 2px">Carmen Foia</p>
+              <p style="font-size:13px;color:#5c554d;margin:0 0 6px">${role}</p>
+              <a href="${SITE}" style="font-size:13px;color:#006960;font-weight:600;text-decoration:none">psihologcarmenfoia.ro</a>
+            </div>
+            <p style="font-size:12px;line-height:1.5;color:#999;margin:0">${disc}</p>
+          </div>
         </div>`;
       const r = await fetch("https://api.resend.com/emails", {
         method: "POST",

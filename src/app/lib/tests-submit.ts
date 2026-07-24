@@ -2,15 +2,18 @@ import { supabase } from "./supabase";
 
 export type TestSubmission = {
   slug: string;
-  /** For the results email only — not stored. */
-  testName: string;
   score: number;
+  /** Stored: the canonical (English) band label or overall tone. */
   band: string;
-  /** Interpretation text, for the results email only — not stored. */
-  message: string;
   locale: string;
   email?: string;
   marketingConsent?: boolean;
+  // Email-only display fields (not stored):
+  testName: string;
+  scoreMax?: number;
+  bandLabel?: string;
+  message: string;
+  tone?: "good" | "moderate" | "concern";
 };
 
 /**
