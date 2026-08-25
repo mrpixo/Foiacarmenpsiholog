@@ -93,7 +93,7 @@ export function BlogArticle() {
         <div className="flex flex-col gap-14 lg:flex-row lg:gap-20">
           {/* Author card — sticky sidebar on the right (desktop), below the article on mobile */}
           <aside className="order-2 lg:w-[300px] lg:shrink-0">
-            <div className="lg:sticky lg:top-28">
+            <div className="lg:sticky lg:top-44">
               <AuthorCard />
             </div>
           </aside>
