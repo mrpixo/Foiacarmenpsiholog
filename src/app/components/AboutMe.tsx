@@ -7,9 +7,6 @@ const FONT = { fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" } as const;
 // Muted body colour from the Figma "Despre mine" design.
 const MUTED = "rgba(29,41,61,0.7)";
 
-// Bold emphasis inside card bodies (matches the Figma).
-const B = ({ children }: { children: ReactNode }) => <strong className="font-bold">{children}</strong>;
-
 // Bold inline link into the booking page (Contact).
 const BookLink = ({ children }: { children: ReactNode }) => (
   <Link
@@ -33,21 +30,21 @@ const copy: Record<"ro" | "en", { title: string; intro: string; note: string; ct
       {
         title: "Experiență profesională și formare",
         body: (
-          <>Am peste <B>15 ani de experiență profesională</B>, iar în 2026 am absolvit două programe de master: <B>Psihologie Educațională și Vocațională, cu media 10</B>, și <B>Psihologie Clinică, cu media 9,94</B>. În ambele cazuri, am obținut cea mai mare medie din promoție. Îmi actualizez constant pregătirea prin formare continuă.</>
+          <>Sunt psiholog licențiat de peste 15 ani. În 2026 am absolvit două programe de master, Psihologie Clinică și Psihologie Educațională, Consiliere Școlară și Vocațională, cu cea mai mare notă din promoție, beneficiind de bursă de merit pe toată durata studiilor. Particip constant la programe de specializare și sunt membru al Asociației Psihologilor din Marea Britanie și al Colegiului Psihologilor din România.</>
         ),
         icon: "/despre/diploma.svg",
       },
       {
         title: "Experiență clinică în Londra",
         body: (
-          <>Am acumulat <B>peste șapte ani de experiență clinică și educațională la Londra</B>, ca și specialist în suport comportamental la adolescenți, sprijin psihologic în oncologie, asistență persoanelor cu nevoi speciale și intervenții de suport educațional.</>
+          <>Am experiență de aproape 10 ani în psihologie clinică în Londra, unde am lucrat cu copii, adolescenți și adulți în școli, clinici și servicii de suport. Experiența mea include lucrul cu persoane cu nevoi speciale, dificultăți emoționale și comportamentale, precum și cu pacienți oncologici și persoane care se confruntă cu afecțiuni neuropsihiatrice și deteriorare cognitivă.</>
         ),
         icon: "/despre/big-ben.svg",
       },
       {
         title: "Înțelegere și empatie biculturală",
         body: (
-          <>Ca cetățean român și britanic, cu peste zece ani de viață și experiență profesională la Londra, <BookLink>ofer ședințe în limba română și engleză, atât la Cabinetul de Psihologie Carmen Foia din Oradea</BookLink>, cât și online. Înțeleg din proprie experiență provocările adaptării, ale apartenenței și ale vieții între două culturi.</>
+          <>Sunt cetățean britanic și român și am locuit 10 ani în Londra. Experiența de viață și profesională în ambele culturi îmi permite să înțeleg mai bine nevoile persoanelor din medii diferite. <BookLink>Ofer servicii psihologice în română și engleză, atât în cabinetul de psihologie Oradea, cât și online</BookLink>, oriunde în lume.</>
         ),
         icon: "/despre/connected-people.svg",
       },
@@ -63,21 +60,21 @@ const copy: Record<"ro" | "en", { title: string; intro: string; note: string; ct
       {
         title: "Professional experience and training",
         body: (
-          <>I have <B>over 15 years of professional experience</B>, and in 2026 I completed two master's programs: <B>Educational and Vocational Psychology, with a final grade of 10</B>, and <B>Clinical Psychology, with 9.94</B> — graduating top of my class in both. I keep my training up to date through continuous education.</>
+          <>I'm a licensed psychologist with over 15 years of experience. In 2026 I completed two master's programs — Clinical Psychology, and Educational Psychology, School and Vocational Counselling — graduating top of my class with a merit scholarship throughout my studies. I regularly take part in specialization programs and am a member of the Association of Psychologists in Great Britain and the Romanian College of Psychologists.</>
         ),
         icon: "/despre/diploma.svg",
       },
       {
         title: "Clinical experience in London",
         body: (
-          <>I gained <B>over seven years of clinical and educational experience in London</B> — as a specialist in behavioural support for adolescents, psychological support in oncology, care for people with special needs, and educational-support interventions.</>
+          <>I have nearly 10 years of experience in clinical psychology in London, where I worked with children, adolescents, and adults across schools, clinics, and support services. My experience includes working with people with special needs, emotional and behavioural difficulties, as well as oncology patients and people facing neuropsychiatric conditions and cognitive decline.</>
         ),
         icon: "/despre/big-ben.svg",
       },
       {
         title: "Bicultural understanding and empathy",
         body: (
-          <>As a Romanian and British citizen, with over ten years of life and professional experience in London, <BookLink>I offer sessions in Romanian and English — both at the Carmen Foia Psychology Practice in Oradea</BookLink> and online. I understand from my own experience the challenges of adaptation, belonging, and living between two cultures.</>
+          <>I'm a British and Romanian citizen and lived in London for 10 years. Life and professional experience in both cultures helps me better understand the needs of people from different backgrounds. <BookLink>I offer psychological services in Romanian and English, both at the psychology practice in Oradea and online</BookLink>, anywhere in the world.</>
         ),
         icon: "/despre/connected-people.svg",
       },
