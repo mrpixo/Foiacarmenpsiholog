@@ -10,17 +10,17 @@ const heroServices = {
     "Evaluare psihologică",
     "Consiliere psihologică",
     "Orientare în carieră",
-    "Evaluare pentru autocunoaștere",
+    "Autocunoaștere",
     "Dezvoltare personală",
-    "Consiliere pentru studenți și tineri adulți",
+    "Sprijin pentru studenți și adulți",
   ],
   en: [
     "Psychological assessment",
     "Psychological counselling",
     "Career guidance",
-    "Self-discovery assessment",
+    "Self-discovery",
     "Personal development",
-    "Counselling for students and young adults",
+    "Support for students and adults",
   ],
 };
 
