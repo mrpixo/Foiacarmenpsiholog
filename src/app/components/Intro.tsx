@@ -73,7 +73,7 @@ export function Intro() {
             className="inline-flex w-full items-center justify-center bg-[#ffba68] text-[#1f1d1b] font-semibold text-base px-7 py-3.5 rounded-full transition-all duration-300 hover:bg-[#ffc985] md:w-auto md:justify-center md:hover:scale-105"
             style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}
           >
-            {language === "ro" ? "Programează-te acum" : "Book a session"}
+            {language === "ro" ? "Programează o ședință" : "Book a session"}
           </Link>
         </motion.div>
       </div>

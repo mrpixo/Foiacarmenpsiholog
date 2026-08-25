@@ -7,6 +7,7 @@ import { isSupabaseConfigured } from "../../lib/supabase";
 import { getPublishedNewsBySlug, newsTitle, newsExcerpt, newsBody, type NewsItem } from "../../lib/news";
 import { NewsContent } from "./NewsContent";
 import { NotConfigured } from "../blog/NotConfigured";
+import { AuthorCard } from "../AuthorCard";
 import { useSeo, SITE_URL } from "../../lib/seo";
 
 const FONT = { fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" } as const;
@@ -67,32 +68,44 @@ export function NewsDetail() {
 
   return (
     <section className="w-full px-6 pb-24 pt-36 md:px-24 md:pb-[156px] md:pt-44">
-      <div className="mx-auto max-w-[820px]">
-        <Link to="/noutati" className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-[#006960] transition-colors hover:text-[#054943]" style={FONT}>
-          <ArrowLeft size={16} /> {t.back}
-        </Link>
-
-        {!isSupabaseConfigured ? (
-          <NotConfigured />
-        ) : loading ? (
-          <p className="text-[#5c554d]" style={FONT}>{t.loading}</p>
-        ) : !item ? (
-          <p className="text-[#5c554d]" style={FONT}>{t.notFound}</p>
-        ) : (
-          <motion.article initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}>
-            <p className="mb-3 text-sm text-[#a89f95]" style={FONT}>{formatDate(item.published_at, language)}</p>
-            <h1 className="text-[#39342e]" style={{ ...FONT, fontWeight: 700, fontSize: "clamp(30px,4vw,48px)", lineHeight: 1.15 }}>
-              {newsTitle(item, language)}
-            </h1>
-            {newsExcerpt(item, language) && (
-              <p className="mt-4 text-lg leading-8 text-[#5c554d]" style={FONT}>{newsExcerpt(item, language)}</p>
-            )}
-            {item.cover_url && <img src={item.cover_url} alt="" className="mt-8 w-full rounded-3xl object-cover" />}
-            <div className="mt-8">
-              <NewsContent html={newsBody(item, language)} />
+      <div className="mx-auto max-w-[1180px]">
+        <div className="flex flex-col gap-14 lg:flex-row lg:gap-20">
+          {/* Author card — sticky sidebar on desktop, below the article on mobile */}
+          <aside className="order-2 lg:order-1 lg:w-[300px] lg:shrink-0">
+            <div className="lg:sticky lg:top-28">
+              <AuthorCard />
             </div>
-          </motion.article>
-        )}
+          </aside>
+
+          {/* Article column */}
+          <div className="order-1 min-w-0 lg:order-2 lg:flex-1">
+            <Link to="/noutati" className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-[#006960] transition-colors hover:text-[#054943]" style={FONT}>
+              <ArrowLeft size={16} /> {t.back}
+            </Link>
+
+            {!isSupabaseConfigured ? (
+              <NotConfigured />
+            ) : loading ? (
+              <p className="text-[#5c554d]" style={FONT}>{t.loading}</p>
+            ) : !item ? (
+              <p className="text-[#5c554d]" style={FONT}>{t.notFound}</p>
+            ) : (
+              <motion.article initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}>
+                <p className="mb-3 text-sm text-[#a89f95]" style={FONT}>{formatDate(item.published_at, language)}</p>
+                <h1 className="text-[#39342e]" style={{ ...FONT, fontWeight: 700, fontSize: "clamp(30px,4vw,48px)", lineHeight: 1.15 }}>
+                  {newsTitle(item, language)}
+                </h1>
+                {newsExcerpt(item, language) && (
+                  <p className="mt-4 text-lg leading-8 text-[#5c554d]" style={FONT}>{newsExcerpt(item, language)}</p>
+                )}
+                {item.cover_url && <img src={item.cover_url} alt="" className="mt-8 w-full rounded-3xl object-cover" />}
+                <div className="mt-8">
+                  <NewsContent html={newsBody(item, language)} />
+                </div>
+              </motion.article>
+            )}
+          </div>
+        </div>
       </div>
     </section>
   );

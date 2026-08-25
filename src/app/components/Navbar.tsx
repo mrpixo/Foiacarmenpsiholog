@@ -154,10 +154,10 @@ export function Navbar() {
         {/* CTA — imported 24px x 12px sizing */}
         <Link
           to="/contact"
-          className="inline-flex items-center justify-center rounded-full bg-[#ffba68] px-6 py-3 text-[16px] font-semibold leading-6 tracking-[-0.3125px] text-[#1f1d1b] transition-all duration-300 hover:bg-[#ffc985] hover:scale-105"
+          className="inline-flex items-center justify-center whitespace-nowrap rounded-full bg-[#ffba68] px-6 py-3 text-[16px] font-semibold leading-6 tracking-[-0.3125px] text-[#1f1d1b] transition-all duration-300 hover:bg-[#ffc985] hover:scale-105"
           style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}
         >
-          {language === "ro" ? "Programează-te acum" : "Book a session"}
+          {language === "ro" ? "Programează o ședință" : "Book a session"}
         </Link>
 
         {/* Language selector */}
@@ -251,7 +251,7 @@ export function Navbar() {
                 className="inline-flex flex-1 items-center justify-center rounded-full bg-[#ffba68] px-6 py-3 text-center text-[16px] font-semibold leading-6 tracking-[-0.3125px] text-[#1f1d1b] transition-all duration-300 hover:bg-[#ffc985]"
                 style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}
               >
-                {language === "ro" ? "Programează-te acum" : "Book a session"}
+                {language === "ro" ? "Programează o ședință" : "Book a session"}
               </Link>
               <button
                 type="button"

@@ -74,7 +74,7 @@ function ServiceRow({ service, index }: {
           className="inline-flex w-full items-center justify-center rounded-full bg-[#ffba68] px-6 py-3.5 text-base font-semibold text-[#1f1d1a] transition-colors duration-300 hover:bg-[#ffc985]"
           style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}
         >
-          {language === "ro" ? "Programează-te acum" : "Book a session"}
+          {language === "ro" ? "Programează o ședință" : "Book a session"}
         </Link>
       </div>
 
@@ -123,7 +123,7 @@ function ServiceRow({ service, index }: {
             className="relative z-10 inline-flex items-center justify-center whitespace-nowrap rounded-full bg-[#ffba68] px-6 py-3 text-sm font-semibold text-[#1f1d1a] opacity-0 transition-all duration-300 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto hover:bg-[#ffc985]"
             style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}
           >
-            {language === "ro" ? "Programează-te acum" : "Book a session"}
+            {language === "ro" ? "Programează o ședință" : "Book a session"}
           </Link>
         </div>
       </div>

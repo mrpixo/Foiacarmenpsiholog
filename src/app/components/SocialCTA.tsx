@@ -55,7 +55,7 @@ export function SocialCTA() {
             className="flex w-full items-center justify-center rounded-full bg-[#ffba68] px-7 py-3.5 text-base font-semibold text-[#1f1d1b] transition-all duration-300 hover:bg-[#ffc985] md:w-auto md:justify-center md:hover:scale-105"
             style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}
           >
-            {language === "ro" ? "Programează-te acum" : "Book a session"}
+            {language === "ro" ? "Programează o ședință" : "Book a session"}
           </Link>
 
           <div className="flex flex-wrap items-center justify-center gap-4">
