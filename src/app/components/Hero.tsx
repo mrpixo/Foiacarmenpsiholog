@@ -87,7 +87,7 @@ export function HeroTop() {
         {/* LEFT: Service categories */}
         <motion.div
           style={{ y: listY }}
-          className="flex w-full flex-col will-change-transform"
+          className="flex w-full flex-col gap-2 md:gap-3 will-change-transform"
           initial={{ opacity: 0, ...entrance(isMobile, -20) }}
           animate={{ opacity: 1, x: 0, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
@@ -103,7 +103,7 @@ export function HeroTop() {
                 fontFamily: "'Oakes Grotesk', 'Inter', sans-serif",
                 fontWeight: 400,
                 fontSize: "clamp(28px,3.8vw,56px)",
-                lineHeight: 1.2,
+                lineHeight: 1.1,
               }}
             >
               {service}
