@@ -1,4 +1,3 @@
-import { Linkedin, Instagram, Facebook } from "lucide-react";
 import { Link } from "react-router";
 import imgPortrait from "../../imports/Body/carmen-portrait-new.webp";
 import { useLanguage } from "../i18n";
@@ -24,24 +23,6 @@ const copy = {
     googleAria: "Google reviews",
   },
 };
-
-// LinkedIn is the only live profile; the rest mirror the placeholders used across
-// the site (Footer / SocialCTA) until real handles are provided.
-const socials = [
-  { key: "linkedin", href: "https://www.linkedin.com/in/carmen-foia-960604b4", icon: <Linkedin size={18} /> },
-  { key: "tiktok", href: "#", icon: (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.53V6.77a4.86 4.86 0 0 1-1.01-.08z" />
-    </svg>
-  ) },
-  { key: "instagram", href: "#", icon: <Instagram size={18} /> },
-  { key: "facebook", href: "#", icon: <Facebook size={18} /> },
-  { key: "x", href: "#", icon: (
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.74l7.73-8.835L1.254 2.25H8.08l4.263 5.633zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-    </svg>
-  ) },
-];
 
 const STAR_PATH = "M12 2l2.9 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 7.1-1.01z";
 
@@ -130,30 +111,15 @@ export function AuthorCard() {
       {/* Divider */}
       <div className="my-6 h-px w-full bg-[#e7ded5]" />
 
-      {/* Availability + CTA */}
-      <p className="text-[15px] font-medium text-[#39342e]" style={FONT}>{t.where}</p>
+      {/* CTA, then availability below it */}
       <Link
         to="/contact"
-        className="mt-4 inline-flex w-full items-center justify-center rounded-full bg-[#ffba68] px-7 py-3.5 text-base font-semibold text-[#1f1d1b] transition-all duration-300 hover:bg-[#ffc985]"
+        className="inline-flex w-full items-center justify-center rounded-full bg-[#ffba68] px-7 py-3.5 text-base font-semibold text-[#1f1d1b] transition-all duration-300 hover:bg-[#ffc985]"
         style={FONT}
       >
         {t.cta}
       </Link>
-
-      {/* Socials */}
-      <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
-        {socials.map((s) => (
-          <a
-            key={s.key}
-            href={s.href}
-            {...(s.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-            aria-label={s.key}
-            className="flex size-11 items-center justify-center rounded-full bg-[#e7ded5] text-[#54504a] transition-colors duration-200 hover:bg-[#006960] hover:text-white"
-          >
-            {s.icon}
-          </a>
-        ))}
-      </div>
+      <p className="mt-4 text-[15px] font-medium text-[#39342e]" style={FONT}>{t.where}</p>
 
       {/* Google rating — only when live data is available */}
       {reviews && (
