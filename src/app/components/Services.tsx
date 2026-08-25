@@ -65,7 +65,7 @@ function ServiceRow({ service, index }: {
           loading="lazy"
           decoding="async"
         />
-        <p style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif", fontWeight: 700, fontSize: "22px", lineHeight: 1.3, color: "#39342e" }}>
+        <p style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif", fontWeight: 700, fontSize: "22px", lineHeight: 1.2, color: "#39342e" }}>
           {service.title}
         </p>
         <p style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif", fontSize: "16px", lineHeight: 1.5, color: "#45556c" }}>
@@ -96,7 +96,7 @@ function ServiceRow({ service, index }: {
           animate={{ color: hovered ? "#ffffff" : "#39342e" }}
           transition={{ duration: 0.3 }}
           className="shrink-0 md:w-[470px]"
-          style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif", fontWeight: 700, fontSize: "clamp(20px,2.4vw,32px)", lineHeight: "32px" }}
+          style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif", fontWeight: 700, fontSize: "clamp(20px,2.4vw,32px)", lineHeight: 1.2 }}
         >
           {service.title}
         </motion.p>
