@@ -70,15 +70,15 @@ export function NewsDetail() {
     <section className="w-full px-6 pb-24 pt-36 md:px-24 md:pb-[156px] md:pt-44">
       <div className="mx-auto max-w-[1180px]">
         <div className="flex flex-col gap-14 lg:flex-row lg:gap-20">
-          {/* Author card — sticky sidebar on desktop, below the article on mobile */}
-          <aside className="order-2 lg:order-1 lg:w-[300px] lg:shrink-0">
+          {/* Author card — sticky sidebar on the right (desktop), below the article on mobile */}
+          <aside className="order-2 lg:w-[300px] lg:shrink-0">
             <div className="lg:sticky lg:top-28">
               <AuthorCard />
             </div>
           </aside>
 
           {/* Article column */}
-          <div className="order-1 min-w-0 lg:order-2 lg:flex-1">
+          <div className="order-1 min-w-0 lg:flex-1">
             <Link to="/noutati" className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-[#006960] transition-colors hover:text-[#054943]" style={FONT}>
               <ArrowLeft size={16} /> {t.back}
             </Link>
