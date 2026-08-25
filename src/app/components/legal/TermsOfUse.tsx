@@ -29,9 +29,10 @@ function TermsRO() {
 
       <h2>2. Serviciile oferite</h2>
       <p>
-        Cabinetul oferă servicii de psihologie și consiliere (de ex. psihologie sportivă, orientare
-        vocațională, anxietate de performanță, terapie individuală, terapie de cuplu, dezvoltare
-        personală), în ședințe individuale sau de cuplu, online sau la cabinet, conform programării.
+        Cabinetul oferă servicii de psihologie și consiliere (de ex. consiliere psihologică
+        individuală, consiliere pentru copii și adolescenți, consiliere pe anxietatea de performanță,
+        consiliere pentru motivație și obiective, evaluare psihologică, workshopuri), în ședințe
+        individuale sau de grup, online sau la cabinet, conform programării.
       </p>
 
       <h2>3. Programări</h2>
@@ -150,9 +151,10 @@ function TermsEN() {
 
       <h2>2. Services offered</h2>
       <p>
-        The Practice offers psychology and counselling services (e.g. sports psychology, vocational
-        guidance, performance anxiety, individual therapy, couples therapy, personal development), in
-        individual or couples sessions, online or at the office, as booked.
+        The Practice offers psychology and counselling services (e.g. individual psychological
+        counselling, counselling for children and adolescents, performance-anxiety counselling,
+        motivation and goal counselling, psychological assessment, workshops), in individual or group
+        sessions, online or at the office, as booked.
       </p>
 
       <h2>3. Bookings</h2>
