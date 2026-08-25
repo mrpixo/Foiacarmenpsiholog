@@ -6,13 +6,27 @@ import { useLanguage } from "../i18n";
 import { useIsMobile, entrance } from "../lib/useIsMobile";
 
 const heroServices = {
-  ro: ["Orientare în carieră", "Psihologie sportivă", "Terapie individuală", "Motivare", "Dezvoltare personală", "Studenți"],
-  en: ["Career guidance", "Sports psychology", "Individual therapy", "Motivation", "Personal development", "Students"],
+  ro: [
+    "Evaluare psihologică",
+    "Consiliere psihologică",
+    "Orientare în carieră",
+    "Evaluare pentru autocunoaștere",
+    "Dezvoltare personală",
+    "Consiliere pentru studenți și tineri adulți",
+  ],
+  en: [
+    "Psychological assessment",
+    "Psychological counselling",
+    "Career guidance",
+    "Self-discovery assessment",
+    "Personal development",
+    "Counselling for students and young adults",
+  ],
 };
 
 const heroQuote = {
-  ro: "Te ajut să gestionezi anxietatea, să depășești blocajele emoționale și să faci pași mai siguri către obiectivele tale personale, profesionale sau sportive.",
-  en: "I help you manage anxiety, overcome emotional blocks, and take surer steps toward your personal, professional, or athletic goals.",
+  ro: "Fiecare persoană este unică. Înțelege ce se află în spatele felului în care gândești, simți și reacționezi. Împreună găsim resursele și direcția de care ai nevoie.",
+  en: "Every person is unique. Understand what lies behind the way you think, feel, and react. Together we find the resources and the direction you need.",
 };
 
 /** Top beige section — service list (left) + quote (right) + watermark */
