@@ -1,9 +1,7 @@
 import { Linkedin, Instagram, Facebook } from "lucide-react";
-import { useLanguage } from "../i18n";
 import { FlagGB } from "./Flags";
 
 export function TopBar() {
-  const { language } = useLanguage();
   return (
     <div className="w-full bg-[#054943] px-6 md:px-24 py-6 flex flex-col md:flex-row items-center justify-between gap-4 flex-wrap">
       {/* Phone / WhatsApp */}
@@ -11,12 +9,14 @@ export function TopBar() {
         className="text-white text-base text-center md:text-left"
         style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}
       >
-        {language === "ro" ? "Telefon / WhatsApp" : "Phone / WhatsApp"}:{" "}
+        WhatsApp:{" "}
         <a
-          href="tel:+40770926562"
+          href="https://wa.me/40770926562"
+          target="_blank"
+          rel="noopener noreferrer"
           className="font-bold whitespace-nowrap hover:text-[#ffba68] transition-colors"
         >
-          +40 770 926 562
+          0770 926 562
         </a>
       </p>
 
@@ -24,7 +24,7 @@ export function TopBar() {
       <div className="flex items-center gap-3">
         <FlagGB className="size-6 shrink-0" />
         <span className="text-white text-sm" style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}>
-          I'm a British citizen and provide therapy in english
+          Licensed Psychologist for over 15+ years, I am British citizen, offering counselling also in English
         </span>
       </div>
 
