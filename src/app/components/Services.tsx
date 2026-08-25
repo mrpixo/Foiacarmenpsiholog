@@ -10,20 +10,22 @@ import { useLanguage } from "../i18n";
 
 const services = {
   ro: [
-    { id: 0, reason: "psihologie-sportiva", title: "Psihologie sportivă", description: "Dezvoltarea concentrării, încrederii și performanței în sport.", image: imgRect16 },
-    { id: 1, reason: "orientare-vocationala", title: "Orientare vocațională", description: "Claritate în alegerea carierei și a direcției profesionale.", image: imgRect17 },
-    { id: 2, reason: "anxietate-performanta", title: "Anxietate de performanță", description: "Gestionarea emoțiilor și a presiunii în situații importante.", image: imgAnxietate },
-    { id: 3, reason: "terapie-individuala", title: "Terapie individuală", description: "Sprijin pentru dificultăți emoționale și provocări personale.", image: imgRect20 },
-    { id: 4, reason: "terapie-cuplu", title: "Terapie de cuplu", description: "Îmbunătățirea comunicării și consolidarea relației.", image: imgRect19 },
-    { id: 5, reason: "dezvoltare-personala", title: "Dezvoltare personală", description: "Creșterea încrederii, autocunoaștere și atingerea potențialului personal.", image: imgRect16 },
+    { id: 0, reason: "consiliere-individuala", title: "Consiliere psihologică individuală", description: "Sprijin personalizat pentru dificultăți emoționale, stres, anxietate și perioade de schimbare.", image: imgRect16 },
+    { id: 1, reason: "consiliere-copii-adolescenti", title: "Consiliere psihologică pentru copii și adolescenți", description: "Sprijin adaptat vârstei pentru gestionarea emoțiilor, anxietății, învățării, dificultăților de adaptare, relațiilor, încrederii în sine și provocărilor școlare.", image: imgRect17 },
+    { id: 2, reason: "anxietate-performanta", title: "Consiliere pe anxietatea de performanță (sportivi, lideri, profesioniști, studenți, elevi, etc.)", description: "Consiliere în gestionarea anxietății, presiunii și blocajelor de performanță.", image: imgAnxietate },
+    { id: 3, reason: "motivatie-obiective", title: "Consiliere motivație și atingerea obiectivelor", description: "Motivația, atingerea obiectivelor și susținerea progresului.", image: imgRect20 },
+    { id: 4, reason: "evaluare-psihologica", title: "Evaluare psihologică", description: "Evaluare pe diverse arii de autocunoaștere în funcție de nevoile clienților (personalitate, scheme cognitive, stil de atașament, coeficientul de inteligență, anxietate, stres, etc.).", image: imgRect19 },
+    { id: 5, reason: "workshopuri-companii", title: "Workshopuri pentru companii și organizații", description: "Programe de grup pe teme de stres, comunicare, motivație, wellbeing și dezvoltare profesională.", image: imgRect16 },
+    { id: 6, reason: "workshopuri-copii-adolescenti", title: "Workshopuri pentru copii și adolescenți", description: "Programe interactive și psihoeducaționale, pentru emoții, încredere, motivație, relații și dezvoltare personală.", image: imgRect17 },
   ],
   en: [
-    { id: 0, reason: "psihologie-sportiva", title: "Sports psychology", description: "Building focus, confidence, and performance in sport.", image: imgRect16 },
-    { id: 1, reason: "orientare-vocationala", title: "Vocational guidance", description: "Clarity in choosing your career and professional direction.", image: imgRect17 },
-    { id: 2, reason: "anxietate-performanta", title: "Performance anxiety", description: "Managing emotions and pressure in important moments.", image: imgAnxietate },
-    { id: 3, reason: "terapie-individuala", title: "Individual therapy", description: "Support for emotional difficulties and personal challenges.", image: imgRect20 },
-    { id: 4, reason: "terapie-cuplu", title: "Couples therapy", description: "Improving communication and strengthening your relationship.", image: imgRect19 },
-    { id: 5, reason: "dezvoltare-personala", title: "Personal development", description: "Building confidence, self-awareness, and reaching your potential.", image: imgRect16 },
+    { id: 0, reason: "consiliere-individuala", title: "Individual psychological counselling", description: "Personalized support for emotional difficulties, stress, anxiety, and periods of change.", image: imgRect16 },
+    { id: 1, reason: "consiliere-copii-adolescenti", title: "Counselling for children and adolescents", description: "Age-appropriate support for managing emotions, anxiety, learning, adjustment, relationships, self-confidence, and school challenges.", image: imgRect17 },
+    { id: 2, reason: "anxietate-performanta", title: "Performance-anxiety counselling (athletes, leaders, professionals, students, pupils, etc.)", description: "Counselling to manage anxiety, pressure, and performance blocks.", image: imgAnxietate },
+    { id: 3, reason: "motivatie-obiective", title: "Motivation and goal-achievement counselling", description: "Motivation, achieving goals, and sustaining progress.", image: imgRect20 },
+    { id: 4, reason: "evaluare-psihologica", title: "Psychological assessment", description: "Assessment across areas of self-knowledge based on client needs (personality, cognitive schemas, attachment style, IQ, anxiety, stress, etc.).", image: imgRect19 },
+    { id: 5, reason: "workshopuri-companii", title: "Workshops for companies and organizations", description: "Group programs on stress, communication, motivation, wellbeing, and professional development.", image: imgRect16 },
+    { id: 6, reason: "workshopuri-copii-adolescenti", title: "Workshops for children and adolescents", description: "Interactive, psycho-educational programs for emotions, confidence, motivation, relationships, and personal development.", image: imgRect17 },
   ],
 };
 
@@ -157,7 +159,7 @@ export function Services() {
           className="text-[rgba(29,41,61,0.7)] mt-5 max-w-[660px] [text-wrap:balance]"
           style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif", fontWeight: 400, fontSize: "clamp(16px,1.6vw,24px)", lineHeight: 1.5 }}
         >
-          {language === "ro" ? "Sprijin adaptat nevoilor tale, indiferent de etapa în care te afli." : "Support tailored to your needs, whatever stage you're at."}
+          {language === "ro" ? "Fiecare persoană este unică, iar abordarea terapeutică este adaptată nevoilor și obiectivelor tale specifice, într-un mediu bazat pe empatie și respect." : "Every person is unique, and the therapeutic approach is tailored to your specific needs and goals, in an environment built on empathy and respect."}
         </motion.p>
       </div>
 

@@ -60,51 +60,59 @@ export type BookingReason = {
 
 export const bookingReasons: BookingReason[] = [
   {
-    id: "psihologie-sportiva",
-    label: { ro: "Psihologie sportivă", en: "Sports psychology" },
+    id: "consiliere-individuala",
+    label: { ro: "Consiliere psihologică individuală", en: "Individual psychological counselling" },
     description: {
-      ro: "Sesiuni 1-la-1 pentru a gestiona presiunea și anxietatea în sport.",
-      en: "One-to-one sessions to manage pressure and anxiety in sport.",
+      ro: "Sprijin personalizat pentru dificultăți emoționale, stres, anxietate și perioade de schimbare.",
+      en: "Personalized support for emotional difficulties, stress, anxiety, and periods of change.",
     },
   },
   {
-    id: "orientare-vocationala",
-    label: { ro: "Orientare vocațională", en: "Vocational guidance" },
+    id: "consiliere-copii-adolescenti",
+    label: { ro: "Consiliere psihologică pentru copii și adolescenți", en: "Counselling for children and adolescents" },
     description: {
-      ro: "Consiliere pentru claritate profesională și decizii asumate.",
-      en: "Counselling for career clarity and confident decisions.",
+      ro: "Sprijin adaptat vârstei pentru emoții, anxietate, învățare, relații, încredere în sine și provocări școlare.",
+      en: "Age-appropriate support for emotions, anxiety, learning, relationships, self-confidence, and school challenges.",
     },
   },
   {
     id: "anxietate-performanta",
-    label: { ro: "Anxietate de performanță", en: "Performance anxiety" },
+    label: { ro: "Consiliere pe anxietatea de performanță", en: "Performance-anxiety counselling" },
     description: {
-      ro: "Strategii pentru reglare emoțională, focus și încredere.",
-      en: "Tools for emotional regulation, focus, and self-trust.",
+      ro: "Gestionarea anxietății, presiunii și blocajelor de performanță — sportivi, lideri, profesioniști, studenți, elevi.",
+      en: "Managing anxiety, pressure, and performance blocks — athletes, leaders, professionals, students, pupils.",
     },
   },
   {
-    id: "terapie-individuala",
-    label: { ro: "Terapie individuală", en: "Individual therapy" },
+    id: "motivatie-obiective",
+    label: { ro: "Consiliere motivație și atingerea obiectivelor", en: "Motivation & goal achievement" },
     description: {
-      ro: "Sesiuni personalizate pentru autocunoaștere și echilibru.",
-      en: "Tailored sessions for self-awareness and balance.",
+      ro: "Motivația, atingerea obiectivelor și susținerea progresului.",
+      en: "Motivation, achieving goals, and sustaining progress.",
     },
   },
   {
-    id: "terapie-cuplu",
-    label: { ro: "Terapie de cuplu", en: "Couples therapy" },
+    id: "evaluare-psihologica",
+    label: { ro: "Evaluare psihologică", en: "Psychological assessment" },
     description: {
-      ro: "Sprijin pentru comunicare, reconectare și înțelegere reciprocă.",
-      en: "Support for communication, reconnection, and understanding.",
+      ro: "Evaluare pe diverse arii de autocunoaștere (personalitate, scheme cognitive, atașament, inteligență, anxietate, stres, etc.).",
+      en: "Assessment across areas of self-knowledge (personality, cognitive schemas, attachment, intelligence, anxiety, stress, etc.).",
     },
   },
   {
-    id: "dezvoltare-personala",
-    label: { ro: "Dezvoltare personală", en: "Personal development" },
+    id: "workshopuri-companii",
+    label: { ro: "Workshopuri pentru companii și organizații", en: "Workshops for companies and organizations" },
     description: {
-      ro: "Programe de autocunoaștere pentru a-ți atinge potențialul.",
-      en: "Self-discovery programs to help you reach your potential.",
+      ro: "Programe de grup pe teme de stres, comunicare, motivație, wellbeing și dezvoltare profesională.",
+      en: "Group programs on stress, communication, motivation, wellbeing, and professional development.",
+    },
+  },
+  {
+    id: "workshopuri-copii-adolescenti",
+    label: { ro: "Workshopuri pentru copii și adolescenți", en: "Workshops for children and adolescents" },
+    description: {
+      ro: "Programe interactive și psihoeducaționale pentru emoții, încredere, motivație, relații și dezvoltare personală.",
+      en: "Interactive, psycho-educational programs for emotions, confidence, motivation, relationships, and personal development.",
     },
   },
   {
