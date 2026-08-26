@@ -106,7 +106,7 @@ export function Navbar() {
       ].join(" ")}
     >
       {/* Logo — matched to imported Figma header */}
-      <Link to="/" className="flex shrink-0 items-center gap-3 rounded-full border border-[#0d121a]/10 bg-white/82 px-3 py-2 shadow-[0_4px_24px_rgba(0,0,0,0.08)] backdrop-blur-[5px] md:gap-4 md:border-0 md:bg-transparent md:p-0 md:shadow-none md:[backdrop-filter:none]" aria-label={language === "ro" ? "Carmen Foia Psiholog homepage" : "Carmen Foia Psychologist homepage"}>
+      <Link to="/" className="flex shrink-0 items-center gap-3 rounded-full border border-[#0d121a]/10 bg-white/82 py-2 pl-3 pr-6 shadow-[0_4px_24px_rgba(0,0,0,0.08)] backdrop-blur-[5px] md:gap-4 md:border-0 md:bg-transparent md:p-0 md:shadow-none md:[backdrop-filter:none]" aria-label={language === "ro" ? "Carmen Foia Psiholog homepage" : "Carmen Foia Psychologist homepage"}>
         <HeaderLogoMark />
         <div className="flex flex-col items-start leading-tight">
           <span className="text-[15px] font-semibold leading-tight text-[#1d293d] md:text-[18px] md:leading-[22px]" style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}>
