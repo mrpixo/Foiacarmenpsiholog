@@ -36,7 +36,7 @@ const copy: Record<"ro" | "en", { title: string; intro: string; note: string; ct
         icon: "/despre/diploma.svg",
       },
       {
-        title: "Experiență clinică în Londra",
+        title: "Experiență de peste 7 ani în Londra",
         body: (
           <>Am experiență de peste 7 ani în sănătate mentală în Londra, unde am lucrat cu copii, adolescenți și adulți în școli, clinici și servicii de suport. Experiența mea include lucrul cu persoane cu nevoi speciale, dificultăți emoționale și comportamentale, precum și cu pacienți oncologici și persoane care se confruntă cu afecțiuni neuropsihiatrice și deteriorare cognitivă.</>
         ),
@@ -66,7 +66,7 @@ const copy: Record<"ro" | "en", { title: string; intro: string; note: string; ct
         icon: "/despre/diploma.svg",
       },
       {
-        title: "Clinical experience in London",
+        title: "Over 7 years of experience in London",
         body: (
           <>I have over 7 years of experience in mental health in London, where I worked with children, adolescents, and adults across schools, clinics, and support services. My experience includes working with people with special needs, emotional and behavioural difficulties, as well as oncology patients and people facing neuropsychiatric conditions and cognitive decline.</>
         ),
@@ -91,6 +91,23 @@ export function AboutMe() {
   const inView = useInView(ref, { once: true, margin: "-10%" });
 
   const discoverMore = () => document.getElementById("servicii")?.scrollIntoView({ behavior: "smooth" });
+
+  // Note + CTA — right column on desktop, end of the section on mobile.
+  const noteAndCta = (
+    <>
+      <p className="text-left md:text-right" style={{ ...FONT, fontWeight: 400, fontSize: "16px", lineHeight: 1.7, color: MUTED }}>
+        {t.note}
+      </p>
+      <button
+        type="button"
+        onClick={discoverMore}
+        className="inline-flex w-full cursor-pointer items-center justify-center rounded-full bg-[#ffba68] px-7 py-3.5 text-base font-semibold text-[#1f1d1b] transition-all duration-300 hover:bg-[#ffc985] md:w-auto md:hover:scale-105"
+        style={FONT}
+      >
+        {t.cta}
+      </button>
+    </>
+  );
 
   return (
     <section id="despre" className="w-full bg-white px-6 py-20 md:px-[126px] md:py-[156px]">
@@ -120,19 +137,9 @@ export function AboutMe() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="flex shrink-0 flex-col items-start gap-4 md:max-w-[420px] md:items-end"
+            className="hidden shrink-0 flex-col items-start gap-4 md:flex md:max-w-[420px] md:items-end"
           >
-            <p className="text-left md:text-right" style={{ ...FONT, fontWeight: 400, fontSize: "16px", lineHeight: 1.5, color: "#39342e" }}>
-              {t.note}
-            </p>
-            <button
-              type="button"
-              onClick={discoverMore}
-              className="inline-flex w-full cursor-pointer items-center justify-center rounded-full bg-[#ffba68] px-7 py-3.5 text-base font-semibold text-[#1f1d1b] transition-all duration-300 hover:bg-[#ffc985] md:w-auto md:hover:scale-105"
-              style={FONT}
-            >
-              {t.cta}
-            </button>
+            {noteAndCta}
           </motion.div>
         </div>
 
@@ -158,6 +165,16 @@ export function AboutMe() {
             </motion.div>
           ))}
         </div>
+
+        {/* Note + CTA — shown at the end of the section on mobile only */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          className="flex flex-col items-start gap-4 md:hidden"
+        >
+          {noteAndCta}
+        </motion.div>
       </div>
     </section>
   );
