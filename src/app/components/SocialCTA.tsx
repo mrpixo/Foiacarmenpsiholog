@@ -18,8 +18,9 @@ export function SocialCTA() {
     >
       {/* Big watermark */}
       <div
-        className="absolute bottom-0 left-[-23px] pointer-events-none select-none leading-none"
+        className="absolute left-[-23px] pointer-events-none select-none leading-none"
         style={{
+          bottom: "-0.2em",
           fontFamily: "'Oakes Grotesk', 'Inter', sans-serif",
           fontWeight: 700,
           fontSize: "293px",
