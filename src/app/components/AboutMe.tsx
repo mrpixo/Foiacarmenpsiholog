@@ -30,7 +30,7 @@ const copy: Record<"ro" | "en", { title: string; intro: string; note: string; ct
       {
         title: "Experiență profesională și formare",
         body: (
-          <>Sunt psiholog licențiat de peste 15 ani. În 2026 am absolvit două programe de master, Psihologie Clinică și Psihologie Educațională, Consiliere Școlară și Vocațională, cu cea mai mare notă din promoție, beneficiind de bursă de merit pe toată durata studiilor. Particip constant la programe de specializare și sunt membru al Asociației Psihologilor din Marea Britanie și al Colegiului Psihologilor din România.</>
+          <>Sunt psiholog licențiat de peste 15 ani. Am absolvit două programe de master, Psihologie Clinică și Psihologie Educațională, Consiliere Școlară și Vocațională, cu bursă de merit pe toată durata studiilor. Particip constant la programe de specializare și sunt membru al Asociației Psihologilor din Marea Britanie și al Colegiului Psihologilor din România.</>
         ),
         icon: "/despre/diploma.svg",
       },
@@ -60,7 +60,7 @@ const copy: Record<"ro" | "en", { title: string; intro: string; note: string; ct
       {
         title: "Professional experience and training",
         body: (
-          <>I'm a licensed psychologist with over 15 years of experience. In 2026 I completed two master's programs — Clinical Psychology, and Educational Psychology, School and Vocational Counselling — graduating top of my class with a merit scholarship throughout my studies. I regularly take part in specialization programs and am a member of the Association of Psychologists in Great Britain and the Romanian College of Psychologists.</>
+          <>I'm a licensed psychologist with over 15 years of experience. I completed two master's programs — Clinical Psychology, and Educational Psychology, School and Vocational Counselling — with a merit scholarship throughout my studies. I regularly take part in specialization programs and am a member of the Association of Psychologists in Great Britain and the Romanian College of Psychologists.</>
         ),
         icon: "/despre/diploma.svg",
       },
