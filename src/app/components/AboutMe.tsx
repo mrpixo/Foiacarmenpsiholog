@@ -37,7 +37,7 @@ const copy: Record<"ro" | "en", { title: string; intro: string; note: string; ct
       {
         title: "Experiență clinică în Londra",
         body: (
-          <>Am experiență de aproape 10 ani în psihologie clinică în Londra, unde am lucrat cu copii, adolescenți și adulți în școli, clinici și servicii de suport. Experiența mea include lucrul cu persoane cu nevoi speciale, dificultăți emoționale și comportamentale, precum și cu pacienți oncologici și persoane care se confruntă cu afecțiuni neuropsihiatrice și deteriorare cognitivă.</>
+          <>Am experiență de peste 7 ani în sănătate mentală în Londra, unde am lucrat cu copii, adolescenți și adulți în școli, clinici și servicii de suport. Experiența mea include lucrul cu persoane cu nevoi speciale, dificultăți emoționale și comportamentale, precum și cu pacienți oncologici și persoane care se confruntă cu afecțiuni neuropsihiatrice și deteriorare cognitivă.</>
         ),
         icon: "/despre/big-ben.svg",
       },
@@ -67,7 +67,7 @@ const copy: Record<"ro" | "en", { title: string; intro: string; note: string; ct
       {
         title: "Clinical experience in London",
         body: (
-          <>I have nearly 10 years of experience in clinical psychology in London, where I worked with children, adolescents, and adults across schools, clinics, and support services. My experience includes working with people with special needs, emotional and behavioural difficulties, as well as oncology patients and people facing neuropsychiatric conditions and cognitive decline.</>
+          <>I have over 7 years of experience in mental health in London, where I worked with children, adolescents, and adults across schools, clinics, and support services. My experience includes working with people with special needs, emotional and behavioural difficulties, as well as oncology patients and people facing neuropsychiatric conditions and cognitive decline.</>
         ),
         icon: "/despre/big-ben.svg",
       },
