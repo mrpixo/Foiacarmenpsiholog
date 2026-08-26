@@ -2,6 +2,7 @@ import { useRef, type ReactNode } from "react";
 import { Link } from "react-router";
 import { motion, useInView } from "motion/react";
 import { useLanguage } from "../i18n";
+import imgCopsiDark from "../../imports/copsi-logo-dark.svg";
 
 const FONT = { fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" } as const;
 // Muted body colour from the Figma "Despre mine" design.
@@ -105,6 +106,11 @@ export function AboutMe() {
             <h2 className="text-[#39342e]" style={{ ...FONT, fontWeight: 700, fontSize: "clamp(36px,5vw,64px)", lineHeight: 1.1 }}>
               {t.title}
             </h2>
+            <img
+              src={imgCopsiDark}
+              alt="Colegiul Psihologilor din România"
+              className="h-[70px] w-[140px] self-start"
+            />
             <p style={{ ...FONT, fontWeight: 400, fontSize: "clamp(18px,2vw,24px)", lineHeight: 1.5, color: MUTED }}>
               {t.intro}
             </p>

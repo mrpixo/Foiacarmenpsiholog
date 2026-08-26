@@ -145,8 +145,10 @@ export function Footer() {
               style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif", fontWeight: 400, fontSize: "15px", lineHeight: 1.6 }}
             >
               {ro
-                ? "Psiholog clinician și psiholog educațional, consiliere școlară și vocațională, acreditat de Colegiul Psihologilor din România. Cod RUP: XXXXX"
-                : "Clinical psychologist and educational psychologist, school and vocational counselling, accredited by the Romanian College of Psychologists. RUP code: XXXXX"}
+                ? "Psiholog clinician și psiholog educațional, consiliere școlară și vocațională, acreditat de Colegiul Psihologilor din România."
+                : "Clinical psychologist and educational psychologist, school and vocational counselling, accredited by the Romanian College of Psychologists."}
+              <br />
+              {ro ? "Cod RUP: 35795" : "RUP code: 35795"}
             </p>
             <img src={imgCopsi} alt="Colegiul Psihologilor din România" className="h-[70px] w-[140px] self-start" />
           </div>
