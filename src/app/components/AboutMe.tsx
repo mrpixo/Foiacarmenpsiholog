@@ -44,7 +44,7 @@ const copy: Record<"ro" | "en", { title: string; intro: string; note: string; ct
       {
         title: "Înțelegere și empatie biculturală",
         body: (
-          <>Sunt cetățean britanic și român și am locuit 10 ani în Londra. Experiența de viață și profesională în ambele culturi îmi permite să înțeleg mai bine nevoile persoanelor din medii diferite. <BookLink>Ofer servicii psihologice în română și engleză, atât în cabinetul de psihologie Oradea, cât și online</BookLink>, oriunde în lume.</>
+          <>Sunt cetățean britanic și român și am locuit mai mult de 10 ani în Londra. Experiența de viață și profesională în ambele culturi îmi permite să înțeleg mai bine nevoile persoanelor din medii diferite. <BookLink>Ofer servicii psihologice în română și engleză, atât în cabinetul de psihologie Oradea, cât și online</BookLink>, oriunde în lume.</>
         ),
         icon: "/despre/connected-people.svg",
       },
@@ -74,7 +74,7 @@ const copy: Record<"ro" | "en", { title: string; intro: string; note: string; ct
       {
         title: "Bicultural understanding and empathy",
         body: (
-          <>I'm a British and Romanian citizen and lived in London for 10 years. Life and professional experience in both cultures helps me better understand the needs of people from different backgrounds. <BookLink>I offer psychological services in Romanian and English, both at the psychology practice in Oradea and online</BookLink>, anywhere in the world.</>
+          <>I'm a British and Romanian citizen and lived in London for over 10 years. Life and professional experience in both cultures helps me better understand the needs of people from different backgrounds. <BookLink>I offer psychological services in Romanian and English, both at the psychology practice in Oradea and online</BookLink>, anywhere in the world.</>
         ),
         icon: "/despre/connected-people.svg",
       },
