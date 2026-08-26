@@ -7,7 +7,7 @@ export function Mission() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-10%" });
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const watermarkY = useTransform(scrollYProgress, [0, 1], [50, -50]);
+  const watermarkY = useTransform(scrollYProgress, [0, 1], [0, 40]);
 
   return (
     <section
@@ -17,8 +17,8 @@ export function Mission() {
     >
       {/* Watermark — anchored to the bottom of the section, with parallax drift */}
       <motion.div
-        style={{ y: watermarkY }}
-        className="absolute bottom-0 left-[-14px] pointer-events-none select-none leading-none will-change-transform"
+        style={{ y: watermarkY, bottom: "-0.18em", fontSize: "clamp(80px,14vw,283px)" }}
+        className="absolute left-[-14px] pointer-events-none select-none leading-none will-change-transform"
       >
         <div
           className="text-[clamp(80px,14vw,283px)] font-black whitespace-nowrap text-white/40"

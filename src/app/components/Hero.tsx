@@ -37,8 +37,8 @@ export function HeroTop() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
 
-  // Parallax: watermark drifts up slower than scroll
-  const watermarkY = useTransform(scrollYProgress, [0, 1], [0, -72]);
+  // Parallax: watermark sits flush at the bottom, drifting down slightly as you scroll
+  const watermarkY = useTransform(scrollYProgress, [0, 1], [0, 40]);
   // Parallax: right-side quote drifts slightly upward
   const quoteY = useTransform(scrollYProgress, [0, 1], [0, -36]);
   // Parallax: service list drifts slightly
@@ -52,8 +52,8 @@ export function HeroTop() {
     >
       {/* Watermark — absolute, bottom-left, parallax */}
       <motion.div
-        style={{ y: watermarkY }}
-        className="absolute bottom-0 left-[-17px] pointer-events-none select-none leading-none will-change-transform z-0"
+        style={{ y: watermarkY, bottom: "-0.18em", fontSize: "clamp(80px,16vw,283px)" }}
+        className="absolute left-[-17px] pointer-events-none select-none leading-none will-change-transform z-0"
       >
         <div
           style={{
