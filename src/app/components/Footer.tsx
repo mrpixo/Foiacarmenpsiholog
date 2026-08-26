@@ -91,10 +91,12 @@ export function Footer() {
                 Carmen Foia Psiholog
               </span>
               <span
-                className="text-white/70 uppercase tracking-[2.1px]"
-                style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif", fontWeight: 500, fontSize: "12px" }}
+                className="text-white/70"
+                style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif", fontWeight: 500, fontSize: "12px", lineHeight: 1.4 }}
               >
-                {language === "ro" ? "Psiholog Clinician" : "Clinical Psychologist"}
+                {language === "ro" ? "Psiholog clinician | Psiholog educațional" : "Clinical psychologist | Educational psychologist"}
+                <br />
+                {language === "ro" ? "consiliere școlară și vocațională" : "School & vocational counselling"}
               </span>
             </div>
           </div>

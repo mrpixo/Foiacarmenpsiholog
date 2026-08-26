@@ -122,7 +122,7 @@ export function AboutMe() {
             <button
               type="button"
               onClick={discoverMore}
-              className="inline-flex cursor-pointer items-center justify-center rounded-full bg-[#ffba68] px-6 py-3 text-base font-semibold tracking-[-0.3px] text-[#1f1d1b] transition-all duration-300 hover:bg-[#ffc985] md:hover:scale-105"
+              className="inline-flex w-full cursor-pointer items-center justify-center rounded-full bg-[#ffba68] px-6 py-3 text-base font-semibold tracking-[-0.3px] text-[#1f1d1b] transition-all duration-300 hover:bg-[#ffc985] md:w-auto md:hover:scale-105"
               style={FONT}
             >
               {t.cta}
