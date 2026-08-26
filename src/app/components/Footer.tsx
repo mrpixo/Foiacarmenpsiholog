@@ -1,6 +1,7 @@
 import { Linkedin, Instagram, Facebook } from "lucide-react";
 import { Link } from "react-router";
 import svgPaths from "../../imports/Header/svg-txdvk9yxpl";
+import imgCopsi from "../../imports/copsi-logo.svg";
 import { useLanguage } from "../i18n";
 import { useConsent } from "../lib/consent";
 
@@ -135,19 +136,35 @@ export function Footer() {
         {/* Divider */}
         <div className="w-full h-px bg-white/8 rounded-full" />
 
-        {/* Nav columns — equal width, spread across full width (per Figma) */}
-        <div className="flex flex-col gap-10 sm:flex-row sm:gap-12">
-          {columns.map((col) => (
-            <div key={col.label} className="flex flex-1 flex-col gap-5">
-              <p
-                className="text-white/70"
-                style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif", fontWeight: 400, fontSize: "16px", lineHeight: 1.5 }}
-              >
-                {col.label}
-              </p>
-              <div className="flex flex-col">{col.links.map(renderLink)}</div>
-            </div>
-          ))}
+        {/* Accreditation + nav columns */}
+        <div className="flex flex-col gap-12 lg:flex-row lg:gap-20">
+          {/* Accreditation — Colegiul Psihologilor din România (COPSI) */}
+          <div className="flex max-w-[460px] flex-col gap-6 lg:shrink-0">
+            <p
+              className="text-white/70"
+              style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif", fontWeight: 400, fontSize: "15px", lineHeight: 1.6 }}
+            >
+              {ro
+                ? "Psiholog clinician și psiholog educațional, consiliere școlară și vocațională, acreditat de Colegiul Psihologilor din România. Cod RUP: XXXXX"
+                : "Clinical psychologist and educational psychologist, school and vocational counselling, accredited by the Romanian College of Psychologists. RUP code: XXXXX"}
+            </p>
+            <img src={imgCopsi} alt="Colegiul Psihologilor din România" className="h-[70px] w-[140px] self-start" />
+          </div>
+
+          {/* Nav columns */}
+          <div className="flex flex-1 flex-col gap-10 sm:flex-row sm:gap-12">
+            {columns.map((col) => (
+              <div key={col.label} className="flex flex-1 flex-col gap-5">
+                <p
+                  className="text-white/70"
+                  style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif", fontWeight: 400, fontSize: "16px", lineHeight: 1.5 }}
+                >
+                  {col.label}
+                </p>
+                <div className="flex flex-col">{col.links.map(renderLink)}</div>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Divider */}
