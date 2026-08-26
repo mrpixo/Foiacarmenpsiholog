@@ -113,9 +113,9 @@ export function Navbar() {
             {language === "ro" ? "Carmen Foia Psiholog" : "Carmen Foia Psychologist"}
           </span>
           <span className="mt-0.5 max-w-[230px] text-[10px] font-medium leading-[1.3] text-[#39342e] md:max-w-none md:whitespace-nowrap md:text-[11px]" style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}>
-            {language === "ro" ? "Psiholog clinician" : "Clinical psychologist"}
+            {language === "ro" ? "Psiholog clinician și educațional" : "Clinical & educational psychologist"}
             <br />
-            {language === "ro" ? "Psiholog educațional, consiliere școlară și vocațională" : "Educational psychologist, school & vocational counselling"}
+            {language === "ro" ? "Consiliere școlară și vocațională" : "School & vocational counselling"}
           </span>
         </div>
       </Link>

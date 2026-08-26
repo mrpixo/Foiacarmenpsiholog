@@ -8,7 +8,7 @@ const FONT = { fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" } as const;
 const copy = {
   ro: {
     name: "Carmen Foia Psiholog",
-    role: "Psiholog clinician, psiholog educațional, consiliere școlară și vocațională",
+    role: "Psiholog clinician și educațional, consiliere școlară și vocațională",
     where: "Online sau la cabinet",
     cta: "Programează o ședință",
     reviews: "recenzii",
@@ -16,7 +16,7 @@ const copy = {
   },
   en: {
     name: "Carmen Foia Psychologist",
-    role: "Clinical psychologist, educational psychologist, school & vocational counselling",
+    role: "Clinical & educational psychologist, school & vocational counselling",
     where: "Online or in person",
     cta: "Book a session",
     reviews: "reviews",
