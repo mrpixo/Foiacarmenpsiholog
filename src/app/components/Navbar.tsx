@@ -115,7 +115,7 @@ export function Navbar() {
           <span className="mt-0.5 max-w-[230px] text-[10px] font-medium leading-[1.3] text-[#39342e] md:max-w-none md:whitespace-nowrap md:text-[11px]" style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}>
             {language === "ro" ? "Psiholog clinician | Psiholog educațional" : "Clinical psychologist | Educational psychologist"}
             <br />
-            {language === "ro" ? "Consiliere școlară și vocațională" : "School & vocational counselling"}
+            {language === "ro" ? "consiliere școlară și vocațională" : "School & vocational counselling"}
           </span>
         </div>
       </Link>
