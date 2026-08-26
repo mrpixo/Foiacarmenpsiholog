@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { motion, useInView } from "motion/react";
+import { motion, useInView, useScroll, useTransform } from "motion/react";
 import { Linkedin, Instagram, Facebook } from "lucide-react";
 import { Link } from "react-router";
 import { useLanguage } from "../i18n";
@@ -10,16 +10,21 @@ export function SocialCTA() {
   const isMobile = useIsMobile();
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-10%" });
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
+  const watermarkY = useTransform(scrollYProgress, [0, 1], [0, 40]);
 
   return (
     <section
+      ref={sectionRef}
       className="selection-teal relative w-full overflow-hidden py-16 md:py-[64px]"
       style={{ background: "#054943" }}
     >
-      {/* Big watermark */}
-      <div
-        className="absolute left-[-23px] pointer-events-none select-none leading-none"
+      {/* Big watermark — parallax */}
+      <motion.div
+        className="absolute left-[-23px] pointer-events-none select-none leading-none will-change-transform"
         style={{
+          y: watermarkY,
           bottom: "-0.2em",
           fontFamily: "'Oakes Grotesk', 'Inter', sans-serif",
           fontWeight: 700,
@@ -30,7 +35,7 @@ export function SocialCTA() {
         }}
       >
         Socials
-      </div>
+      </motion.div>
 
       <div ref={ref} className="relative z-10 px-6 md:px-[126px] flex flex-col md:flex-row items-center justify-between gap-8">
         {/* Title */}
