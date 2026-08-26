@@ -28,7 +28,7 @@ export function SocialCTA() {
           bottom: "-0.2em",
           fontFamily: "'Oakes Grotesk', 'Inter', sans-serif",
           fontWeight: 700,
-          fontSize: "293px",
+          fontSize: "clamp(80px,16vw,283px)",
           lineHeight: 1,
           color: "rgba(255,255,255,0.05)",
           whiteSpace: "nowrap",

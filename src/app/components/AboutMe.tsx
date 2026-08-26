@@ -120,7 +120,7 @@ export function AboutMe() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="flex shrink-0 flex-col items-start gap-2.5 md:max-w-[420px] md:items-end"
+            className="flex shrink-0 flex-col items-start gap-4 md:max-w-[420px] md:items-end"
           >
             <p className="text-left md:text-right" style={{ ...FONT, fontWeight: 400, fontSize: "16px", lineHeight: 1.5, color: "#39342e" }}>
               {t.note}
@@ -128,7 +128,7 @@ export function AboutMe() {
             <button
               type="button"
               onClick={discoverMore}
-              className="inline-flex w-full cursor-pointer items-center justify-center rounded-full bg-[#ffba68] px-6 py-3 text-base font-semibold tracking-[-0.3px] text-[#1f1d1b] transition-all duration-300 hover:bg-[#ffc985] md:w-auto md:hover:scale-105"
+              className="inline-flex w-full cursor-pointer items-center justify-center rounded-full bg-[#ffba68] px-7 py-3.5 text-base font-semibold text-[#1f1d1b] transition-all duration-300 hover:bg-[#ffc985] md:w-auto md:hover:scale-105"
               style={FONT}
             >
               {t.cta}
