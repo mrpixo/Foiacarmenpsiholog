@@ -17,9 +17,7 @@ const navLinks: Record<"ro" | "en", NavLink[]> = {
     { label: "Noutăți", to: "/noutati" },
     { label: "Blog", to: "/blog" },
     { label: "Teste", to: "/teste" },
-    { label: "Întrebări frecvente", to: "/intrebari-frecvente" },
-    { label: "Contact", to: "/contact" },
-  ],
+    { label: "Întrebări frecvente", to: "/intrebari-frecvente" },  ],
   en: [
     { label: "Home", target: "top" },
     { label: "About me", target: "despre" },
@@ -27,9 +25,7 @@ const navLinks: Record<"ro" | "en", NavLink[]> = {
     { label: "News", to: "/noutati" },
     { label: "Blog", to: "/blog" },
     { label: "Tests", to: "/teste" },
-    { label: "FAQ", to: "/intrebari-frecvente" },
-    { label: "Contact", to: "/contact" },
-  ],
+    { label: "FAQ", to: "/intrebari-frecvente" },  ],
 };
 
 function HeaderLogoMark() {
@@ -112,12 +108,14 @@ export function Navbar() {
       {/* Logo — matched to imported Figma header */}
       <Link to="/" className="flex shrink-0 items-center gap-3 rounded-full border border-[#0d121a]/10 bg-white/82 px-3 py-2 shadow-[0_4px_24px_rgba(0,0,0,0.08)] backdrop-blur-[5px] md:gap-4 md:border-0 md:bg-transparent md:p-0 md:shadow-none md:[backdrop-filter:none]" aria-label={language === "ro" ? "Carmen Foia Psiholog homepage" : "Carmen Foia Psychologist homepage"}>
         <HeaderLogoMark />
-        <div className="flex flex-col items-start whitespace-nowrap leading-[1.5] md:h-[45px]">
-          <span className="text-[15px] font-semibold leading-tight text-[#1d293d] md:text-[18px] md:leading-[27px]" style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}>
+        <div className="flex flex-col items-start leading-tight">
+          <span className="text-[15px] font-semibold leading-tight text-[#1d293d] md:text-[18px] md:leading-[22px]" style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}>
             {language === "ro" ? "Carmen Foia Psiholog" : "Carmen Foia Psychologist"}
           </span>
-          <span className="text-[10px] font-medium uppercase leading-tight tracking-[1.5px] text-[#62748e] md:text-[12px] md:leading-[18px] md:tracking-[2.1172px]" style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}>
-            {language === "ro" ? "Psiholog Clinician" : "Clinical Psychologist"}
+          <span className="mt-0.5 max-w-[230px] text-[10px] font-medium leading-[1.3] text-[#62748e] md:text-[11px]" style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}>
+            {language === "ro" ? "Psiholog clinician" : "Clinical psychologist"}
+            <br />
+            {language === "ro" ? "Psiholog educațional, consiliere școlară și vocațională" : "Educational psychologist, school & vocational counselling"}
           </span>
         </div>
       </Link>
