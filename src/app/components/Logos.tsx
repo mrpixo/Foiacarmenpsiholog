@@ -9,6 +9,7 @@ import imgAsoc from "../../imports/asociatia-psihologi.webp";
 import imgCsm from "../../imports/csm-oradea.webp";
 import imgVillage from "../../imports/the-village-school.webp";
 import imgWhitefriars from "../../imports/whitefriars-school.webp";
+import imgEuGreen from "../../imports/eu-green-logo.svg";
 
 /** Partner / experience logos (files in src/imports/). */
 const logos = [
@@ -20,6 +21,7 @@ const logos = [
   { src: imgCsm, alt: "CSM Oradea" },
   { src: imgVillage, alt: "The Village School" },
   { src: imgWhitefriars, alt: "Whitefriars School" },
+  { src: imgEuGreen, alt: "EU GREEN — European University Alliance" },
 ];
 
 export function Logos() {
@@ -63,7 +65,7 @@ export function Logos() {
                 alt={logo.alt}
                 title={logo.alt}
                 loading="lazy"
-                className="h-16 w-auto max-w-[180px] object-contain opacity-80 transition-opacity duration-200 hover:opacity-100 md:h-20"
+                className="h-16 w-auto max-w-[180px] object-contain md:h-20"
               />
             </div>
           ))}
