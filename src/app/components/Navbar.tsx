@@ -112,7 +112,7 @@ export function Navbar() {
           <span className="text-[15px] font-semibold leading-tight text-[#1d293d] md:text-[18px] md:leading-[22px]" style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}>
             {language === "ro" ? "Carmen Foia Psiholog" : "Carmen Foia Psychologist"}
           </span>
-          <span className="mt-0.5 max-w-[230px] text-[10px] font-medium leading-[1.3] text-[#39342e] md:max-w-none md:whitespace-nowrap md:text-[11px]" style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}>
+          <span className="mt-0.5 max-w-[230px] text-[10px] font-medium leading-[1.3] text-[#4a5464] md:max-w-none md:whitespace-nowrap md:text-[11px]" style={{ fontFamily: "'Oakes Grotesk', 'Inter', sans-serif" }}>
             {language === "ro" ? "Psiholog clinician | Psiholog educațional" : "Clinical psychologist | Educational psychologist"}
             <br />
             {language === "ro" ? "consiliere școlară și vocațională" : "School & vocational counselling"}

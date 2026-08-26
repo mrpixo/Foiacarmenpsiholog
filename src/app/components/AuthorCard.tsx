@@ -106,7 +106,7 @@ export function AuthorCard() {
 
       {/* Name + role */}
       <p className="mt-5 text-[18px] font-semibold text-[#39342e]" style={FONT}>{t.name}</p>
-      <p className="mx-auto mt-2 max-w-[240px] text-[13px] leading-[1.5] text-[#39342e]" style={FONT}>{t.role}</p>
+      <p className="mx-auto mt-2 max-w-[240px] text-[13px] leading-[1.5] text-[#4a5464]" style={FONT}>{t.role}</p>
 
       {/* Divider */}
       <div className="my-6 h-px w-full bg-[#e7ded5]" />
