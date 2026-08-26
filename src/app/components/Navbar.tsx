@@ -62,6 +62,7 @@ function HeaderLogoMark() {
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [nearFooter, setNearFooter] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const { language, setLanguage } = useLanguage();
   const [languageOpen, setLanguageOpen] = useState(false);
@@ -87,7 +88,13 @@ export function Navbar() {
   };
 
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 40);
+    const handler = () => {
+      setScrolled(window.scrollY > 40);
+      // Slide the fixed header away once the footer approaches the top of the
+      // viewport, so its logo block doesn't sit duplicated over the footer's.
+      const footer = document.querySelector("footer");
+      setNearFooter(!!footer && footer.getBoundingClientRect().top < 160);
+    };
     handler();
     window.addEventListener("scroll", handler);
     return () => window.removeEventListener("scroll", handler);
@@ -96,10 +103,15 @@ export function Navbar() {
   return (
     <motion.header
       initial={{ y: -20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      animate={
+        nearFooter && !mobileOpen
+          ? { y: -120, opacity: 0 }
+          : { y: 0, opacity: 1 }
+      }
+      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
       className={[
         "fixed left-1/2 top-4 z-50 flex h-[76px] w-[calc(100%-2rem)] xl:w-[calc(100%-252px)] -translate-x-1/2 items-center justify-between transition-[background-color,box-shadow] duration-500",
+        nearFooter && !mobileOpen ? "pointer-events-none" : "",
         // Bar visuals only on desktop; on mobile the logo + hamburger float as separate pills.
         "xl:rounded-full xl:px-4 xl:backdrop-blur-[5px]",
         scrolled ? "xl:bg-white/82 xl:shadow-[0_8px_32px_rgba(0,105,96,0.12)]" : "xl:bg-white/58 xl:shadow-[0_4px_24px_rgba(0,0,0,0.06)]",
