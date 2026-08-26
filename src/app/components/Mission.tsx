@@ -7,7 +7,7 @@ export function Mission() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-10%" });
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const watermarkY = useTransform(scrollYProgress, [0, 1], [-50, 50]);
+  const watermarkY = useTransform(scrollYProgress, [0, 1], [50, -50]);
 
   return (
     <section

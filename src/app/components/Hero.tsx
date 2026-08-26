@@ -38,7 +38,7 @@ export function HeroTop() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
 
   // Parallax: watermark drifts up slower than scroll
-  const watermarkY = useTransform(scrollYProgress, [0, 1], [0, 72]);
+  const watermarkY = useTransform(scrollYProgress, [0, 1], [0, -72]);
   // Parallax: right-side quote drifts slightly upward
   const quoteY = useTransform(scrollYProgress, [0, 1], [0, -36]);
   // Parallax: service list drifts slightly
