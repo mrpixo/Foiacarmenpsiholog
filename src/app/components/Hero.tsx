@@ -75,6 +75,7 @@ export function HeroTop() {
             lineHeight: 1,
             color: "#f9f5f2",
             whiteSpace: "nowrap",
+            marginTop: "-0.4em",
           }}
         >
           Carmen Foia
