@@ -82,7 +82,7 @@ export function HeroTop() {
       </motion.div>
 
       {/* Content row */}
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 items-center gap-10 px-6 md:px-[126px] py-16 md:py-[96px] min-h-[760px]">
+      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 items-center gap-10 px-6 md:px-[126px] pt-[112px] md:pt-[188px] pb-16 md:pb-[96px] min-h-[760px]">
 
         {/* LEFT: Service categories */}
         <motion.div
