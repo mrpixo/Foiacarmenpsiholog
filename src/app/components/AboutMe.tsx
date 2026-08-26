@@ -23,7 +23,7 @@ const copy: Record<"ro" | "en", { title: string; intro: string; note: string; ct
   ro: {
     title: "Despre mine",
     intro:
-      "Bună, sunt Carmen, psiholog licențiat cu peste 15 ani de experiență. Sprijin persoanele care trec prin perioade dificile, se confruntă cu schimbări importante sau își doresc să se înțeleagă mai bine.",
+      "Bună, sunt Carmen, psiholog licențiat de peste 15 ani, cu o experiență profesională solidă în sănătate mintală în Londra și România. Sunt Psiholog Clinician și Psiholog Educațional, consiliere școlară și vocațională, membră acreditată de Colegiul Psihologilor din România.",
     note: "Fiecare persoană este unică. De aceea, adaptez procesul terapeutic nevoilor, ritmului și obiectivelor tale.",
     cta: "Descoperă cum te pot ajuta",
     cards: [
@@ -53,7 +53,7 @@ const copy: Record<"ro" | "en", { title: string; intro: string; note: string; ct
   en: {
     title: "About me",
     intro:
-      "Hi, I'm Carmen, a licensed psychologist with over 15 years of experience. I support people going through difficult times, facing major changes, or wanting to understand themselves better.",
+      "Hi, I'm Carmen, a licensed psychologist for over 15 years, with solid professional experience in mental health in London and Romania. I'm a clinical psychologist and educational psychologist — school and vocational counselling — and an accredited member of the Romanian College of Psychologists.",
     note: "Every person is unique. That's why I adapt the therapeutic process to your needs, pace, and goals.",
     cta: "Discover how I can help",
     cards: [
