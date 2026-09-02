@@ -197,6 +197,12 @@ async function main() {
       const page = await browser.newPage();
       try {
         await page.setViewport({ width: 1280, height: 900 });
+        // Pin the site language to Romanian before the app boots. Without this
+        // the app's geo-IP detection runs from the build server (non-RO) and
+        // the captured HTML comes out in English.
+        await page.evaluateOnNewDocument(() => {
+          try { localStorage.setItem("cf-lang", "ro"); } catch { /* ignore */ }
+        });
         await page.goto(`http://localhost:${PORT}${route}`, {
           waitUntil: "networkidle2",
           timeout: 30000,
