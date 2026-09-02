@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useLanguage } from "../i18n";
 
 const SITE_URL = "https://psihologcarmenfoia.ro";
-const SUFFIX = "Carmen Foia — Psiholog Oradea";
+const SUFFIX = "Carmen Foia • Psiholog Oradea";
 
 function setMeta(attr: "name" | "property", key: string, content: string) {
   let el = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);

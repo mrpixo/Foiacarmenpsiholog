@@ -80,7 +80,7 @@ export function Contact() {
   const { language } = useLanguage();
   const t = copy[language];
   useSeo({
-    title: { ro: "Programează o ședință — Psiholog Oradea", en: "Book a session — Psychologist in Oradea" },
+    title: { ro: "Programează o ședință", en: "Book a session" },
     description: {
       ro: "Programează o ședință de terapie sau consiliere cu Carmen Foia, psiholog în Oradea. Alege tipul de sesiune și un interval disponibil.",
       en: "Book a therapy or counselling session with Carmen Foia, psychologist in Oradea. Choose your session type and an available slot.",

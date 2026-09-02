@@ -74,19 +74,19 @@ function readEnv() {
   return out;
 }
 
-/** Fetch published slugs for a table from Supabase REST (best-effort). */
+/** Fetch published rows ({slug, updated_at}) for a table from Supabase REST (best-effort). */
 async function fetchSlugs(env, table) {
   const url = env.VITE_SUPABASE_URL;
   const key = env.VITE_SUPABASE_ANON_KEY;
   if (!url || !key) return [];
   try {
     const res = await fetch(
-      `${url}/rest/v1/${table}?status=eq.published&select=slug`,
+      `${url}/rest/v1/${table}?status=eq.published&select=slug,updated_at`,
       { headers: { apikey: key, Authorization: `Bearer ${key}` } },
     );
     if (!res.ok) return [];
     const rows = await res.json();
-    return rows.map((r) => r.slug).filter(Boolean);
+    return rows.filter((r) => r.slug);
   } catch {
     return [];
   }
@@ -167,30 +167,29 @@ async function main() {
   const shellHtml = await readFile(path.join(DIST, "index.html"), "utf8");
   const env = readEnv();
 
-  const [articleSlugs, newsSlugs] = await Promise.all([
+  const [articleRows, newsRows] = await Promise.all([
     fetchSlugs(env, "articles"),
     fetchSlugs(env, "news"),
   ]);
 
+  const lastmodByRoute = new Map();
+  for (const r of articleRows) if (r.updated_at) lastmodByRoute.set(`/blog/${r.slug}`, r.updated_at.slice(0, 10));
+  for (const r of newsRows) if (r.updated_at) lastmodByRoute.set(`/noutati/${r.slug}`, r.updated_at.slice(0, 10));
+
   const routes = [
     ...STATIC_ROUTES,
-    ...articleSlugs.map((s) => `/blog/${s}`),
-    ...newsSlugs.map((s) => `/noutati/${s}`),
+    ...articleRows.map((r) => `/blog/${r.slug}`),
+    ...newsRows.map((r) => `/noutati/${r.slug}`),
   ];
 
   const server = await startServer(shellHtml);
   const browser = await launchBrowser();
 
-  // Routes left as the lean Vite shell (NOT prerendered):
-  //  • "/"        — fastest first load; its SEO is covered by the static
-  //                 JSON-LD + meta + no-JS fallback in index.html.
-  //  • "/contact" — the Cal.com booking embed self-injects scripts and must
-  //                 initialise live; prerendering bakes a stale bootstrap that
-  //                 breaks the iframe. It's an interactive page, not SEO content.
-  // Both stay in the sitemap. Everything else (articles, news, FAQ, legal) is
-  // prerendered since it carries long-form, AI-citable text.
-  const SKIP_PRERENDER = new Set(["/", "/contact"]);
-  const crawlRoutes = routes.filter((r) => !SKIP_PRERENDER.has(r));
+  // Every route is prerendered, including "/" and "/contact". Third-party
+  // scripts that pages inject at runtime (Cal.com embed, analytics) are
+  // stripped from the captured HTML below, so they initialise fresh when the
+  // real app boots instead of double-loading from the baked markup.
+  const crawlRoutes = routes;
 
   let ok = 0;
   try {
@@ -209,6 +208,17 @@ async function main() {
         );
         await autoScroll(page);
         await new Promise((r) => setTimeout(r, 800)); // let entrance animations settle
+        // Strip runtime-injected third-party scripts (Cal.com embed, GA, …) so
+        // they can't double-initialise over the hydrating app. Keep the Vite
+        // bundle (/assets/*) and JSON-LD blocks.
+        await page.evaluate(() => {
+          for (const s of Array.from(document.querySelectorAll("script"))) {
+            if (s.type === "application/ld+json") continue;
+            const src = s.getAttribute("src") || "";
+            if (src.startsWith("/assets/")) continue;
+            s.remove();
+          }
+        });
         const html = "<!DOCTYPE html>\n" + (await page.content()).replace(/^<!DOCTYPE html>\s*/i, "");
 
         const outDir = route === "/" ? DIST : path.join(DIST, route);
@@ -232,7 +242,10 @@ async function main() {
     const SITE = "https://psihologcarmenfoia.ro";
     const priority = (r) => (r === "/" ? "1.0" : r === "/contact" ? "0.9" : r.includes("/") && r.length > 7 ? "0.6" : "0.7");
     const body = routes
-      .map((r) => `  <url><loc>${SITE}${r === "/" ? "/" : r}</loc><priority>${priority(r)}</priority></url>`)
+      .map((r) => {
+        const lastmod = lastmodByRoute.get(r);
+        return `  <url><loc>${SITE}${r === "/" ? "/" : r}</loc>${lastmod ? `<lastmod>${lastmod}</lastmod>` : ""}<priority>${priority(r)}</priority></url>`;
+      })
       .join("\n");
     const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${body}\n</urlset>\n`;
     await writeFile(path.join(DIST, "sitemap.xml"), xml, "utf8");
@@ -241,7 +254,7 @@ async function main() {
     console.warn("[prerender] sitemap write failed:", e.message);
   }
 
-  console.log(`[prerender] done: ${ok}/${crawlRoutes.length} routes (homepage left as fast shell)`);
+  console.log(`[prerender] done: ${ok}/${crawlRoutes.length} routes`);
 }
 
 main().catch((e) => {

@@ -62,10 +62,10 @@ function FullWidthPhoto() {
 
 function Home() {
   useSeo({
-    title: { ro: "Psiholog Oradea — Terapie & Consiliere", en: "Psychologist in Oradea — Therapy & Counselling" },
+    title: { ro: "Consiliere Psihologică Oradea", en: "English-Speaking Psychologist in Oradea" },
     description: {
-      ro: "Carmen Foia, psiholog clinician în Oradea. Consiliere psihologică individuală, pentru copii și adolescenți, anxietate de performanță, evaluare psihologică și workshopuri. Programează o ședință.",
-      en: "Carmen Foia, clinical psychologist in Oradea. Individual counselling, counselling for children and adolescents, performance anxiety, psychological assessment, and workshops. Book a session.",
+      ro: "Consiliere psihologică în Oradea pentru adulți, copii și adolescenți, evaluare psihologică și workshopuri • la cabinet sau online. Programează o ședință.",
+      en: "English-speaking psychologist in Oradea. Psychological counselling for adults, children and adolescents, assessments and workshops • in person or online.",
     },
     path: "/",
   });
