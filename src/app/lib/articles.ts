@@ -1,4 +1,5 @@
 import { supabase } from "./supabase";
+import { triggerDeploy } from "./deploy";
 import type { Category, Article, ArticleStatus, ArticleInput } from "./articles-format";
 
 // Re-export types, formatters and pure utils so existing importers of
@@ -107,6 +108,8 @@ export async function setArticleStatus(id: string, status: ArticleStatus): Promi
   if (status === "published") patch.published_at = new Date().toISOString();
   const { error } = await supabase.from("articles").update(patch).eq("id", id);
   if (error) throw error;
+  // Re-prerender the site so the (un)published article reaches crawlers + sitemap.
+  triggerDeploy();
 }
 
 export async function deleteArticle(id: string): Promise<void> {

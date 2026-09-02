@@ -26,6 +26,13 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   // First visit with no stored choice → detect country. Romania → ro, else en.
   useEffect(() => {
     if (decided.current) return;
+    // Crawlers and headless renderers (Googlebot & co.) crawl from foreign IPs;
+    // never geo-switch them to English — they must index the Romanian default.
+    if (
+      navigator.webdriver ||
+      /bot|crawler|spider|slurp|bingpreview|google-inspectiontool|lighthouse|headless/i.test(navigator.userAgent)
+    )
+      return;
     let cancelled = false;
     fetch("https://ipapi.co/country/")
       .then((r) => r.text())

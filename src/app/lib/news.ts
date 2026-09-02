@@ -1,4 +1,5 @@
 import { supabase } from "./supabase";
+import { triggerDeploy } from "./deploy";
 import type { NewsItem, NewsStatus, NewsInput } from "./news-format";
 
 // Re-export types + formatters so existing importers of "./news" keep working.
@@ -59,6 +60,8 @@ export async function setNewsStatus(id: string, status: NewsStatus): Promise<voi
   if (status === "published") patch.published_at = new Date().toISOString();
   const { error } = await supabase.from("news").update(patch).eq("id", id);
   if (error) throw error;
+  // Re-prerender the site so the (un)published item reaches crawlers + sitemap.
+  triggerDeploy();
 }
 
 export async function deleteNews(id: string): Promise<void> {
