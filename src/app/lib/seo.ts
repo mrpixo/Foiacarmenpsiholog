@@ -30,6 +30,8 @@ type SeoInput = {
   description: { ro: string; en: string };
   /** Path part of the canonical URL, e.g. "/blog". */
   path?: string;
+  /** Use the title exactly as given — for pages whose title already carries the brand. */
+  noSuffix?: boolean;
   /** Optional per-page JSON-LD (Article, FAQPage, BreadcrumbList, …). Injected
    *  into <head> and captured by the prerenderer for rich results / AI search. */
   jsonLd?: object | object[] | null;
@@ -55,10 +57,10 @@ function setJsonLd(data: object | object[] | null | undefined) {
 export { SITE_URL };
 
 /** Sets document title + meta description/OG/canonical (+ optional JSON-LD) per page, per language. */
-export function useSeo({ title, description, path = "", jsonLd = null }: SeoInput) {
+export function useSeo({ title, description, path = "", noSuffix = false, jsonLd = null }: SeoInput) {
   const { language } = useLanguage();
   useEffect(() => {
-    const t = `${title[language]} | ${SUFFIX}`;
+    const t = noSuffix ? title[language] : `${title[language]} | ${SUFFIX}`;
     const d = description[language];
     const url = `${SITE_URL}${path}`;
 
@@ -74,5 +76,5 @@ export function useSeo({ title, description, path = "", jsonLd = null }: SeoInpu
     setCanonical(url);
     setJsonLd(jsonLd);
     return () => setJsonLd(null);
-  }, [language, title, description, path, jsonLd]);
+  }, [language, title, description, path, noSuffix, jsonLd]);
 }
