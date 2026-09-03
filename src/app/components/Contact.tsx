@@ -80,12 +80,16 @@ export function Contact() {
   const { language } = useLanguage();
   const t = copy[language];
   useSeo({
-    title: { ro: "Programează o ședință", en: "Book a session" },
+    title: {
+      ro: "Programare psiholog Oradea - Carmen Foia • 0770 926 562",
+      en: "Book a psychologist in Oradea - Carmen Foia • 0770 926 562",
+    },
     description: {
-      ro: "Programează o ședință de terapie sau consiliere cu Carmen Foia, psiholog în Oradea. Alege tipul de sesiune și un interval disponibil.",
-      en: "Book a therapy or counselling session with Carmen Foia, psychologist in Oradea. Choose your session type and an available slot.",
+      ro: "Programează o ședință cu psiholog Carmen Foia la cabinet în Oradea sau online. Alegi tipul ședinței, ziua și ora direct în calendar, în câteva minute.",
+      en: "Book a session with psychologist Carmen Foia — in person in Oradea or online. Pick the session type, day and time straight from the calendar, in minutes.",
     },
     path: "/contact",
+    noSuffix: true,
   });
   const [searchParams] = useSearchParams();
   const params = useParams();
