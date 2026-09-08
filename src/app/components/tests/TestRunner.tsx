@@ -44,7 +44,7 @@ export function TestRunner() {
       ro: test ? test.measures.ro : "Test psihologic de auto-evaluare.",
       en: test ? test.measures.en : "Psychological self-assessment test.",
     },
-    path: "/teste",
+    path: slug ? `/teste/${slug}` : "/teste",
   });
 
   const [phase, setPhase] = useState<"intro" | "quiz" | "result">("intro");
