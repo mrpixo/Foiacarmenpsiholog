@@ -224,10 +224,13 @@ export function AdminNewsEditor() {
 }
 
 function Labeled({ label, children }: { label: string; children: React.ReactNode }) {
+  // Deliberately a <div>, not a <label>: a <label> forwards any click inside it
+  // to its first button/input, so clicking into the rich-text editor would also
+  // "press" the first toolbar button (toggling bold + scrolling the page).
   return (
-    <label className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2">
       <span className="text-sm font-medium text-[#39342e]">{label}</span>
       {children}
-    </label>
+    </div>
   );
 }
