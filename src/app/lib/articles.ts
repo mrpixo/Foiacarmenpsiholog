@@ -105,7 +105,12 @@ export async function updateArticle(id: string, input: Partial<ArticleInput>): P
 
 export async function setArticleStatus(id: string, status: ArticleStatus): Promise<void> {
   const patch: Record<string, unknown> = { status };
-  if (status === "published") patch.published_at = new Date().toISOString();
+  if (status === "published") {
+    // Stamp only on first publish — republishing must not reshuffle the
+    // blog's chronological order.
+    const { data } = await supabase.from("articles").select("published_at").eq("id", id).single();
+    if (!data?.published_at) patch.published_at = new Date().toISOString();
+  }
   const { error } = await supabase.from("articles").update(patch).eq("id", id);
   if (error) throw error;
   // Re-prerender the site so the (un)published article reaches crawlers + sitemap.

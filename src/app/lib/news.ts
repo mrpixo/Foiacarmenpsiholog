@@ -57,7 +57,12 @@ export async function updateNews(id: string, input: Partial<NewsInput>): Promise
 
 export async function setNewsStatus(id: string, status: NewsStatus): Promise<void> {
   const patch: Record<string, unknown> = { status };
-  if (status === "published") patch.published_at = new Date().toISOString();
+  if (status === "published") {
+    // Stamp only on first publish — republishing must not reshuffle the
+    // news list's chronological order.
+    const { data } = await supabase.from("news").select("published_at").eq("id", id).single();
+    if (!data?.published_at) patch.published_at = new Date().toISOString();
+  }
   const { error } = await supabase.from("news").update(patch).eq("id", id);
   if (error) throw error;
   // Re-prerender the site so the (un)published item reaches crawlers + sitemap.
