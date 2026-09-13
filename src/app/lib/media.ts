@@ -27,9 +27,36 @@ export async function listMedia(): Promise<MediaItem[]> {
     }));
 }
 
-/** Upload an image file and return its public URL + path. */
-export async function uploadMedia(file: File): Promise<MediaItem> {
+/**
+ * Re-encode an image as compressed WebP (max 1600px wide) so multi-MB camera
+ * shots never land on the site as-is. SVG/GIF pass through (vector / possible
+ * animation), and any file the browser can't decode falls back to the original.
+ */
+async function toWebp(file: File): Promise<{ blob: Blob; ext: string; type: string }> {
   const ext = file.name.split(".").pop()?.toLowerCase() || "bin";
+  const original = { blob: file as Blob, ext, type: file.type };
+  if (!file.type.startsWith("image/") || file.type === "image/svg+xml" || file.type === "image/gif") return original;
+  try {
+    const bmp = await createImageBitmap(file);
+    const scale = Math.min(1, 1600 / bmp.width);
+    const w = Math.max(1, Math.round(bmp.width * scale));
+    const h = Math.max(1, Math.round(bmp.height * scale));
+    const canvas = document.createElement("canvas");
+    canvas.width = w;
+    canvas.height = h;
+    canvas.getContext("2d")!.drawImage(bmp, 0, 0, w, h);
+    bmp.close();
+    const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, "image/webp", 0.82));
+    if (!blob || blob.size >= file.size) return original; // keep whichever is smaller
+    return { blob, ext: "webp", type: "image/webp" };
+  } catch {
+    return original;
+  }
+}
+
+/** Upload an image file (converted to WebP when smaller) and return its public URL + path. */
+export async function uploadMedia(file: File): Promise<MediaItem> {
+  const { blob, ext, type } = await toWebp(file);
   const safe = file.name
     .replace(/\.[^.]+$/, "")
     .toLowerCase()
@@ -39,7 +66,7 @@ export async function uploadMedia(file: File): Promise<MediaItem> {
   const path = `${Date.now()}-${safe || "image"}.${ext}`;
   const { error } = await supabase.storage
     .from(MEDIA_BUCKET)
-    .upload(path, file, { cacheControl: "31536000", upsert: false, contentType: file.type });
+    .upload(path, blob, { cacheControl: "31536000", upsert: false, contentType: type });
   if (error) throw error;
   return { name: path, url: publicUrl(path), createdAt: new Date().toISOString() };
 }

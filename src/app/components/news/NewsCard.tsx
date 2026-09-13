@@ -47,6 +47,8 @@ export function NewsCard({
             <img
               src={item.cover_url}
               alt={newsTitle(item, language)}
+              loading="lazy"
+              decoding="async"
               className="h-full w-full rounded-2xl object-cover transition-transform duration-500 group-hover:scale-105"
             />
           ) : (

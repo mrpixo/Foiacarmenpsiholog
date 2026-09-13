@@ -28,6 +28,8 @@ export function ArticleCard({ article, index = 0 }: { article: Article; index?: 
             <img
               src={article.cover_url}
               alt={title(article, language)}
+              loading="lazy"
+              decoding="async"
               className="h-full w-full rounded-2xl object-cover transition-transform duration-500 group-hover:scale-105"
             />
           ) : (
