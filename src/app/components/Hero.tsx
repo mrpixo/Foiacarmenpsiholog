@@ -5,6 +5,7 @@ import imgPortrait from "../../imports/Body/carmen-portrait-new.webp";
 import imgPortrait480 from "../../imports/Body/carmen-portrait-new-480.webp";
 import { useLanguage } from "../i18n";
 import { useIsMobile, entrance } from "../lib/useIsMobile";
+import { wasPrerendered } from "../lib/prerendered";
 
 const heroServices = {
   ro: [
@@ -90,14 +91,14 @@ export function HeroTop() {
         <motion.div
           style={{ y: listY }}
           className="flex w-full flex-col gap-2 md:gap-3 will-change-transform"
-          initial={{ opacity: 0, ...entrance(isMobile, -20) }}
+          initial={wasPrerendered ? false : { opacity: 0, ...entrance(isMobile, -20) }}
           animate={{ opacity: 1, x: 0, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
         >
           {services.map((service, i) => (
             <motion.p
               key={service}
-              initial={{ opacity: 0, ...entrance(isMobile, -16) }}
+              initial={wasPrerendered ? false : { opacity: 0, ...entrance(isMobile, -16) }}
               animate={{ opacity: 1, x: 0, y: 0 }}
               transition={{ duration: 0.5, delay: 0.15 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
               className="text-[#1f1d1a] cursor-default"
@@ -114,7 +115,7 @@ export function HeroTop() {
 
           <motion.div
             className="mt-10"
-            initial={{ opacity: 0, y: 16 }}
+            initial={wasPrerendered ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
@@ -131,7 +132,7 @@ export function HeroTop() {
         {/* RIGHT: Quote text */}
         <motion.p
           className="w-full max-w-none text-left will-change-transform md:text-right"
-          initial={{ opacity: 0, ...entrance(isMobile, 20) }}
+          initial={wasPrerendered ? false : { opacity: 0, ...entrance(isMobile, 20) }}
           animate={{ opacity: 1, x: 0, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
           style={{
@@ -197,7 +198,7 @@ export function HeroPhoto() {
           width: "clamp(200px,31vw,543px)",
           height: "100%",
         }}
-        initial={{ opacity: 0, scale: 1.04 }}
+        initial={wasPrerendered ? false : { opacity: 0, scale: 1.04 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
       >
