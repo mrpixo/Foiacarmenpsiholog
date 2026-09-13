@@ -82,7 +82,7 @@ function GoogleBadge({ reviews, label, reviewsWord }: { reviews: GoogleReviews; 
       {inner}
     </a>
   ) : (
-    <div className={cls} aria-label={label}>{inner}</div>
+    <div className={cls} role="img" aria-label={label}>{inner}</div>
   );
 }
 

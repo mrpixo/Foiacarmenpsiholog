@@ -12,7 +12,7 @@ function StarRow({ rating, size = 20 }: { rating: number; size?: number }) {
   // before the rating column existed), so the stars always show the site yellow.
   const r = rating == null ? 5 : Math.max(0, Math.min(5, rating));
   return (
-    <div className="flex items-center gap-1" aria-label={`${r}/5`}>
+    <div className="flex items-center gap-1" role="img" aria-label={`${r}/5`}>
       {[1, 2, 3, 4, 5].map((n) => (
         <Star
           key={n}
