@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { Link } from "react-router";
 import imgPortrait from "../../imports/Body/carmen-portrait-new.webp";
+import imgPortrait480 from "../../imports/Body/carmen-portrait-new-480.webp";
 import { useLanguage } from "../i18n";
 import { useIsMobile, entrance } from "../lib/useIsMobile";
 
@@ -202,6 +203,8 @@ export function HeroPhoto() {
       >
         <img
           src={imgPortrait}
+          srcSet={`${imgPortrait480} 480w, ${imgPortrait} 953w`}
+          sizes="clamp(200px, 31vw, 543px)"
           alt={language === "ro" ? "Carmen Foia Psiholog" : "Carmen Foia Psychologist"}
           className="w-full h-full object-contain object-bottom rounded-2xl"
         />

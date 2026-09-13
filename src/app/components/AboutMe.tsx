@@ -126,6 +126,8 @@ export function AboutMe() {
             <img
               src={imgCopsiDark}
               alt="Colegiul Psihologilor din România"
+              loading="lazy"
+              decoding="async"
               className="h-[70px] w-[140px] self-start"
             />
             <p style={{ ...FONT, fontWeight: 400, fontSize: "clamp(18px,2vw,24px)", lineHeight: 1.5, color: MUTED }}>
@@ -153,7 +155,7 @@ export function AboutMe() {
               transition={{ duration: 0.6, delay: 0.15 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
               className="flex flex-col items-start gap-6 md:gap-8"
             >
-              <img src={card.icon} alt="" aria-hidden className="size-[72px] md:size-[90px]" />
+              <img src={card.icon} alt="" aria-hidden loading="lazy" decoding="async" className="size-[72px] md:size-[90px]" />
               <div className="flex flex-col gap-3">
                 <h3 className="text-[#39342e]" style={{ ...FONT, fontWeight: 400, fontSize: "clamp(20px,2vw,24px)", lineHeight: 1.5 }}>
                   {card.title}

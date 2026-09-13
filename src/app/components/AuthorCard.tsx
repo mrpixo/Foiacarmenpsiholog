@@ -1,5 +1,6 @@
 import { Link } from "react-router";
-import imgPortrait from "../../imports/Body/carmen-portrait-new.webp";
+// The card photo renders at 132px — the 480w portrait variant is plenty.
+import imgPortrait from "../../imports/Body/carmen-portrait-new-480.webp";
 import { useLanguage } from "../i18n";
 import { useGoogleReviews, type GoogleReviews } from "../lib/googleReviews";
 

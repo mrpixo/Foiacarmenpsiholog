@@ -129,6 +129,10 @@
       }
     </script>
 
+    <!-- Runtime data (testimonials, articles, rating) comes from Supabase —
+         open the connection early so those fetches don't pay the handshake. -->
+    <link rel="preconnect" href="https://odwtgplhgfzcgjsronqq.supabase.co" crossorigin />
+
     <!-- Inter font • loaded without blocking first paint (preconnect, then
          swap the stylesheet in once it's fetched). -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

@@ -150,7 +150,7 @@ export function Footer() {
               <br />
               {ro ? "Cod RUP: 35795" : "RUP code: 35795"}
             </p>
-            <img src={imgCopsi} alt="Colegiul Psihologilor din România" className="h-[70px] w-[140px] self-start" />
+            <img src={imgCopsi} alt="Colegiul Psihologilor din România" loading="lazy" decoding="async" className="h-[70px] w-[140px] self-start" />
           </div>
 
           {/* Nav columns */}

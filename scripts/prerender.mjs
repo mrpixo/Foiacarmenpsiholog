@@ -224,6 +224,15 @@ async function main() {
             if (src.startsWith("/assets/")) continue;
             s.remove();
           }
+          // The Google Fonts stylesheet ships as media="print" + onload swap so
+          // it never blocks first paint. Running the page flips it to media="all",
+          // and capturing that would bake a render-blocking stylesheet into the
+          // static HTML — flip it back before capture (onload re-swaps it live).
+          for (const l of Array.from(document.querySelectorAll('link[rel="stylesheet"]'))) {
+            if ((l.getAttribute("href") || "").includes("fonts.googleapis.com") && l.getAttribute("onload")) {
+              l.setAttribute("media", "print");
+            }
+          }
         });
         const html = "<!DOCTYPE html>\n" + (await page.content()).replace(/^<!DOCTYPE html>\s*/i, "");
 
