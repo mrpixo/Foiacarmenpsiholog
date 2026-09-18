@@ -35,6 +35,9 @@ type SeoInput = {
   /** Optional per-page JSON-LD (Article, FAQPage, BreadcrumbList, …). Injected
    *  into <head> and captured by the prerenderer for rich results / AI search. */
   jsonLd?: object | object[] | null;
+  /** Absolute URL of the share image (og:image / twitter:image) — e.g. an
+   *  article's cover. Falls back to the site's brand card when omitted. */
+  image?: string | null;
 };
 
 /** Sets/removes the per-page JSON-LD <script> (id'd so it's replaced, not piled up). */
@@ -57,7 +60,7 @@ function setJsonLd(data: object | object[] | null | undefined) {
 export { SITE_URL };
 
 /** Sets document title + meta description/OG/canonical (+ optional JSON-LD) per page, per language. */
-export function useSeo({ title, description, path = "", noSuffix = false, jsonLd = null }: SeoInput) {
+export function useSeo({ title, description, path = "", noSuffix = false, jsonLd = null, image = null }: SeoInput) {
   const { language } = useLanguage();
   useEffect(() => {
     const t = noSuffix ? title[language] : `${title[language]} | ${SUFFIX}`;
@@ -71,10 +74,12 @@ export function useSeo({ title, description, path = "", noSuffix = false, jsonLd
     setMeta("property", "og:description", d);
     setMeta("property", "og:url", url);
     setMeta("property", "og:locale", language === "ro" ? "ro_RO" : "en_US");
+    setMeta("property", "og:image", image || `${SITE_URL}/og-image.jpg`);
     setMeta("name", "twitter:title", t);
     setMeta("name", "twitter:description", d);
+    setMeta("name", "twitter:image", image || `${SITE_URL}/og-image.jpg`);
     setCanonical(url);
     setJsonLd(jsonLd);
     return () => setJsonLd(null);
-  }, [language, title, description, path, noSuffix, jsonLd]);
+  }, [language, title, description, path, noSuffix, jsonLd, image]);
 }

@@ -71,6 +71,7 @@ export function BlogArticle() {
       : { ro: "Articol de blog — Carmen Foia, psiholog Oradea.", en: "Blog article — Carmen Foia, psychologist in Oradea." },
     path: slug ? `/blog/${slug}` : "/blog",
     jsonLd,
+    image: article?.cover_url ?? null,
   });
 
   useEffect(() => {

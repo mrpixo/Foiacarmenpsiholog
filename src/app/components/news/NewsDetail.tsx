@@ -58,6 +58,7 @@ export function NewsDetail() {
       : { ro: "Noutăți — Carmen Foia, psiholog Oradea.", en: "News — Carmen Foia, psychologist in Oradea." },
     path: slug ? `/noutati/${slug}` : "/noutati",
     jsonLd,
+    image: item?.cover_url ?? null,
   });
 
   useEffect(() => {
